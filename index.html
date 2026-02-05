@@ -94,8 +94,6 @@
     .btnSoft{background:rgba(15,23,42,.04);}
     .btn:hover{transform:translateY(-1px)}
     .btn:active{transform:translateY(0px)}
-
-    /* ✅ 첫 화면 "셀프견적하기" 버튼 키움 */
     .btnBig{
       font-size:16px;
       padding:14px 16px;
@@ -155,7 +153,6 @@
     .highlight{border-left:6px solid #FEE500;background:rgba(254,229,0,.22);}
     .highlightTitle{font-weight:1000;font-size:14px;letter-spacing:-0.2px;}
 
-    /* sticky kakao */
     .kakaoSticky{position:fixed;left:14px;right:14px;bottom:14px;z-index:50;max-width:980px;margin:0 auto;}
     .kakaoBtn{
       width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;
@@ -174,7 +171,6 @@
       border:1px solid rgba(25,25,25,.14);font-weight:1000;font-size:12.5px;white-space:nowrap;
     }
 
-    /* modal */
     .modalBack{position:fixed;inset:0;background:rgba(15,23,42,.45);display:none;align-items:center;justify-content:center;padding:18px;z-index:80;}
     .modal{width:min(520px, 100%);background:#fff;border:1px solid var(--line);border-radius:22px;box-shadow: var(--shadow);overflow:hidden;}
     .modalTop{padding:14px 14px 10px;border-bottom:1px solid var(--line);background:linear-gradient(180deg, rgba(254,229,0,.22), rgba(255,255,255,0));}
@@ -183,7 +179,6 @@
     .modalBtns{display:flex;gap:10px;padding:0 14px 14px;}
     .modalBtns .btn{flex:1}
 
-    /* stepper */
     .stepper{display:grid;grid-template-columns:48px 1fr 48px;gap:8px;align-items:center;}
     .stepBtn{
       height:48px;border-radius:16px;border:1px solid var(--line);background:rgba(15,23,42,.04);
@@ -236,7 +231,7 @@
           <div class="heroBtns">
             <button class="btn btnPrimary btnBig" id="btnGoQuote">셀프 견적하기</button>
           </div>
-          <div class="note">※ 예약/영수증 체크 시 10% 할인 적용됩니다.</div>
+          <div class="note">※ 예약/영수증 체크 시 10% 할인 적용됩니다. (방범/추락 안전망은 제외)</div>
         </div>
       </div>
     </div>
@@ -250,14 +245,17 @@
       <div class="sectionBody">
         <div class="highlight" style="border-radius:18px;padding:12px;margin-bottom:12px;border:1px solid rgba(0,0,0,.06);">
           <div class="highlightTitle">✅ 개수에 따른 차등 할인율 적용</div>
-          <div class="note" style="margin-top:4px;">5개 이상 시공 시 할인율 5프로 추가 할인</div>
+          <div class="note" style="margin-top:4px;">
+            4개 이상 4% 할인 / 7개 이상 7% 할인<br/>
+            예약리뷰 할인과 중복 가능 (방범/추락 안전망은 예약리뷰 할인 불가)
+          </div>
         </div>
 
         <div class="chip" style="margin-bottom:12px;">
           <input type="checkbox" id="discount10">
           <div>
             <div><b>예약리뷰</b> 또는 <b>영수증리뷰</b> 약속(10% 할인)</div>
-            <div class="note">체크하면 총액에서 자동으로 10% 할인 적용됩니다.</div>
+            <div class="note">체크하면 총액에서 자동으로 10% 할인 적용됩니다. (방범/추락 안전망은 할인 제외)</div>
           </div>
         </div>
 
@@ -276,7 +274,7 @@
               </div>
 
               <div>
-                <label>소형(개)</label>
+                <label>소형(개) <span class="note">· 높이 500 이하</span></label>
                 <div class="stepper">
                   <button class="stepBtn" type="button" data-step="-1" data-target="cntS">−</button>
                   <input id="cntS" class="stepInput" type="number" min="0" step="1" value="0" inputmode="numeric">
@@ -303,6 +301,66 @@
               </div>
 
               <div><label>메모(선택)</label><input id="memo" placeholder="예: 저층/아이 있음/초파리 유입 등"></div>
+            </div>
+          </div>
+        </details>
+
+        <div style="height:12px"></div>
+
+        <!-- ✅ 방범/추락: 창문형 바로 밑으로 이동 -->
+        <details id="dSafety">
+          <summary><span>방범/추락 안전 방충망 (mm 입력)</span><span class="chev">열기/닫기 ▾</span></summary>
+          <div class="detailBody">
+            <div class="row">
+              <div class="note">
+                * 가로/세로(mm)와 수량 입력 후 <b>추가</b>를 눌러주세요.<br/>
+                * 방범/추락 안전망은 <b>예약리뷰/영수증 10% 할인 적용 불가</b> (개수 할인은 적용)
+              </div>
+
+              <div class="grid2">
+                <div>
+                  <label>종류</label>
+                  <select id="safetyKind">
+                    <option value="crime">방범안전 방충망</option>
+                    <option value="fall">추락안전 방충망</option>
+                  </select>
+                </div>
+                <div>
+                  <label>망 규격(자동)</label>
+                  <input id="safetyGauge" readonly value="0.7mm">
+                </div>
+              </div>
+
+              <div class="grid2">
+                <div>
+                  <label>가로(mm)</label>
+                  <input id="safetyW" type="number" min="0" step="1" value="0" inputmode="numeric" placeholder="예: 850">
+                </div>
+                <div>
+                  <label>세로(mm)</label>
+                  <input id="safetyH" type="number" min="0" step="1" value="0" inputmode="numeric" placeholder="예: 2050">
+                </div>
+              </div>
+
+              <div>
+                <label>수량</label>
+                <div class="stepper">
+                  <button class="stepBtn" type="button" data-step="-1" data-target="safetyQty">−</button>
+                  <input id="safetyQty" class="stepInput" type="number" min="0" step="1" value="0" inputmode="numeric">
+                  <button class="stepBtn" type="button" data-step="1" data-target="safetyQty">＋</button>
+                </div>
+              </div>
+
+              <button class="btn btnPrimary" type="button" id="btnAddSafety">추가</button>
+              <div class="note" id="safetyPreview"></div>
+
+              <div class="list" id="safetyListBox" style="display:none;">
+                <div class="listHead">
+                  <span>추가된 항목</span>
+                  <span class="note" id="safetySumText"></span>
+                </div>
+                <div class="listBody" id="safetyList"></div>
+              </div>
             </div>
           </div>
         </details>
@@ -402,65 +460,6 @@
           </div>
         </details>
 
-        <div style="height:12px"></div>
-
-        <!-- 안전/추락 -->
-        <details id="dSafety">
-          <summary><span>방범/추락 안전 방충망 (mm 입력)</span><span class="chev">열기/닫기 ▾</span></summary>
-          <div class="detailBody">
-            <div class="row">
-              <div class="note">
-                * 가로/세로(mm)와 수량 입력 후 <b>추가</b>를 눌러주세요.
-              </div>
-
-              <div class="grid2">
-                <div>
-                  <label>종류</label>
-                  <select id="safetyKind">
-                    <option value="crime">방범안전 방충망</option>
-                    <option value="fall">추락안전 방충망</option>
-                  </select>
-                </div>
-                <div>
-                  <label>망 규격(자동)</label>
-                  <input id="safetyGauge" readonly value="0.7mm">
-                </div>
-              </div>
-
-              <div class="grid2">
-                <div>
-                  <label>가로(mm)</label>
-                  <input id="safetyW" type="number" min="0" step="1" value="0" inputmode="numeric" placeholder="예: 850">
-                </div>
-                <div>
-                  <label>세로(mm)</label>
-                  <input id="safetyH" type="number" min="0" step="1" value="0" inputmode="numeric" placeholder="예: 2050">
-                </div>
-              </div>
-
-              <div>
-                <label>수량</label>
-                <div class="stepper">
-                  <button class="stepBtn" type="button" data-step="-1" data-target="safetyQty">−</button>
-                  <input id="safetyQty" class="stepInput" type="number" min="0" step="1" value="0" inputmode="numeric">
-                  <button class="stepBtn" type="button" data-step="1" data-target="safetyQty">＋</button>
-                </div>
-              </div>
-
-              <button class="btn btnPrimary" type="button" id="btnAddSafety">추가</button>
-              <div class="note" id="safetyPreview"></div>
-
-              <div class="list" id="safetyListBox" style="display:none;">
-                <div class="listHead">
-                  <span>추가된 항목</span>
-                  <span class="note" id="safetySumText"></span>
-                </div>
-                <div class="listBody" id="safetyList"></div>
-              </div>
-            </div>
-          </div>
-        </details>
-
         <div class="result">
           <p class="price" id="resultPrice">0원</p>
           <div class="resultMeta" id="resultNote">개수 입력하면 자동으로 계산됩니다.</div>
@@ -524,10 +523,14 @@ const CONFIG = {
   },
   MAKE_PRICE: { SM: 100000, L: 140000 },
 
-  // ✅ 예약/영수증 체크 할인 (10%)
-  DISCOUNT_RATE: 0.10,
+  // 예약/영수증 (10%) - ✅ 방범/추락 안전망 제외
+  REVIEW_DISCOUNT_RATE: 0.10,
 
-  // ✅ 안전/추락 소비자가격 표(내부 계산용)
+  // ✅ 개수 할인
+  QTY_DISCOUNT_4_RATE: 0.04,
+  QTY_DISCOUNT_7_RATE: 0.07,
+
+  // 안전/추락 소비자가격 표(내부 계산용)
   SAFETY_CONSUMER_TABLE: {
     "0.4": {
       "0.3":150000,"0.4":150000,"0.5":150000,"0.6":150000,
@@ -577,7 +580,7 @@ function safetyKindLabel(k){
   return (k === "crime") ? "방범안전 방충망" : "추락안전 방충망";
 }
 function safetyGaugeForKind(kind){
-  return (kind === "crime") ? "0.7" : "0.4"; // 고정
+  return (kind === "crime") ? "0.7" : "0.4";
 }
 
 function toast(msg){
@@ -585,9 +588,7 @@ function toast(msg){
   setTimeout(()=>{ $("toast").textContent = ""; }, 2400);
 }
 
-function ceilToTenth(area){
-  return Math.ceil(area * 10) / 10;
-}
+function ceilToTenth(area){ return Math.ceil(area * 10) / 10; }
 function safetyRoundedM2FromMM(wMm, hMm){
   const raw = (wMm * hMm) / 1_000_000;
   let rounded = ceilToTenth(raw);
@@ -606,6 +607,9 @@ let safetyItems = []; // {id, kind, gauge, w, h, qty, rawM2, roundedM2, unitPric
 
 function safetySumTotal(){
   return safetyItems.reduce((acc, it)=> acc + (it.unitPrice * it.qty), 0);
+}
+function safetySumQty(){
+  return safetyItems.reduce((acc, it)=> acc + it.qty, 0);
 }
 function renderSafetyList(){
   const box = $("safetyListBox");
@@ -645,7 +649,13 @@ function renderSafetyList(){
   $("safetySumText").textContent = `합계 ${fmt(sum)}`;
 }
 
-function buildSummary(totalConsumer, totalFinal, discountOn){
+function getQtyDiscountRate(totalQty){
+  if(totalQty >= 7) return CONFIG.QTY_DISCOUNT_7_RATE;
+  if(totalQty >= 4) return CONFIG.QTY_DISCOUNT_4_RATE;
+  return 0;
+}
+
+function buildSummary(totalConsumer, totalFinal, discountOn, qtyDiscountRate, totalQty, eligibleConsumer, safetyConsumer){
   const meshKey = $("meshType").value;
   const cntS = clampInt(parseFloat($("cntS").value));
   const cntM = clampInt(parseFloat($("cntM").value));
@@ -664,7 +674,15 @@ function buildSummary(totalConsumer, totalFinal, discountOn){
 
   const lines = [];
   lines.push(`창문형: ${meshLabel(meshKey)}`);
-  lines.push(`창 개수: 소 ${cntS} / 중 ${cntM}(높이 1500↓) / 대 ${cntL}(높이 2300↓)`);
+  lines.push(`창 개수: 소 ${cntS}(높이 500↓) / 중 ${cntM}(높이 1500↓) / 대 ${cntL}(높이 2300↓)`);
+
+  if(safetyItems.length){
+    lines.push(`방범/추락 안전 방충망 (리뷰 10% 할인 제외):`);
+    safetyItems.forEach((it, idx)=>{
+      const lineTotal = it.unitPrice * it.qty;
+      lines.push(`- ${idx+1}) ${safetyKindLabel(it.kind)} ${it.gauge}mm / ${it.w}×${it.h}mm / ${it.qty}개 / ${fmt(it.unitPrice)}×${it.qty}=${fmt(lineTotal)}`);
+    });
+  }
 
   if(entranceQty>0){
     lines.push(`현관롤: ${entranceTypeLabel(entranceType)} / ${entranceSizeLabel(entranceSize)} / ${entranceQty}개`);
@@ -679,16 +697,14 @@ function buildSummary(totalConsumer, totalFinal, discountOn){
     lines.push(`하이샤시 틀 제작: 소/중 ${hsSM}개(1500↓, ×100,000) / 대 ${hsL2}개(2200↓, ×140,000)`);
   }
 
-  if(safetyItems.length){
-    lines.push(`방범/추락 안전 방충망:`);
-    safetyItems.forEach((it, idx)=>{
-      const lineTotal = it.unitPrice * it.qty;
-      lines.push(`- ${idx+1}) ${safetyKindLabel(it.kind)} ${it.gauge}mm / ${it.w}×${it.h}mm / ${it.qty}개 / ${fmt(it.unitPrice)}×${it.qty}=${fmt(lineTotal)}`);
-    });
-  }
-
+  const qtyDiscTxt =
+    qtyDiscountRate > 0 ? `${Math.round(qtyDiscountRate*100)}% 적용` : "미적용";
+  lines.push(`총 개수: ${totalQty}개 / 개수 할인: ${qtyDiscTxt}`);
   lines.push(`소비자가격(정가): ${fmt(totalConsumer)}`);
-  lines.push(`예약/영수증리뷰 약속(10%): ${discountOn ? "적용" : "미적용"}`);
+  lines.push(`예약/영수증리뷰 10%: ${discountOn ? "적용(안전망 제외)" : "미적용"}`);
+  if(discountOn){
+    lines.push(`- 리뷰할인 적용대상 합계: ${fmt(eligibleConsumer)} (안전망 ${fmt(safetyConsumer)} 제외)`);
+  }
   lines.push(`최종 자동견적: ${fmt(totalFinal)}`);
   lines.push(`메모: ${memo || "없음"}`);
 
@@ -696,71 +712,101 @@ function buildSummary(totalConsumer, totalFinal, discountOn){
 }
 
 function calc(){
-  const discountOn = $("discount10").checked;
+  const reviewDiscountOn = $("discount10").checked;
 
   const meshKey = $("meshType").value;
   const cntS = clampInt(parseFloat($("cntS").value));
   const cntM = clampInt(parseFloat($("cntM").value));
   const cntL = clampInt(parseFloat($("cntL").value));
 
-  let total = 0;
+  // 1) 창문형(리뷰할인 대상)
+  let windowTotal = 0;
   const up = CONFIG.UNIT_PRICE_WINDOW[meshKey] || CONFIG.UNIT_PRICE_WINDOW.micro;
-  total += up.S * cntS + up.M * cntM + up.L * cntL;
+  windowTotal += up.S * cntS + up.M * cntM + up.L * cntL;
 
-  // 현관롤
+  // 2) 현관롤(리뷰할인 대상, PJ는 제외/문의)
   const entranceType = $("entranceType").value;
   const entranceSize = $("entranceSize").value;
   const entranceQty = clampInt(parseFloat($("entranceQty").value));
+  let entranceTotal = 0;
   let entranceInquiry = false;
   if(entranceQty>0){
     const p = CONFIG.ENTRANCE_ROLL_PRICE[entranceType]?.[entranceSize];
     if(p == null){
       entranceInquiry = true;
     }else{
-      total += p * entranceQty;
+      entranceTotal += p * entranceQty;
     }
   }
 
-  // 알미늄
+  // 3) 알미늄(리뷰할인 대상)
   const alSM = clampInt(parseFloat($("alSM").value));
   const alL = clampInt(parseFloat($("alL").value));
-  total += CONFIG.MAKE_PRICE.SM * alSM;
-  total += CONFIG.MAKE_PRICE.L  * alL;
+  const alTotal = (CONFIG.MAKE_PRICE.SM * alSM) + (CONFIG.MAKE_PRICE.L * alL);
 
-  // 하이샤시
+  // 4) 하이샤시(리뷰할인 대상)
   const hsSM = clampInt(parseFloat($("hsSM").value));
   const hsL2 = clampInt(parseFloat($("hsL2").value));
-  total += CONFIG.MAKE_PRICE.SM * hsSM;
-  total += CONFIG.MAKE_PRICE.L  * hsL2;
+  const hsTotal = (CONFIG.MAKE_PRICE.SM * hsSM) + (CONFIG.MAKE_PRICE.L * hsL2);
 
-  // 안전/추락
-  total += safetySumTotal();
+  // 5) 안전/추락(✅ 리뷰할인 제외)
+  const safetyTotal = safetySumTotal();
+
+  // 총 개수(✅ 안전망 포함, PJ 롤도 개수에는 포함)
+  const safetyQty = safetySumQty();
+  const totalQty =
+    (cntS + cntM + cntL) +
+    entranceQty +
+    (alSM + alL) +
+    (hsSM + hsL2) +
+    safetyQty;
 
   const any =
-    (cntS+cntM+cntL) > 0 ||
-    entranceQty>0 ||
-    (alSM+alL)>0 ||
-    (hsSM+hsL2)>0 ||
-    safetyItems.length>0;
+    totalQty > 0;
 
-  if(!any) total = 0;
+  // 소비자가격(정가)
+  const eligibleConsumer = windowTotal + entranceTotal + alTotal + hsTotal;
+  const totalConsumer = eligibleConsumer + safetyTotal;
 
-  // 할인 적용(10%)
-  let totalFinal = total;
-  if(discountOn) totalFinal = total * (1 - CONFIG.DISCOUNT_RATE);
+  // ✅ 개수 할인율
+  const qtyDiscountRate = getQtyDiscountRate(totalQty);
 
-  $("resultPrice").textContent = fmt(totalFinal);
+  // ✅ 개수 할인 먼저 적용(전체 항목)
+  const eligibleAfterQty = eligibleConsumer * (1 - qtyDiscountRate);
+  const safetyAfterQty   = safetyTotal   * (1 - qtyDiscountRate);
+
+  // ✅ 리뷰 10%는 "안전망 제외"로만 적용
+  const eligibleAfterReview = reviewDiscountOn ? (eligibleAfterQty * (1 - CONFIG.REVIEW_DISCOUNT_RATE)) : eligibleAfterQty;
+
+  let totalFinal = 0;
+  if(any){
+    totalFinal = eligibleAfterReview + safetyAfterQty;
+  }
+
+  $("resultPrice").textContent = fmt(any ? totalFinal : 0);
 
   let note = any ? "입력 기준 자동견적입니다." : "개수 입력하면 자동 계산됩니다.";
   if(entranceInquiry){
     note = "⚠️ PJ 롤 방충망은 자동견적이 아니라 ‘별도 견적 문의’입니다. 오픈채팅으로 문의 주세요.";
-  }
-  if(discountOn && any){
-    note = "✅ 예약/영수증리뷰 약속 10% 할인 적용된 금액입니다.";
+  }else{
+    if(qtyDiscountRate > 0){
+      note = `✅ 개수 할인 ${Math.round(qtyDiscountRate*100)}% 적용된 금액입니다.`;
+      if(reviewDiscountOn) note += " (예약/영수증 10% 중복 적용 / 안전망 제외)";
+    }else if(reviewDiscountOn && any){
+      note = "✅ 예약/영수증리뷰 약속 10% 할인 적용된 금액입니다. (안전망 제외)";
+    }
   }
   $("resultNote").textContent = note;
 
-  $("summary").value = buildSummary(total, totalFinal, discountOn);
+  $("summary").value = buildSummary(
+    totalConsumer,
+    any ? totalFinal : 0,
+    reviewDiscountOn,
+    qtyDiscountRate,
+    totalQty,
+    eligibleConsumer,
+    safetyTotal
+  );
 
   return { summary: $("summary").value, any };
 }
@@ -837,7 +883,7 @@ function safetyPreview(){
 }
 
 function wire(){
-  // stepper
+  // stepper + delete
   document.addEventListener("click", (e)=>{
     const btn = e.target.closest("[data-step][data-target]");
     if(btn){
@@ -929,13 +975,6 @@ function wire(){
     $("cntS").value = 0; $("cntM").value = 0; $("cntL").value = 0;
     $("memo").value = "";
 
-    $("entranceType").value = "normal";
-    $("entranceSize").value = "under";
-    $("entranceQty").value = 0;
-
-    $("alSM").value = 0; $("alL").value = 0;
-    $("hsSM").value = 0; $("hsL2").value = 0;
-
     $("safetyKind").value = "crime";
     updateSafetyGaugeUI();
     $("safetyW").value = 0;
@@ -944,6 +983,13 @@ function wire(){
     safetyItems = [];
     renderSafetyList();
     safetyPreview();
+
+    $("entranceType").value = "normal";
+    $("entranceSize").value = "under";
+    $("entranceQty").value = 0;
+
+    $("alSM").value = 0; $("alL").value = 0;
+    $("hsSM").value = 0; $("hsL2").value = 0;
 
     calc();
     toast("초기화 완료");
