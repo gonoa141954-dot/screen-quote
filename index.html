@@ -8,7 +8,8 @@
   <meta name="description" content="30초 셀프견적 · 요약 자동복사 후 오픈채팅 상담" />
   <meta property="og:title" content="방충망 자동견적 | 방충망시공소" />
   <meta property="og:description" content="개수만 입력하면 정확 금액 확인 · 상담받기 누르면 견적요약 자동복사" />
-  <meta property="og:image" content="https://postfiles.pstatic.net/MjAyNjAyMDVfNTAg/MDAxNzcwMjc4MDExODM5.kYFzjJTjj7yo8HCyegcA2PTmVc7QCk36hNwsSoswW9Ug.QWdYq37ZL8noWjggwuiPbXg9A32noMuhUqCEdmGCdq0g.PNG/ChatGPT_Image_2026%EB%85%84_2%EC%9B%94_5%EC%9D%BC_%EC%98%A4%ED%9B%84_04_52_58.png?type=w966" />
+  <!-- ✅ 깃허브에 올린 hero.png를 공유 썸네일로 사용 -->
+  <meta property="og:image" content="https://gonoa141954-dot.github.io/screen-quote/hero.png" />
 
   <style>
     :root{
@@ -68,7 +69,7 @@
     .heroMedia img{
       width:100%; height:100%;
       object-fit:cover; display:block;
-      filter:saturate(1.05) contrast(1.03);
+      filter:saturate(1.08) contrast(1.04);
     }
     .heroMedia::after{
       content:""; position:absolute; inset:0;
@@ -107,25 +108,50 @@
     .btn:hover{transform:translateY(-1px)}
     .btn:active{transform:translateY(0px)}
 
-    .grid3{display:grid; grid-template-columns:1fr; gap:12px; margin-top:14px;}
-    @media (min-width:900px){ .grid3{grid-template-columns:1fr 1fr 1fr;} }
-    .card{
+    /* ✅ 기존 3칸 카드 대신, 한 줄 아이콘 바 (깔끔) */
+    .featureBar{
+      margin-top:14px;
       border:1px solid var(--line);
-      background:rgba(255,255,255,.90);
       border-radius:var(--r);
-      padding:14px;
+      background:rgba(255,255,255,.92);
       box-shadow:var(--shadow2);
+      padding:12px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
     }
-    .card h3{margin:0 0 6px;font-size:14px;font-weight:1000;letter-spacing:-0.2px;}
-    .card p{margin:0;color:var(--muted);font-size:12.7px;line-height:1.55;}
-    .icon{
-      width:36px;height:36px;border-radius:14px;
+    .featureItem{
+      flex:1 1 190px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 12px;
+      border-radius:18px;
+      background:rgba(15,23,42,.03);
+      border:1px solid rgba(15,23,42,.08);
+    }
+    .featureIcon{
+      width:36px;height:36px;
+      border-radius:14px;
       display:grid;place-items:center;
       background:rgba(37,99,235,.10);
       border:1px solid rgba(37,99,235,.18);
-      margin-bottom:10px;
-      font-weight:1000;
       color:rgba(37,99,235,.95);
+      font-weight:1000;
+      flex:0 0 auto;
+    }
+    .featureText b{
+      display:block;
+      font-weight:1000;
+      font-size:13px;
+      letter-spacing:-0.2px;
+    }
+    .featureText span{
+      display:block;
+      font-size:12px;
+      color:var(--muted);
+      margin-top:2px;
+      line-height:1.35;
     }
 
     .section{
@@ -241,7 +267,7 @@
       font-weight:1000;font-size:12.5px;white-space:nowrap;
     }
 
-    /* tiny modal */
+    /* modal */
     .modalBack{
       position:fixed;inset:0;
       background:rgba(15,23,42,.45);
@@ -282,7 +308,8 @@
     <div class="hero">
       <div class="heroGrid">
         <div class="heroMedia">
-          <img src="https://postfiles.pstatic.net/MjAyNjAyMDVfNTAg/MDAxNzcwMjc4MDExODM5.kYFzjJTjj7yo8HCyegcA2PTmVc7QCk36hNwsSoswW9Ug.QWdYq37ZL8noWjggwuiPbXg9A32noMuhUqCEdmGCdq0g.PNG/ChatGPT_Image_2026%EB%85%84_2%EC%9B%94_5%EC%9D%BC_%EC%98%A4%ED%9B%84_04_52_58.png?type=w966" alt="방충망 자동견적 이미지" />
+          <!-- ✅ 저장소에 올린 hero.png 사용 -->
+          <img src="./hero.png" alt="방충망 자동견적 이미지" />
         </div>
 
         <div class="heroContent">
@@ -295,7 +322,7 @@
 
           <div class="heroBtns">
             <button class="btn btnPrimary" id="btnGoQuote">셀프 견적하기</button>
-            <button class="btn btnSoft" id="btnHow">진행 방식 보기</button>
+            <button class="btn btnSoft" id="btnHow">이용 방법</button>
           </div>
 
           <div class="note">
@@ -305,21 +332,28 @@
       </div>
     </div>
 
-    <div class="grid3" id="howSection">
-      <div class="card">
-        <div class="icon">✓</div>
-        <h3>정확 금액</h3>
-        <p>“얼마~얼마”가 아니라 입력 기준으로 딱 떨어지게 계산됩니다.</p>
+    <!-- ✅ 깔끔 아이콘 바 -->
+    <div class="featureBar" id="howSection">
+      <div class="featureItem">
+        <div class="featureIcon">₩</div>
+        <div class="featureText">
+          <b>정확 금액</b>
+          <span>입력 기준으로 딱 계산</span>
+        </div>
       </div>
-      <div class="card">
-        <div class="icon">⏱</div>
-        <h3>자동 복사</h3>
-        <p>상담받기 버튼을 누르면 견적요약이 자동으로 복사됩니다.</p>
+      <div class="featureItem">
+        <div class="featureIcon">⎘</div>
+        <div class="featureText">
+          <b>요약 자동복사</b>
+          <span>상담 버튼 누르면 자동</span>
+        </div>
       </div>
-      <div class="card">
-        <div class="icon">📱</div>
-        <h3>모바일 최적</h3>
-        <p>대부분 폰으로 보니까 입력/복사/상담 버튼을 크게 만들었습니다.</p>
+      <div class="featureItem">
+        <div class="featureIcon">📱</div>
+        <div class="featureText">
+          <b>모바일 최적</b>
+          <span>폰에서 보기 쉽게</span>
+        </div>
       </div>
     </div>
 
@@ -330,7 +364,7 @@
       </div>
 
       <div class="sectionBody">
-        <div class="card highlight" style="margin-bottom:12px;">
+        <div class="highlight" style="border-radius:18px;padding:12px;margin-bottom:12px;border:1px solid rgba(0,0,0,.06);">
           <div class="highlightTitle">✅ 개수에 따라 할인적용 (오픈카톡)</div>
           <div class="note" style="margin-top:4px;">예약리뷰/영수증리뷰 체크 시 총액에서 10% 자동 할인됩니다.</div>
         </div>
@@ -343,7 +377,7 @@
           </div>
         </div>
 
-        <!-- 기본 닫힘 -->
+        <!-- ✅ 처음에는 닫힘 -->
         <details id="dWindow">
           <summary><span>창문형 방충망</span><span class="chev">열기/닫기 ▾</span></summary>
           <div class="detailBody">
@@ -481,7 +515,7 @@
     </div>
   </div>
 
-  <!-- 고정 카카오 버튼 (클릭 시 자동복사 + 이동) -->
+  <!-- 고정 카카오 버튼 -->
   <div class="kakaoSticky">
     <button class="kakaoBtn" id="kakaoConsultBtn" type="button">
       <div class="kLeft">
@@ -644,7 +678,6 @@ async function copyText(text){
     await navigator.clipboard.writeText(text);
     return true;
   }catch(e){
-    // fallback
     const ta = $("summary");
     ta.removeAttribute("readonly");
     ta.value = text;
@@ -678,7 +711,7 @@ function wire(){
   $("btnCopy").addEventListener("click", async ()=>{
     const { summary } = calc();
     const ok = await copyText(summary);
-    toast(ok ? "복사 완료! 오픈채팅에 붙여넣기 하면 끝" : "복사 실패(기기 설정) — 요약을 길게 눌러 복사해주세요");
+    toast(ok ? "복사 완료! 오픈채팅에 붙여넣기 하면 끝" : "복사 실패 — 요약을 길게 눌러 복사해주세요");
   });
 
   $("btnReset").addEventListener("click", ()=>{
@@ -719,12 +752,10 @@ function wire(){
     calc();
   });
 
-  // ✅ 상담받기: 자동복사 → 안내 → 이동
   $("kakaoConsultBtn").addEventListener("click", async ()=>{
     const { summary, any } = calc();
 
     if(!any){
-      // 아무 입력 없으면 친절하게 안내 + 견적쪽으로 이동
       openModal("아직 입력된 항목이 없어요. 아래에서 개수 입력 후 다시 ‘상담받기’를 눌러주세요.");
       $("btnGoKakao").style.display = "none";
       $("quoteSection").scrollIntoView({ behavior:"smooth", block:"start" });
@@ -737,7 +768,6 @@ function wire(){
     $("btnGoKakao").style.display = "inline-flex";
     if(ok){
       openModal("복사 완료! 오픈채팅으로 이동하면 채팅창에 ‘붙여넣기’만 하시면 됩니다.");
-      // 복사 성공이면 0.6초 뒤 자동 이동(너무 빨리 튀는 느낌 방지)
       setTimeout(()=> window.open(KAKAO_URL, "_blank", "noopener"), 650);
     }else{
       openModal("복사가 막힌 기기예요. 아래 요약을 길게 눌러 복사한 뒤, 오픈채팅으로 이동해주세요.");
