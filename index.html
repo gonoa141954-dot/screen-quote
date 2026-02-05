@@ -7,7 +7,7 @@
 
   <meta name="description" content="30초 셀프견적 · 요약 자동복사 후 오픈채팅 상담" />
   <meta property="og:title" content="방충망 자동견적 | 방충망시공소" />
-  <meta property="og:description" content="개수만 입력하면 소비자가격 자동 계산 · 상담받기 누르면 요약 자동복사" />
+  <meta property="og:description" content="입력만 하면 금액 확인 · 상담받기 누르면 견적요약 자동복사" />
   <meta property="og:image" content="https://gonoa141954-dot.github.io/screen-quote/hero.png" />
 
   <style>
@@ -132,6 +132,16 @@
     textarea{min-height:150px;resize:vertical;line-height:1.5;}
     .note{font-size:12.5px;color:var(--muted);line-height:1.5;}
 
+    .chip{
+      display:flex; gap:10px; align-items:flex-start;
+      border:1px solid var(--line);
+      background:rgba(15,23,42,.03);
+      border-radius:18px;
+      padding:12px;
+    }
+    .chip input{width:auto;margin-top:2px}
+    .chip b{font-weight:1000}
+
     details{border:1px solid var(--line);border-radius:18px;overflow:hidden;background:#fff;box-shadow: var(--shadow2);}
     summary{
       list-style:none;cursor:pointer;padding:14px 12px;font-weight:1000;
@@ -200,7 +210,6 @@
     .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
     @media (max-width:520px){ .grid2{grid-template-columns:1fr;} }
 
-    /* safety list */
     .list{border:1px solid var(--line);background:#fff;border-radius:18px;overflow:hidden;box-shadow:var(--shadow2);}
     .listHead{display:flex;justify-content:space-between;align-items:center;padding:12px 12px;border-bottom:1px solid var(--line);background:linear-gradient(180deg, rgba(15,23,42,.02), rgba(255,255,255,0));gap:10px;font-weight:1000;}
     .listBody{padding:10px 12px;display:flex;flex-direction:column;gap:8px;}
@@ -231,20 +240,20 @@
           <div class="kicker">⚡ 30초 셀프견적</div>
           <h1 class="title">방충망 자동견적</h1>
           <p class="sub">
-            바쁘실 때는 <b>입력만</b> 하고 금액 확인하세요.
+            입력만 하면 금액 확인됩니다.
             아래 <b>상담받기</b> 누르면 <b>견적요약이 자동 복사</b>됩니다.
           </p>
           <div class="heroBtns">
             <button class="btn btnPrimary" id="btnGoQuote">셀프 견적하기</button>
             <button class="btn btnSoft" id="btnHow">이용 방법</button>
           </div>
-          <div class="note">※ 소비자가격(정가) 기준 자동견적입니다.</div>
+          <div class="note">※ 예약/영수증 체크 시 10% 할인 적용됩니다.</div>
         </div>
       </div>
     </div>
 
     <div class="featureBar" id="howSection">
-      <div class="featureItem"><div class="featureIcon">₩</div><div class="featureText"><b>소비자가격</b><span>정가 기준으로 계산</span></div></div>
+      <div class="featureItem"><div class="featureIcon">₩</div><div class="featureText"><b>소비자가격</b><span>기준 단가로 계산</span></div></div>
       <div class="featureItem"><div class="featureIcon">⎘</div><div class="featureText"><b>요약 자동복사</b><span>상담 버튼 누르면 자동</span></div></div>
       <div class="featureItem"><div class="featureIcon">📱</div><div class="featureText"><b>모바일 최적</b><span>폰에서 보기 쉽게</span></div></div>
     </div>
@@ -263,10 +272,9 @@
 
         <div class="chip" style="margin-bottom:12px;">
           <input type="checkbox" id="discount10">
-         
           <div>
             <div><b>예약리뷰</b> 또는 <b>영수증리뷰</b> 약속(10% 할인)</div>
-            <div class="note">체크하면 총액에서 10% 할인 적용 / </div>
+            <div class="note">체크하면 총액에서 자동으로 10% 할인 적용됩니다.</div>
           </div>
         </div>
 
@@ -318,7 +326,7 @@
 
         <div style="height:12px"></div>
 
-        <!-- 현관롤(체크 없이 qty>0이면 자동 반영) -->
+        <!-- 현관롤: qty>0이면 자동 반영 -->
         <details id="dEntrance">
           <summary><span>현관 롤방충망</span><span class="chev">열기/닫기 ▾</span></summary>
           <div class="detailBody">
@@ -356,7 +364,7 @@
 
         <div style="height:12px"></div>
 
-        <!-- 알미늄(체크 없이 개수 입력만으로 자동 반영) -->
+        <!-- 알미늄: qty 입력만으로 자동 반영 -->
         <details id="dAl">
           <summary><span>알미늄 틀 제작(미세망 포함)</span><span class="chev">열기/닫기 ▾</span></summary>
           <div class="detailBody">
@@ -384,7 +392,7 @@
 
         <div style="height:12px"></div>
 
-        <!-- 하이샤시(체크 없이 개수 입력만으로 자동 반영) -->
+        <!-- 하이샤시 -->
         <details id="dHS">
           <summary><span>하이샤시 틀 제작(미세망 포함)</span><span class="chev">열기/닫기 ▾</span></summary>
           <div class="detailBody">
@@ -412,13 +420,13 @@
 
         <div style="height:12px"></div>
 
-        <!-- ✅ 안전/추락(여기만 "추가 버튼"으로 누적) -->
+        <!-- 안전/추락: 추가 버튼으로 누적 -->
         <details id="dSafety">
           <summary><span>방범/추락 안전 방충망 (mm 입력)</span><span class="chev">열기/닫기 ▾</span></summary>
           <div class="detailBody">
             <div class="row">
               <div class="note">
-                * 면적(㎡)은 0.1 단위로 올림(예: 1.86 → 1.9) 후 소비자가격 표 적용<br/>
+                * 면적(㎡)은 0.1 단위 올림(예: 1.86 → 1.9) 후 소비자가격 표 적용<br/>
                 * 방범안전=0.7mm 고정 / 추락안전=0.4mm 고정
               </div>
 
@@ -472,7 +480,7 @@
 
         <div class="result">
           <p class="price" id="resultPrice">0원</p>
-          <div class="resultMeta" id="resultNote">입력 기준 소비자가격(정가) 자동견적입니다.</div>
+          <div class="resultMeta" id="resultNote">개수 입력하면 자동으로 계산됩니다.</div>
 
           <label>고객에게 보낼 요약(자동 생성)</label>
           <textarea id="summary" readonly></textarea>
@@ -533,6 +541,10 @@ const CONFIG = {
   },
   MAKE_PRICE: { SM: 100000, L: 140000 },
 
+  // ✅ 예약/영수증 체크 할인 (10%)
+  DISCOUNT_RATE: 0.10,
+
+  // ✅ 안전/추락 소비자가격 표(사진 그대로)
   SAFETY_CONSUMER_TABLE: {
     "0.4": {
       "0.3":150000,"0.4":150000,"0.5":150000,"0.6":150000,
@@ -582,7 +594,7 @@ function safetyKindLabel(k){
   return (k === "crime") ? "방범안전 방충망" : "추락안전 방충망";
 }
 function safetyGaugeForKind(kind){
-  return (kind === "crime") ? "0.7" : "0.4";
+  return (kind === "crime") ? "0.7" : "0.4"; // ✅ 고정
 }
 
 function toast(msg){
@@ -650,7 +662,7 @@ function renderSafetyList(){
   $("safetySumText").textContent = `합계 ${fmt(sum)}`;
 }
 
-function buildSummary(totalConsumer){
+function buildSummary(totalConsumer, totalFinal, discountOn){
   const meshKey = $("meshType").value;
   const cntS = clampInt(parseFloat($("cntS").value));
   const cntM = clampInt(parseFloat($("cntM").value));
@@ -666,7 +678,6 @@ function buildSummary(totalConsumer){
   const alL  = clampInt(parseFloat($("alL").value));
   const hsSM = clampInt(parseFloat($("hsSM").value));
   const hsL2 = clampInt(parseFloat($("hsL2").value));
-  const discountOn = $("discount10").checked;
 
   const lines = [];
   lines.push(`창문형: ${meshLabel(meshKey)}`);
@@ -692,47 +703,53 @@ function buildSummary(totalConsumer){
     });
   }
 
-  lines.push(`소비자가격(정가) 자동견적: ${fmt(totalConsumer)}`);
-  lines.push(`예약/영수증리뷰 약속 체크: ${discountOn ? "체크" : "미체크"}`);
+  lines.push(`소비자가격(정가): ${fmt(totalConsumer)}`);
+  lines.push(`예약/영수증리뷰 약속(10%): ${discountOn ? "적용" : "미적용"}`);
+  lines.push(`최종 자동견적: ${fmt(totalFinal)}`);
   lines.push(`메모: ${memo || "없음"}`);
 
   return "자동견적 보고 연락드려요.\n" + lines.join("\n");
 }
 
 function calc(){
+  const discountOn = $("discount10").checked;
+
   const meshKey = $("meshType").value;
   const cntS = clampInt(parseFloat($("cntS").value));
   const cntM = clampInt(parseFloat($("cntM").value));
   const cntL = clampInt(parseFloat($("cntL").value));
-  const up = CONFIG.UNIT_PRICE_WINDOW[meshKey] || CONFIG.UNIT_PRICE_WINDOW.micro;
 
   let total = 0;
+  const up = CONFIG.UNIT_PRICE_WINDOW[meshKey] || CONFIG.UNIT_PRICE_WINDOW.micro;
   total += up.S * cntS + up.M * cntM + up.L * cntL;
 
-  // 현관롤: qty>0이면 반영
+  // 현관롤
   const entranceType = $("entranceType").value;
   const entranceSize = $("entranceSize").value;
   const entranceQty = clampInt(parseFloat($("entranceQty").value));
   let entranceInquiry = false;
   if(entranceQty>0){
     const p = CONFIG.ENTRANCE_ROLL_PRICE[entranceType]?.[entranceSize];
-    if(p == null){ entranceInquiry = true; }
-    else total += p * entranceQty;
+    if(p == null){
+      entranceInquiry = true;
+    }else{
+      total += p * entranceQty;
+    }
   }
 
-  // 알미늄: qty>0이면 반영
+  // 알미늄
   const alSM = clampInt(parseFloat($("alSM").value));
-  const alL  = clampInt(parseFloat($("alL").value));
+  const alL = clampInt(parseFloat($("alL").value));
   total += CONFIG.MAKE_PRICE.SM * alSM;
   total += CONFIG.MAKE_PRICE.L  * alL;
 
-  // 하이샤시: qty>0이면 반영
+  // 하이샤시
   const hsSM = clampInt(parseFloat($("hsSM").value));
   const hsL2 = clampInt(parseFloat($("hsL2").value));
   total += CONFIG.MAKE_PRICE.SM * hsSM;
   total += CONFIG.MAKE_PRICE.L  * hsL2;
 
-  // 안전/추락 누적 합산
+  // 안전/추락
   total += safetySumTotal();
 
   const any =
@@ -744,15 +761,22 @@ function calc(){
 
   if(!any) total = 0;
 
-  $("resultPrice").textContent = fmt(total);
+  // ✅ 할인 적용(10%)
+  let totalFinal = total;
+  if(discountOn) totalFinal = total * (1 - CONFIG.DISCOUNT_RATE);
 
-  let note = any ? "소비자가격(정가) 기준 자동견적입니다." : "입력하면 자동 계산됩니다.";
+  $("resultPrice").textContent = fmt(totalFinal);
+
+  let note = any ? "입력 기준 자동견적입니다." : "개수 입력하면 자동 계산됩니다.";
   if(entranceInquiry){
     note = "⚠️ PJ 롤 방충망은 자동견적이 아니라 ‘별도 견적 문의’입니다. 오픈채팅으로 문의 주세요.";
   }
+  if(discountOn && any){
+    note = "✅ 예약/영수증리뷰 약속 10% 할인 적용된 금액입니다.";
+  }
   $("resultNote").textContent = note;
 
-  $("summary").value = buildSummary(total);
+  $("summary").value = buildSummary(total, totalFinal, discountOn);
 
   return { summary: $("summary").value, any };
 }
@@ -794,9 +818,8 @@ function closeModal(){
 
 function updateSafetyGaugeUI(){
   const kind = $("safetyKind").value;
-  const g = safetyGaugeForKind(kind); // crime=0.7 / fall=0.4
+  const g = safetyGaugeForKind(kind);
   $("safetyGauge").value = `${g}mm`;
-  // 미리보기 갱신
   safetyPreview();
 }
 
@@ -830,7 +853,7 @@ function safetyPreview(){
 }
 
 function wire(){
-  // stepper buttons
+  // stepper
   document.addEventListener("click", (e)=>{
     const btn = e.target.closest("[data-step][data-target]");
     if(btn){
@@ -852,34 +875,31 @@ function wire(){
     }
   });
 
-  // inputs => auto calc (모든 섹션 자동합산)
+  // calc trigger
   [
     "discount10",
     "meshType","cntS","cntM","cntL","memo",
     "entranceType","entranceSize","entranceQty",
     "alSM","alL",
-    "hsSM","hsL2",
+    "hsSM","hsL2"
   ].forEach(id => $(id).addEventListener("input", calc));
 
-  // safety inputs: 미리보기 + (추가는 버튼으로만)
+  // safety preview
   ["safetyW","safetyH","safetyQty"].forEach(id=>{
     $(id).addEventListener("input", ()=>{
-      if(id !== "safetyW" && id !== "safetyH") {
-        // stepper로도 바뀌지만 직접입력도 정리
+      if(id === "safetyQty"){
         $(id).value = clampInt(parseFloat($(id).value));
       }
       safetyPreview();
-      calc(); // 미리보기뿐 아니라 총합(리스트 합)도 갱신
     });
   });
 
-  $("safetyKind").addEventListener("input", ()=>{
-    updateSafetyGaugeUI();
-  });
+  $("safetyKind").addEventListener("input", updateSafetyGaugeUI);
 
+  // add safety
   $("btnAddSafety").addEventListener("click", ()=>{
-    const kind = $("safetyKind").value;          // crime/fall
-    const gauge = safetyGaugeForKind(kind);      // crime=0.7, fall=0.4
+    const kind = $("safetyKind").value;
+    const gauge = safetyGaugeForKind(kind);
 
     const w = clampInt(parseFloat($("safetyW").value));
     const h = clampInt(parseFloat($("safetyH").value));
@@ -905,19 +925,19 @@ function wire(){
     calc();
     toast("추가 완료");
 
-    // 다음 사이즈 입력 편하게 초기화(원하면 수량 유지해도 됨)
     $("safetyW").value = 0;
     $("safetyH").value = 0;
-    // $("safetyQty").value = 1; // 원하면 1로 유지
     safetyPreview();
   });
 
+  // copy
   $("btnCopy").addEventListener("click", async ()=>{
     const { summary } = calc();
     const ok = await copyText(summary);
     toast(ok ? "복사 완료! 오픈채팅에 붙여넣기 하면 끝" : "복사 실패 — 요약을 길게 눌러 복사해주세요");
   });
 
+  // reset
   $("btnReset").addEventListener("click", ()=>{
     $("discount10").checked = false;
 
@@ -945,6 +965,7 @@ function wire(){
     toast("초기화 완료");
   });
 
+  // scroll buttons
   $("btnGoQuote").addEventListener("click", ()=>{
     $("dWindow").open = true;
     $("quoteSection").scrollIntoView({ behavior:"smooth", block:"start" });
@@ -955,6 +976,7 @@ function wire(){
     $("howSection").scrollIntoView({ behavior:"smooth", block:"start" });
   });
 
+  // kakao consult
   $("kakaoConsultBtn").addEventListener("click", async ()=>{
     const { summary, any } = calc();
     if(!any){
@@ -987,6 +1009,3 @@ wire();
 </script>
 </body>
 </html>
-
-
-
