@@ -263,6 +263,10 @@
 
         <div class="chip" style="margin-bottom:12px;">
           <input type="checkbox" id="discount10">
+          let totalFinal = total;
+if (discountOn) {
+  totalFinal = total * 0.9; // 10% 할인
+}
           <div>
             <div><b>예약리뷰</b> 또는 <b>영수증리뷰</b> 약속(10% 할인)</div>
             <div class="note">체크하면 총액에서 10% 할인 적용 / </div>
@@ -986,4 +990,5 @@ wire();
 </script>
 </body>
 </html>
+
 
