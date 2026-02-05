@@ -236,7 +236,6 @@
     .highlight{border-left:6px solid #FEE500;background:rgba(254,229,0,.22);}
     .highlightTitle{font-weight:1000;font-size:14px;letter-spacing:-0.2px;}
 
-    /* Sticky Kakao */
     .kakaoSticky{
       position:fixed;left:14px;right:14px;bottom:14px;
       z-index:50;max-width:980px;margin:0 auto;
@@ -265,7 +264,6 @@
       font-weight:1000;font-size:12.5px;white-space:nowrap;
     }
 
-    /* modal */
     .modalBack{
       position:fixed;inset:0;
       background:rgba(15,23,42,.45);
@@ -291,7 +289,6 @@
     .modalBtns{display:flex;gap:10px;padding:0 14px 14px;}
     .modalBtns .btn{flex:1}
 
-    /* ✅ 스테퍼(+-) 입력 UI */
     .stepper{
       display:grid;
       grid-template-columns:48px 1fr 48px;
@@ -321,7 +318,6 @@
       font-size:16px;
       padding:12px 10px;
     }
-    /* 모바일에서 number 스핀버튼 제거 */
     input[type=number]::-webkit-outer-spin-button,
     input[type=number]::-webkit-inner-spin-button{
       -webkit-appearance:none;margin:0;
@@ -398,15 +394,17 @@
 
       <div class="sectionBody">
         <div class="highlight" style="border-radius:18px;padding:12px;margin-bottom:12px;border:1px solid rgba(0,0,0,.06);">
-          <!-- ✅ 문구 변경 -->
-          <div class="highlightTitle">✅ 개수에 따른 차등 할인</div>
-          <div class="note" style="margin-top:4px;">예약리뷰/영수증리뷰 체크 시 총액에서 10% 자동 할인됩니다.</div>
+          <!-- ✅ 문구 수정 1 -->
+          <div class="highlightTitle">✅ 개수에 따른 차등 할인율 적용</div>
+          <!-- ✅ 문구 수정 2 (기존 안내 문구 삭제 후 교체) -->
+          <div class="note" style="margin-top:4px;">5개 이상 시공시 할인율 5프로 추가 할인</div>
         </div>
 
         <div class="chip" style="margin-bottom:12px;">
           <input type="checkbox" id="discount10">
           <div>
-            <div><b>예약리뷰</b> 또는 <b>영수증리뷰</b> (10% 할인)</div>
+            <!-- ✅ 문구 수정 3 -->
+            <div><b>예약리뷰</b> 또는 <b>영수증리뷰</b> 약속(10% 할인)</div>
             <div class="note">체크하면 총액에서 자동으로 10% 할인 적용됩니다.</div>
           </div>
         </div>
@@ -424,7 +422,6 @@
                 </select>
               </div>
 
-              <!-- ✅ 스테퍼로 교체 -->
               <div>
                 <label>소형(개)</label>
                 <div class="stepper">
@@ -488,7 +485,6 @@
                 </select>
               </div>
 
-              <!-- ✅ 스테퍼로 교체 -->
               <div>
                 <label>개수</label>
                 <div class="stepper">
@@ -514,7 +510,6 @@
                 <div>알미늄 틀 제작 견적 추가<div class="note">소/중, 대창 개수를 입력하세요.</div></div>
               </div>
 
-              <!-- ✅ 스테퍼로 교체 -->
               <div>
                 <label>소/중 (합계 개수) <span class="note">· 1개당 100,000원</span></label>
                 <div class="stepper">
@@ -547,7 +542,6 @@
                 <div>하이샤시 틀 제작 견적 추가<div class="note">소/중, 대창 개수를 입력하세요.</div></div>
               </div>
 
-              <!-- ✅ 스테퍼로 교체 -->
               <div>
                 <label>소/중 (합계 개수) <span class="note">· 1개당 100,000원</span></label>
                 <div class="stepper">
@@ -778,7 +772,6 @@ async function copyText(text){
   }
 }
 
-/* ✅ 스테퍼 공용 핸들러 */
 function applyStep(targetId, delta){
   const el = $(targetId);
   if(!el) return;
@@ -786,8 +779,6 @@ function applyStep(targetId, delta){
   const cur = clampInt(parseFloat(el.value));
   const next = Math.max(0, cur + delta);
   el.value = next;
-
-  // input 이벤트 발생시켜 calc()가 자동 실행되게
   el.dispatchEvent(new Event("input", { bubbles:true }));
 }
 
@@ -810,7 +801,6 @@ function wire(){
     "useHighSash2","hsSM","hsL2"
   ].forEach(id => $(id).addEventListener("input", calc));
 
-  /* ✅ 모든 + / - 버튼 이벤트 위임 */
   document.addEventListener("click", (e)=>{
     const btn = e.target.closest("[data-step][data-target]");
     if(!btn) return;
@@ -819,7 +809,6 @@ function wire(){
     applyStep(targetId, delta);
   });
 
-  /* ✅ 직접 타이핑했을 때도 음수/소수 방지 */
   ["cntS","cntM","cntL","entranceQty","alSM","alL","hsSM","hsL2"].forEach(id=>{
     $(id).addEventListener("change", ()=>{
       const v = clampInt(parseFloat($(id).value));
