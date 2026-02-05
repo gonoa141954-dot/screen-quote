@@ -394,16 +394,13 @@
 
       <div class="sectionBody">
         <div class="highlight" style="border-radius:18px;padding:12px;margin-bottom:12px;border:1px solid rgba(0,0,0,.06);">
-          <!-- ✅ 문구 수정 1 -->
           <div class="highlightTitle">✅ 개수에 따른 차등 할인율 적용</div>
-          <!-- ✅ 문구 수정 2 (기존 안내 문구 삭제 후 교체) -->
           <div class="note" style="margin-top:4px;">5개 이상 시공시 할인율 5프로 추가 할인</div>
         </div>
 
         <div class="chip" style="margin-bottom:12px;">
           <input type="checkbox" id="discount10">
           <div>
-            <!-- ✅ 문구 수정 3 -->
             <div><b>예약리뷰</b> 또는 <b>영수증리뷰</b> 약속(10% 할인)</div>
             <div class="note">체크하면 총액에서 자동으로 10% 할인 적용됩니다.</div>
           </div>
@@ -627,6 +624,8 @@ const CONFIG = {
     pj_roll:{ under: null,   over: null },
   },
   MAKE_PRICE: { SM: 100000, L: 140000 },
+
+  /* ✅ 남겨두되, 현재는 소비자가격 표시만 할 거라 적용하지 않음 */
   DISCOUNT_RATE: 0.10
 };
 
@@ -657,7 +656,12 @@ function toast(msg){
   setTimeout(()=>{ $("toast").textContent = ""; }, 2400);
 }
 
-function buildSummary(total, memo, meshKey, cntS, cntM, cntL, useEntranceRoll, entranceType, entranceSize, entranceQty, entranceInquiry, useAlMake, alSM, alL, useHighSash2, hsSM, hsL2, discountOn){
+function buildSummary(totalConsumer, memo, meshKey, cntS, cntM, cntL,
+  useEntranceRoll, entranceType, entranceSize, entranceQty, entranceInquiry,
+  useAlMake, alSM, alL,
+  useHighSash2, hsSM, hsL2,
+  discountOn
+){
   const lines = [];
   lines.push(`창문형: ${meshLabel(meshKey)}`);
   lines.push(`창 개수: 소 ${cntS} / 중 ${cntM}(높이 1500↓) / 대 ${cntL}(높이 2300↓)`);
@@ -674,8 +678,12 @@ function buildSummary(total, memo, meshKey, cntS, cntM, cntL, useEntranceRoll, e
     lines.push(`하이샤시 틀 제작(미세망 포함): 소/중 ${hsSM}개(×100,000) / 대 ${hsL2}개(×140,000)`);
   }
 
-  lines.push(`예약리뷰/영수증리뷰 할인: ${discountOn ? "적용(10%)" : "미적용"}`);
-  lines.push(`자동견적: ${fmt(total)}`);
+  /* ✅ 소비자가격 기준 표기 */
+  lines.push(`소비자가격(정가) 자동견적: ${fmt(totalConsumer)}`);
+
+  /* ✅ 체크 여부는 참고로만 남김 (가격에는 반영 안 함) */
+  lines.push(`예약/영수증리뷰 약속 체크: ${discountOn ? "체크" : "미체크"}`);
+
   lines.push(`메모: ${memo || "없음"}`);
 
   return "자동견적 보고 연락드려요.\n" + lines.join("\n");
@@ -733,19 +741,19 @@ function calc(){
 
   if(!any) total = 0;
 
-  let totalFinal = total;
-  if(discountOn) totalFinal = total * (1 - CONFIG.DISCOUNT_RATE);
+  /* ✅ 소비자가격(정가)만 표시 */
+  const totalConsumer = total;
 
-  $("resultPrice").textContent = fmt(totalFinal);
+  $("resultPrice").textContent = fmt(totalConsumer);
 
-  let note = any ? "입력 기준 자동견적(정확 금액)입니다." : "개수 입력하면 자동 계산됩니다.";
+  let note = any ? "소비자가격(정가) 기준 자동견적입니다." : "개수 입력하면 자동 계산됩니다.";
   if(useEntranceRoll && entranceInquiry){
     note = "⚠️ PJ 롤 방충망은 자동견적이 아니라 ‘별도 견적 문의’입니다. 오픈채팅으로 문의 주세요.";
   }
   $("resultNote").textContent = note;
 
   const summary = buildSummary(
-    totalFinal, memo, meshKey, cntS, cntM, cntL,
+    totalConsumer, memo, meshKey, cntS, cntM, cntL,
     useEntranceRoll, entranceType, entranceSize, entranceQty, entranceInquiry,
     useAlMake, alSM, alL,
     useHighSash2, hsSM, hsL2,
