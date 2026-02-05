@@ -8,7 +8,6 @@
   <meta name="description" content="30초 셀프견적 · 요약 자동복사 후 오픈채팅 상담" />
   <meta property="og:title" content="방충망 자동견적 | 방충망시공소" />
   <meta property="og:description" content="개수만 입력하면 정확 금액 확인 · 상담받기 누르면 견적요약 자동복사" />
-  <!-- ✅ 깃허브에 올린 hero.png를 공유 썸네일로 사용 -->
   <meta property="og:image" content="https://gonoa141954-dot.github.io/screen-quote/hero.png" />
 
   <style>
@@ -108,7 +107,6 @@
     .btn:hover{transform:translateY(-1px)}
     .btn:active{transform:translateY(0px)}
 
-    /* ✅ 기존 3칸 카드 대신, 한 줄 아이콘 바 (깔끔) */
     .featureBar{
       margin-top:14px;
       border:1px solid var(--line);
@@ -292,6 +290,43 @@
     .modalBody{padding:12px 14px 14px;color:var(--muted);font-size:13px;line-height:1.55;}
     .modalBtns{display:flex;gap:10px;padding:0 14px 14px;}
     .modalBtns .btn{flex:1}
+
+    /* ✅ 스테퍼(+-) 입력 UI */
+    .stepper{
+      display:grid;
+      grid-template-columns:48px 1fr 48px;
+      gap:8px;
+      align-items:center;
+    }
+    .stepBtn{
+      height:48px;
+      border-radius:16px;
+      border:1px solid var(--line);
+      background:rgba(15,23,42,.04);
+      font-weight:1000;
+      font-size:18px;
+      cursor:pointer;
+      display:grid;
+      place-items:center;
+      user-select:none;
+      box-shadow: 0 10px 18px rgba(15,23,42,.06);
+      transition:transform .08s ease;
+    }
+    .stepBtn:hover{transform:translateY(-1px)}
+    .stepBtn:active{transform:translateY(0px)}
+    .stepInput{
+      height:48px;
+      text-align:center;
+      font-weight:900;
+      font-size:16px;
+      padding:12px 10px;
+    }
+    /* 모바일에서 number 스핀버튼 제거 */
+    input[type=number]::-webkit-outer-spin-button,
+    input[type=number]::-webkit-inner-spin-button{
+      -webkit-appearance:none;margin:0;
+    }
+    input[type=number]{ -moz-appearance:textfield; }
   </style>
 </head>
 
@@ -308,7 +343,6 @@
     <div class="hero">
       <div class="heroGrid">
         <div class="heroMedia">
-          <!-- ✅ 저장소에 올린 hero.png 사용 -->
           <img src="./hero.png" alt="방충망 자동견적 이미지" />
         </div>
 
@@ -332,7 +366,6 @@
       </div>
     </div>
 
-    <!-- ✅ 깔끔 아이콘 바 -->
     <div class="featureBar" id="howSection">
       <div class="featureItem">
         <div class="featureIcon">₩</div>
@@ -365,7 +398,8 @@
 
       <div class="sectionBody">
         <div class="highlight" style="border-radius:18px;padding:12px;margin-bottom:12px;border:1px solid rgba(0,0,0,.06);">
-          <div class="highlightTitle">✅ 개수에 따라 할인적용 (오픈카톡)</div>
+          <!-- ✅ 문구 변경 -->
+          <div class="highlightTitle">✅ 개수에 따른 차등 할인</div>
           <div class="note" style="margin-top:4px;">예약리뷰/영수증리뷰 체크 시 총액에서 10% 자동 할인됩니다.</div>
         </div>
 
@@ -377,7 +411,6 @@
           </div>
         </div>
 
-        <!-- ✅ 처음에는 닫힘 -->
         <details id="dWindow">
           <summary><span>창문형 방충망</span><span class="chev">열기/닫기 ▾</span></summary>
           <div class="detailBody">
@@ -391,16 +424,32 @@
                 </select>
               </div>
 
-              <div><label>소형(개)</label><input id="cntS" type="number" min="0" step="1" value="0" inputmode="numeric"></div>
+              <!-- ✅ 스테퍼로 교체 -->
+              <div>
+                <label>소형(개)</label>
+                <div class="stepper">
+                  <button class="stepBtn" type="button" data-step="-1" data-target="cntS" aria-label="소형 감소">−</button>
+                  <input id="cntS" class="stepInput" type="number" min="0" step="1" value="0" inputmode="numeric">
+                  <button class="stepBtn" type="button" data-step="1" data-target="cntS" aria-label="소형 증가">＋</button>
+                </div>
+              </div>
 
               <div>
                 <label>중형(개) <span class="note">· 높이 1500 이하</span></label>
-                <input id="cntM" type="number" min="0" step="1" value="0" inputmode="numeric">
+                <div class="stepper">
+                  <button class="stepBtn" type="button" data-step="-1" data-target="cntM" aria-label="중형 감소">−</button>
+                  <input id="cntM" class="stepInput" type="number" min="0" step="1" value="0" inputmode="numeric">
+                  <button class="stepBtn" type="button" data-step="1" data-target="cntM" aria-label="중형 증가">＋</button>
+                </div>
               </div>
 
               <div>
                 <label>대형(개) <span class="note">· 높이 2300 이하</span></label>
-                <input id="cntL" type="number" min="0" step="1" value="0" inputmode="numeric">
+                <div class="stepper">
+                  <button class="stepBtn" type="button" data-step="-1" data-target="cntL" aria-label="대형 감소">−</button>
+                  <input id="cntL" class="stepInput" type="number" min="0" step="1" value="0" inputmode="numeric">
+                  <button class="stepBtn" type="button" data-step="1" data-target="cntL" aria-label="대형 증가">＋</button>
+                </div>
               </div>
 
               <div><label>메모(선택)</label><input id="memo" placeholder="예: 저층/아이 있음/초파리 유입 등"></div>
@@ -439,7 +488,15 @@
                 </select>
               </div>
 
-              <div><label>개수</label><input id="entranceQty" type="number" min="0" step="1" value="0" inputmode="numeric"></div>
+              <!-- ✅ 스테퍼로 교체 -->
+              <div>
+                <label>개수</label>
+                <div class="stepper">
+                  <button class="stepBtn" type="button" data-step="-1" data-target="entranceQty" aria-label="현관 롤 개수 감소">−</button>
+                  <input id="entranceQty" class="stepInput" type="number" min="0" step="1" value="0" inputmode="numeric">
+                  <button class="stepBtn" type="button" data-step="1" data-target="entranceQty" aria-label="현관 롤 개수 증가">＋</button>
+                </div>
+              </div>
 
               <div class="note">* PJ 롤 선택 시 자동금액은 계산하지 않고 “별도 견적 문의”로 표시됩니다.</div>
             </div>
@@ -456,8 +513,25 @@
                 <input type="checkbox" id="useAlMake">
                 <div>알미늄 틀 제작 견적 추가<div class="note">소/중, 대창 개수를 입력하세요.</div></div>
               </div>
-              <div><label>소/중 (합계 개수) <span class="note">· 1개당 100,000원</span></label><input id="alSM" type="number" min="0" step="1" value="0" inputmode="numeric"></div>
-              <div><label>대창 (개수) <span class="note">· 1개당 140,000원</span></label><input id="alL" type="number" min="0" step="1" value="0" inputmode="numeric"></div>
+
+              <!-- ✅ 스테퍼로 교체 -->
+              <div>
+                <label>소/중 (합계 개수) <span class="note">· 1개당 100,000원</span></label>
+                <div class="stepper">
+                  <button class="stepBtn" type="button" data-step="-1" data-target="alSM" aria-label="알미늄 소/중 감소">−</button>
+                  <input id="alSM" class="stepInput" type="number" min="0" step="1" value="0" inputmode="numeric">
+                  <button class="stepBtn" type="button" data-step="1" data-target="alSM" aria-label="알미늄 소/중 증가">＋</button>
+                </div>
+              </div>
+
+              <div>
+                <label>대창 (개수) <span class="note">· 1개당 140,000원</span></label>
+                <div class="stepper">
+                  <button class="stepBtn" type="button" data-step="-1" data-target="alL" aria-label="알미늄 대창 감소">−</button>
+                  <input id="alL" class="stepInput" type="number" min="0" step="1" value="0" inputmode="numeric">
+                  <button class="stepBtn" type="button" data-step="1" data-target="alL" aria-label="알미늄 대창 증가">＋</button>
+                </div>
+              </div>
             </div>
           </div>
         </details>
@@ -472,8 +546,25 @@
                 <input type="checkbox" id="useHighSash2">
                 <div>하이샤시 틀 제작 견적 추가<div class="note">소/중, 대창 개수를 입력하세요.</div></div>
               </div>
-              <div><label>소/중 (합계 개수) <span class="note">· 1개당 100,000원</span></label><input id="hsSM" type="number" min="0" step="1" value="0" inputmode="numeric"></div>
-              <div><label>대창 (개수) <span class="note">· 1개당 140,000원</span></label><input id="hsL2" type="number" min="0" step="1" value="0" inputmode="numeric"></div>
+
+              <!-- ✅ 스테퍼로 교체 -->
+              <div>
+                <label>소/중 (합계 개수) <span class="note">· 1개당 100,000원</span></label>
+                <div class="stepper">
+                  <button class="stepBtn" type="button" data-step="-1" data-target="hsSM" aria-label="하이샤시 소/중 감소">−</button>
+                  <input id="hsSM" class="stepInput" type="number" min="0" step="1" value="0" inputmode="numeric">
+                  <button class="stepBtn" type="button" data-step="1" data-target="hsSM" aria-label="하이샤시 소/중 증가">＋</button>
+                </div>
+              </div>
+
+              <div>
+                <label>대창 (개수) <span class="note">· 1개당 140,000원</span></label>
+                <div class="stepper">
+                  <button class="stepBtn" type="button" data-step="-1" data-target="hsL2" aria-label="하이샤시 대창 감소">−</button>
+                  <input id="hsL2" class="stepInput" type="number" min="0" step="1" value="0" inputmode="numeric">
+                  <button class="stepBtn" type="button" data-step="1" data-target="hsL2" aria-label="하이샤시 대창 증가">＋</button>
+                </div>
+              </div>
             </div>
           </div>
         </details>
@@ -499,7 +590,6 @@
     </div>
   </div>
 
-  <!-- 자동복사 안내 모달 -->
   <div class="modalBack" id="modalBack" aria-hidden="true">
     <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
       <div class="modalTop">
@@ -515,7 +605,6 @@
     </div>
   </div>
 
-  <!-- 고정 카카오 버튼 -->
   <div class="kakaoSticky">
     <button class="kakaoBtn" id="kakaoConsultBtn" type="button">
       <div class="kLeft">
@@ -689,6 +778,19 @@ async function copyText(text){
   }
 }
 
+/* ✅ 스테퍼 공용 핸들러 */
+function applyStep(targetId, delta){
+  const el = $(targetId);
+  if(!el) return;
+
+  const cur = clampInt(parseFloat(el.value));
+  const next = Math.max(0, cur + delta);
+  el.value = next;
+
+  // input 이벤트 발생시켜 calc()가 자동 실행되게
+  el.dispatchEvent(new Event("input", { bubbles:true }));
+}
+
 function openModal(msg){
   $("modalBody").textContent = msg;
   $("modalBack").style.display = "flex";
@@ -707,6 +809,24 @@ function wire(){
     "useAlMake","alSM","alL",
     "useHighSash2","hsSM","hsL2"
   ].forEach(id => $(id).addEventListener("input", calc));
+
+  /* ✅ 모든 + / - 버튼 이벤트 위임 */
+  document.addEventListener("click", (e)=>{
+    const btn = e.target.closest("[data-step][data-target]");
+    if(!btn) return;
+    const delta = parseInt(btn.getAttribute("data-step"), 10);
+    const targetId = btn.getAttribute("data-target");
+    applyStep(targetId, delta);
+  });
+
+  /* ✅ 직접 타이핑했을 때도 음수/소수 방지 */
+  ["cntS","cntM","cntL","entranceQty","alSM","alL","hsSM","hsL2"].forEach(id=>{
+    $(id).addEventListener("change", ()=>{
+      const v = clampInt(parseFloat($(id).value));
+      $(id).value = v;
+      calc();
+    });
+  });
 
   $("btnCopy").addEventListener("click", async ()=>{
     const { summary } = calc();
