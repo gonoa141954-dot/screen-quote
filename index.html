@@ -7,23 +7,15 @@
 
   <meta name="description" content="30초 셀프견적 · 요약 자동복사 후 오픈채팅 상담" />
   <meta property="og:title" content="방충망 자동견적 | 방충망시공소" />
-  <meta property="og:description" content="개수만 입력하면 정확 금액 확인 · 상담받기 누르면 견적요약 자동복사" />
+  <meta property="og:description" content="개수만 입력하면 소비자가격 자동 계산 · 상담받기 누르면 요약 자동복사" />
   <meta property="og:image" content="https://gonoa141954-dot.github.io/screen-quote/hero.png" />
 
   <style>
     :root{
-      --bg:#ffffff;
-      --bg2:#f7f8fb;
-      --card:#ffffff;
+      --bg:#ffffff; --bg2:#f7f8fb; --card:#ffffff;
       --line:rgba(15,23,42,.10);
-      --text:#0f172a;
-      --muted:rgba(15,23,42,.65);
-      --muted2:rgba(15,23,42,.45);
-
-      --brand:#2563eb;
-      --brand2:#06b6d4;
-      --good:#16a34a;
-
+      --text:#0f172a; --muted:rgba(15,23,42,.65); --muted2:rgba(15,23,42,.45);
+      --brand:#2563eb; --brand2:#06b6d4; --good:#16a34a;
       --shadow: 0 18px 45px rgba(15,23,42,.10);
       --shadow2: 0 10px 28px rgba(15,23,42,.08);
       --r:22px;
@@ -65,11 +57,7 @@
     .heroGrid{display:grid; grid-template-columns:1fr;}
     @media (min-width:900px){ .heroGrid{grid-template-columns: 1.15fr .85fr;} }
     .heroMedia{position:relative;min-height:260px;background:#eef2ff;}
-    .heroMedia img{
-      width:100%; height:100%;
-      object-fit:cover; display:block;
-      filter:saturate(1.08) contrast(1.04);
-    }
+    .heroMedia img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(1.08) contrast(1.04);}
     .heroMedia::after{
       content:""; position:absolute; inset:0;
       background:linear-gradient(to top, rgba(255,255,255,.95), rgba(255,255,255,.10) 55%, rgba(255,255,255,0));
@@ -108,63 +96,25 @@
     .btn:active{transform:translateY(0px)}
 
     .featureBar{
-      margin-top:14px;
-      border:1px solid var(--line);
-      border-radius:var(--r);
-      background:rgba(255,255,255,.92);
-      box-shadow:var(--shadow2);
-      padding:12px;
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
+      margin-top:14px;border:1px solid var(--line);border-radius:var(--r);
+      background:rgba(255,255,255,.92);box-shadow:var(--shadow2);
+      padding:12px;display:flex;flex-wrap:wrap;gap:10px;
     }
     .featureItem{
-      flex:1 1 190px;
-      display:flex;
-      align-items:center;
-      gap:10px;
-      padding:10px 12px;
-      border-radius:18px;
-      background:rgba(15,23,42,.03);
+      flex:1 1 190px;display:flex;align-items:center;gap:10px;
+      padding:10px 12px;border-radius:18px;background:rgba(15,23,42,.03);
       border:1px solid rgba(15,23,42,.08);
     }
     .featureIcon{
-      width:36px;height:36px;
-      border-radius:14px;
-      display:grid;place-items:center;
-      background:rgba(37,99,235,.10);
-      border:1px solid rgba(37,99,235,.18);
-      color:rgba(37,99,235,.95);
-      font-weight:1000;
-      flex:0 0 auto;
+      width:36px;height:36px;border-radius:14px;display:grid;place-items:center;
+      background:rgba(37,99,235,.10);border:1px solid rgba(37,99,235,.18);
+      color:rgba(37,99,235,.95);font-weight:1000;flex:0 0 auto;
     }
-    .featureText b{
-      display:block;
-      font-weight:1000;
-      font-size:13px;
-      letter-spacing:-0.2px;
-    }
-    .featureText span{
-      display:block;
-      font-size:12px;
-      color:var(--muted);
-      margin-top:2px;
-      line-height:1.35;
-    }
+    .featureText b{display:block;font-weight:1000;font-size:13px;letter-spacing:-0.2px;}
+    .featureText span{display:block;font-size:12px;color:var(--muted);margin-top:2px;line-height:1.35;}
 
-    .section{
-      margin-top:14px;
-      border:1px solid var(--line);
-      border-radius:var(--r);
-      background:rgba(255,255,255,.92);
-      box-shadow:var(--shadow);
-      overflow:hidden;
-    }
-    .sectionHead{
-      padding:16px 16px 12px;
-      border-bottom:1px solid var(--line);
-      background:linear-gradient(180deg, rgba(37,99,235,.06), rgba(255,255,255,0));
-    }
+    .section{margin-top:14px;border:1px solid var(--line);border-radius:var(--r);background:rgba(255,255,255,.92);box-shadow:var(--shadow);overflow:hidden;}
+    .sectionHead{padding:16px 16px 12px;border-bottom:1px solid var(--line);background:linear-gradient(180deg, rgba(37,99,235,.06), rgba(255,255,255,0));}
     .sectionHead h2{margin:0;font-size:16px;font-weight:1000;letter-spacing:-0.2px;}
     .sectionHead .desc{margin:6px 0 0;color:var(--muted);font-size:12.8px;line-height:1.5;}
     .sectionBody{padding:14px 16px 16px;}
@@ -172,14 +122,8 @@
     .row{display:grid;grid-template-columns:1fr;gap:10px;}
     label{font-size:13px;color:var(--muted);display:block;margin-bottom:6px;}
     input,select,textarea{
-      width:100%;
-      border-radius:16px;
-      border:1px solid var(--line);
-      background:#fff;
-      color:var(--text);
-      padding:12px 12px;
-      font-size:14px;
-      outline:none;
+      width:100%;border-radius:16px;border:1px solid var(--line);
+      background:#fff;color:var(--text);padding:12px 12px;font-size:14px;outline:none;
     }
     input:focus,select:focus,textarea:focus{
       border-color: rgba(37,99,235,.35);
@@ -188,32 +132,10 @@
     textarea{min-height:150px;resize:vertical;line-height:1.5;}
     .note{font-size:12.5px;color:var(--muted);line-height:1.5;}
 
-    .chip{
-      display:flex; gap:10px; align-items:flex-start;
-      border:1px solid var(--line);
-      background:rgba(15,23,42,.03);
-      border-radius:18px;
-      padding:12px;
-    }
-    .chip input{width:auto;margin-top:2px}
-    .chip b{font-weight:1000}
-
-    details{
-      border:1px solid var(--line);
-      border-radius:18px;
-      overflow:hidden;
-      background:#fff;
-      box-shadow: var(--shadow2);
-    }
+    details{border:1px solid var(--line);border-radius:18px;overflow:hidden;background:#fff;box-shadow: var(--shadow2);}
     summary{
-      list-style:none;
-      cursor:pointer;
-      padding:14px 12px;
-      font-weight:1000;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
+      list-style:none;cursor:pointer;padding:14px 12px;font-weight:1000;
+      display:flex;align-items:center;justify-content:space-between;gap:10px;
       background: linear-gradient(180deg, rgba(15,23,42,.02), rgba(255,255,255,0));
     }
     summary::-webkit-details-marker{display:none;}
@@ -221,12 +143,9 @@
     .detailBody{padding:12px;border-top:1px solid var(--line);background:#fff;}
 
     .result{
-      margin-top:14px;
-      border:1px solid var(--line);
-      border-radius:22px;
+      margin-top:14px;border:1px solid var(--line);border-radius:22px;
       background:linear-gradient(180deg, rgba(37,99,235,.06), rgba(255,255,255,0));
-      box-shadow: var(--shadow);
-      padding:14px;
+      box-shadow: var(--shadow);padding:14px;
     }
     .price{font-size:28px;font-weight:1000;letter-spacing:-0.6px;margin:0;}
     .resultMeta{margin:6px 0 10px;color:var(--muted);font-size:12.5px;line-height:1.5;}
@@ -236,131 +155,60 @@
     .highlight{border-left:6px solid #FEE500;background:rgba(254,229,0,.22);}
     .highlightTitle{font-weight:1000;font-size:14px;letter-spacing:-0.2px;}
 
-    .kakaoSticky{
-      position:fixed;left:14px;right:14px;bottom:14px;
-      z-index:50;max-width:980px;margin:0 auto;
-    }
+    /* sticky kakao */
+    .kakaoSticky{position:fixed;left:14px;right:14px;bottom:14px;z-index:50;max-width:980px;margin:0 auto;}
     .kakaoBtn{
-      width:100%;
-      display:flex;align-items:center;justify-content:space-between;gap:12px;
-      padding:12px 14px;border-radius:20px;
-      background:#FEE500;color:#191919;
-      border:1px solid rgba(0,0,0,.10);
-      box-shadow: 0 18px 44px rgba(15,23,42,.18);
-      cursor:pointer;
+      width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;
+      padding:12px 14px;border-radius:20px;background:#FEE500;color:#191919;
+      border:1px solid rgba(0,0,0,.10);box-shadow: 0 18px 44px rgba(15,23,42,.18);cursor:pointer;
     }
     .kLeft{display:flex;gap:12px;align-items:center;}
     .kBadge{
-      width:40px;height:40px;border-radius:999px;
-      display:grid;place-items:center;
+      width:40px;height:40px;border-radius:999px;display:grid;place-items:center;
       background:#191919;color:#FEE500;font-weight:1000;flex:0 0 auto;
     }
     .kText b{display:block;font-size:14px;font-weight:1000;letter-spacing:-0.2px;}
     .kText span{display:block;font-size:12px;color:rgba(25,25,25,.70);margin-top:2px;}
     .kRight{
-      padding:10px 12px;border-radius:14px;
-      background:rgba(25,25,25,.10);
-      border:1px solid rgba(25,25,25,.14);
-      font-weight:1000;font-size:12.5px;white-space:nowrap;
+      padding:10px 12px;border-radius:14px;background:rgba(25,25,25,.10);
+      border:1px solid rgba(25,25,25,.14);font-weight:1000;font-size:12.5px;white-space:nowrap;
     }
 
-    .modalBack{
-      position:fixed;inset:0;
-      background:rgba(15,23,42,.45);
-      display:none;align-items:center;justify-content:center;
-      padding:18px;
-      z-index:80;
-    }
-    .modal{
-      width:min(520px, 100%);
-      background:#fff;
-      border:1px solid var(--line);
-      border-radius:22px;
-      box-shadow: var(--shadow);
-      overflow:hidden;
-    }
-    .modalTop{
-      padding:14px 14px 10px;
-      border-bottom:1px solid var(--line);
-      background:linear-gradient(180deg, rgba(254,229,0,.22), rgba(255,255,255,0));
-    }
+    /* modal */
+    .modalBack{position:fixed;inset:0;background:rgba(15,23,42,.45);display:none;align-items:center;justify-content:center;padding:18px;z-index:80;}
+    .modal{width:min(520px, 100%);background:#fff;border:1px solid var(--line);border-radius:22px;box-shadow: var(--shadow);overflow:hidden;}
+    .modalTop{padding:14px 14px 10px;border-bottom:1px solid var(--line);background:linear-gradient(180deg, rgba(254,229,0,.22), rgba(255,255,255,0));}
     .modalTop b{font-weight:1000}
     .modalBody{padding:12px 14px 14px;color:var(--muted);font-size:13px;line-height:1.55;}
     .modalBtns{display:flex;gap:10px;padding:0 14px 14px;}
     .modalBtns .btn{flex:1}
 
     /* stepper */
-    .stepper{
-      display:grid;
-      grid-template-columns:48px 1fr 48px;
-      gap:8px;
-      align-items:center;
-    }
+    .stepper{display:grid;grid-template-columns:48px 1fr 48px;gap:8px;align-items:center;}
     .stepBtn{
-      height:48px;
-      border-radius:16px;
-      border:1px solid var(--line);
-      background:rgba(15,23,42,.04);
-      font-weight:1000;
-      font-size:18px;
-      cursor:pointer;
-      display:grid;
-      place-items:center;
-      user-select:none;
-      box-shadow: 0 10px 18px rgba(15,23,42,.06);
-      transition:transform .08s ease;
+      height:48px;border-radius:16px;border:1px solid var(--line);background:rgba(15,23,42,.04);
+      font-weight:1000;font-size:18px;cursor:pointer;display:grid;place-items:center;
+      user-select:none;box-shadow: 0 10px 18px rgba(15,23,42,.06);transition:transform .08s ease;
     }
     .stepBtn:hover{transform:translateY(-1px)}
     .stepBtn:active{transform:translateY(0px)}
-    .stepInput{
-      height:48px;
-      text-align:center;
-      font-weight:900;
-      font-size:16px;
-      padding:12px 10px;
-    }
+    .stepInput{height:48px;text-align:center;font-weight:900;font-size:16px;padding:12px 10px;}
     input[type=number]::-webkit-outer-spin-button,
     input[type=number]::-webkit-inner-spin-button{ -webkit-appearance:none;margin:0; }
     input[type=number]{ -moz-appearance:textfield; }
 
+    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+    @media (max-width:520px){ .grid2{grid-template-columns:1fr;} }
+
     /* safety list */
-    .list{
-      border:1px solid var(--line);
-      background:#fff;
-      border-radius:18px;
-      overflow:hidden;
-      box-shadow:var(--shadow2);
-    }
-    .listHead{
-      display:flex;justify-content:space-between;align-items:center;
-      padding:12px 12px;
-      border-bottom:1px solid var(--line);
-      background:linear-gradient(180deg, rgba(15,23,42,.02), rgba(255,255,255,0));
-      gap:10px;
-      font-weight:1000;
-    }
-    .listBody{padding:10px 12px; display:flex; flex-direction:column; gap:8px;}
-    .item{
-      display:flex; gap:10px; align-items:flex-start; justify-content:space-between;
-      border:1px solid rgba(15,23,42,.10);
-      background:rgba(15,23,42,.02);
-      border-radius:16px;
-      padding:10px 10px;
-    }
+    .list{border:1px solid var(--line);background:#fff;border-radius:18px;overflow:hidden;box-shadow:var(--shadow2);}
+    .listHead{display:flex;justify-content:space-between;align-items:center;padding:12px 12px;border-bottom:1px solid var(--line);background:linear-gradient(180deg, rgba(15,23,42,.02), rgba(255,255,255,0));gap:10px;font-weight:1000;}
+    .listBody{padding:10px 12px;display:flex;flex-direction:column;gap:8px;}
+    .item{display:flex;gap:10px;align-items:flex-start;justify-content:space-between;border:1px solid rgba(15,23,42,.10);background:rgba(15,23,42,.02);border-radius:16px;padding:10px 10px;}
     .item .left{min-width:0;}
     .item b{font-weight:1000}
     .item .meta{font-size:12px;color:var(--muted);margin-top:4px;line-height:1.35;}
-    .xBtn{
-      border:1px solid rgba(15,23,42,.12);
-      background:#fff;
-      border-radius:14px;
-      padding:8px 10px;
-      font-weight:1000;
-      cursor:pointer;
-      white-space:nowrap;
-    }
-    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
-    @media (max-width:520px){ .grid2{grid-template-columns:1fr;} }
+    .xBtn{border:1px solid rgba(15,23,42,.12);background:#fff;border-radius:14px;padding:8px 10px;font-weight:1000;cursor:pointer;white-space:nowrap;}
   </style>
 </head>
 
@@ -379,49 +227,26 @@
         <div class="heroMedia">
           <img src="./hero.png" alt="방충망 자동견적 이미지" />
         </div>
-
         <div class="heroContent">
           <div class="kicker">⚡ 30초 셀프견적</div>
           <h1 class="title">방충망 자동견적</h1>
           <p class="sub">
-            바쁘실 때는 <b>개수만 입력</b>하고 금액 확인하세요.
+            바쁘실 때는 <b>입력만</b> 하고 금액 확인하세요.
             아래 <b>상담받기</b> 누르면 <b>견적요약이 자동 복사</b>됩니다.
           </p>
-
           <div class="heroBtns">
             <button class="btn btnPrimary" id="btnGoQuote">셀프 견적하기</button>
             <button class="btn btnSoft" id="btnHow">이용 방법</button>
           </div>
-
-          <div class="note">
-            ※ 입력 기준 자동견적이며, 현장 상황에 따라 추가 발생 시 안내드립니다.
-          </div>
+          <div class="note">※ 소비자가격(정가) 기준 자동견적입니다.</div>
         </div>
       </div>
     </div>
 
     <div class="featureBar" id="howSection">
-      <div class="featureItem">
-        <div class="featureIcon">₩</div>
-        <div class="featureText">
-          <b>소비자가격</b>
-          <span>정가 기준으로 계산</span>
-        </div>
-      </div>
-      <div class="featureItem">
-        <div class="featureIcon">⎘</div>
-        <div class="featureText">
-          <b>요약 자동복사</b>
-          <span>상담 버튼 누르면 자동</span>
-        </div>
-      </div>
-      <div class="featureItem">
-        <div class="featureIcon">📱</div>
-        <div class="featureText">
-          <b>모바일 최적</b>
-          <span>폰에서 보기 쉽게</span>
-        </div>
-      </div>
+      <div class="featureItem"><div class="featureIcon">₩</div><div class="featureText"><b>소비자가격</b><span>정가 기준으로 계산</span></div></div>
+      <div class="featureItem"><div class="featureIcon">⎘</div><div class="featureText"><b>요약 자동복사</b><span>상담 버튼 누르면 자동</span></div></div>
+      <div class="featureItem"><div class="featureIcon">📱</div><div class="featureText"><b>모바일 최적</b><span>폰에서 보기 쉽게</span></div></div>
     </div>
 
     <div class="section" id="quoteSection">
@@ -440,10 +265,11 @@
           <input type="checkbox" id="discount10">
           <div>
             <div><b>예약리뷰</b> 또는 <b>영수증리뷰</b> 약속(10% 할인)</div>
-            <div class="note">체크하면 총액에서 자동으로 10% 할인 적용됩니다. (※ 현재 화면 표시는 소비자가격 기준)</div>
+            <div class="note">체크하면 총액에서 10% 할인 적용(협의) / 현재 화면 표시는 소비자가격 기준</div>
           </div>
         </div>
 
+        <!-- 창문형 -->
         <details id="dWindow">
           <summary><span>창문형 방충망</span><span class="chev">열기/닫기 ▾</span></summary>
           <div class="detailBody">
@@ -460,27 +286,27 @@
               <div>
                 <label>소형(개)</label>
                 <div class="stepper">
-                  <button class="stepBtn" type="button" data-step="-1" data-target="cntS" aria-label="소형 감소">−</button>
+                  <button class="stepBtn" type="button" data-step="-1" data-target="cntS">−</button>
                   <input id="cntS" class="stepInput" type="number" min="0" step="1" value="0" inputmode="numeric">
-                  <button class="stepBtn" type="button" data-step="1" data-target="cntS" aria-label="소형 증가">＋</button>
+                  <button class="stepBtn" type="button" data-step="1" data-target="cntS">＋</button>
                 </div>
               </div>
 
               <div>
                 <label>중형(개) <span class="note">· 높이 1500 이하</span></label>
                 <div class="stepper">
-                  <button class="stepBtn" type="button" data-step="-1" data-target="cntM" aria-label="중형 감소">−</button>
+                  <button class="stepBtn" type="button" data-step="-1" data-target="cntM">−</button>
                   <input id="cntM" class="stepInput" type="number" min="0" step="1" value="0" inputmode="numeric">
-                  <button class="stepBtn" type="button" data-step="1" data-target="cntM" aria-label="중형 증가">＋</button>
+                  <button class="stepBtn" type="button" data-step="1" data-target="cntM">＋</button>
                 </div>
               </div>
 
               <div>
                 <label>대형(개) <span class="note">· 높이 2300 이하</span></label>
                 <div class="stepper">
-                  <button class="stepBtn" type="button" data-step="-1" data-target="cntL" aria-label="대형 감소">−</button>
+                  <button class="stepBtn" type="button" data-step="-1" data-target="cntL">−</button>
                   <input id="cntL" class="stepInput" type="number" min="0" step="1" value="0" inputmode="numeric">
-                  <button class="stepBtn" type="button" data-step="1" data-target="cntL" aria-label="대형 증가">＋</button>
+                  <button class="stepBtn" type="button" data-step="1" data-target="cntL">＋</button>
                 </div>
               </div>
 
@@ -491,18 +317,11 @@
 
         <div style="height:12px"></div>
 
+        <!-- 현관롤(체크 없이 qty>0이면 자동 반영) -->
         <details id="dEntrance">
           <summary><span>현관 롤방충망</span><span class="chev">열기/닫기 ▾</span></summary>
           <div class="detailBody">
             <div class="row">
-              <div class="chip">
-                <input type="checkbox" id="useEntranceRoll">
-                <div>
-                  <b>현관 롤방충망</b> 견적 추가
-                  <div class="note">체크 후 종류/사이즈/개수를 선택하세요.</div>
-                </div>
-              </div>
-
               <div>
                 <label>종류 선택</label>
                 <select id="entranceType">
@@ -523,9 +342,9 @@
               <div>
                 <label>개수</label>
                 <div class="stepper">
-                  <button class="stepBtn" type="button" data-step="-1" data-target="entranceQty" aria-label="현관 롤 개수 감소">−</button>
+                  <button class="stepBtn" type="button" data-step="-1" data-target="entranceQty">−</button>
                   <input id="entranceQty" class="stepInput" type="number" min="0" step="1" value="0" inputmode="numeric">
-                  <button class="stepBtn" type="button" data-step="1" data-target="entranceQty" aria-label="현관 롤 개수 증가">＋</button>
+                  <button class="stepBtn" type="button" data-step="1" data-target="entranceQty">＋</button>
                 </div>
               </div>
 
@@ -536,30 +355,26 @@
 
         <div style="height:12px"></div>
 
+        <!-- 알미늄(체크 없이 개수 입력만으로 자동 반영) -->
         <details id="dAl">
           <summary><span>알미늄 틀 제작(미세망 포함)</span><span class="chev">열기/닫기 ▾</span></summary>
           <div class="detailBody">
             <div class="row">
-              <div class="chip">
-                <input type="checkbox" id="useAlMake">
-                <div>알미늄 틀 제작 견적 추가<div class="note">소/중, 대창 개수를 입력하세요.</div></div>
-              </div>
-
               <div>
                 <label>소/중 (합계 개수) <span class="note">· 1개당 100,000원</span></label>
                 <div class="stepper">
-                  <button class="stepBtn" type="button" data-step="-1" data-target="alSM" aria-label="알미늄 소/중 감소">−</button>
+                  <button class="stepBtn" type="button" data-step="-1" data-target="alSM">−</button>
                   <input id="alSM" class="stepInput" type="number" min="0" step="1" value="0" inputmode="numeric">
-                  <button class="stepBtn" type="button" data-step="1" data-target="alSM" aria-label="알미늄 소/중 증가">＋</button>
+                  <button class="stepBtn" type="button" data-step="1" data-target="alSM">＋</button>
                 </div>
               </div>
 
               <div>
                 <label>대창 (개수) <span class="note">· 1개당 140,000원</span></label>
                 <div class="stepper">
-                  <button class="stepBtn" type="button" data-step="-1" data-target="alL" aria-label="알미늄 대창 감소">−</button>
+                  <button class="stepBtn" type="button" data-step="-1" data-target="alL">−</button>
                   <input id="alL" class="stepInput" type="number" min="0" step="1" value="0" inputmode="numeric">
-                  <button class="stepBtn" type="button" data-step="1" data-target="alL" aria-label="알미늄 대창 증가">＋</button>
+                  <button class="stepBtn" type="button" data-step="1" data-target="alL">＋</button>
                 </div>
               </div>
             </div>
@@ -568,30 +383,26 @@
 
         <div style="height:12px"></div>
 
+        <!-- 하이샤시(체크 없이 개수 입력만으로 자동 반영) -->
         <details id="dHS">
           <summary><span>하이샤시 틀 제작(미세망 포함)</span><span class="chev">열기/닫기 ▾</span></summary>
           <div class="detailBody">
             <div class="row">
-              <div class="chip">
-                <input type="checkbox" id="useHighSash2">
-                <div>하이샤시 틀 제작 견적 추가<div class="note">소/중, 대창 개수를 입력하세요.</div></div>
-              </div>
-
               <div>
                 <label>소/중 (합계 개수) <span class="note">· 1개당 100,000원</span></label>
                 <div class="stepper">
-                  <button class="stepBtn" type="button" data-step="-1" data-target="hsSM" aria-label="하이샤시 소/중 감소">−</button>
+                  <button class="stepBtn" type="button" data-step="-1" data-target="hsSM">−</button>
                   <input id="hsSM" class="stepInput" type="number" min="0" step="1" value="0" inputmode="numeric">
-                  <button class="stepBtn" type="button" data-step="1" data-target="hsSM" aria-label="하이샤시 소/중 증가">＋</button>
+                  <button class="stepBtn" type="button" data-step="1" data-target="hsSM">＋</button>
                 </div>
               </div>
 
               <div>
                 <label>대창 (개수) <span class="note">· 1개당 140,000원</span></label>
                 <div class="stepper">
-                  <button class="stepBtn" type="button" data-step="-1" data-target="hsL2" aria-label="하이샤시 대창 감소">−</button>
+                  <button class="stepBtn" type="button" data-step="-1" data-target="hsL2">−</button>
                   <input id="hsL2" class="stepInput" type="number" min="0" step="1" value="0" inputmode="numeric">
-                  <button class="stepBtn" type="button" data-step="1" data-target="hsL2" aria-label="하이샤시 대창 증가">＋</button>
+                  <button class="stepBtn" type="button" data-step="1" data-target="hsL2">＋</button>
                 </div>
               </div>
             </div>
@@ -600,33 +411,27 @@
 
         <div style="height:12px"></div>
 
-        <!-- ✅ 안전/추락방충망(단가표: 0.4 / 0.7) -->
+        <!-- ✅ 안전/추락(여기만 "추가 버튼"으로 누적) -->
         <details id="dSafety">
-          <summary><span>안전/추락 방충망 (mm 입력)</span><span class="chev">열기/닫기 ▾</span></summary>
+          <summary><span>방범/추락 안전 방충망 (mm 입력)</span><span class="chev">열기/닫기 ▾</span></summary>
           <div class="detailBody">
             <div class="row">
-              <div class="chip">
-                <input type="checkbox" id="useSafety">
-                <div>
-                  <b>안전/추락 방충망</b> 견적 추가
-                  <div class="note">0.4/0.7 선택 → 가로/세로(mm) 입력 → “추가” 누르면 바로 합산됩니다.</div>
-                </div>
+              <div class="note">
+                * 면적(㎡)은 0.1 단위로 올림(예: 1.86 → 1.9) 후 소비자가격 표 적용<br/>
+                * 방범안전=0.7mm 고정 / 추락안전=0.4mm 고정
               </div>
 
               <div class="grid2">
                 <div>
                   <label>종류</label>
                   <select id="safetyKind">
-                    <option value="safe">안전방충망</option>
-                    <option value="fall">추락방충망</option>
+                    <option value="crime">방범안전 방충망</option>
+                    <option value="fall">추락안전 방충망</option>
                   </select>
                 </div>
                 <div>
-                  <label>망 규격</label>
-                  <select id="safetyGauge">
-                    <option value="0.4">0.4mm</option>
-                    <option value="0.7">0.7mm</option>
-                  </select>
+                  <label>망 규격(자동)</label>
+                  <input id="safetyGauge" readonly value="0.7mm">
                 </div>
               </div>
 
@@ -644,14 +449,14 @@
               <div>
                 <label>수량</label>
                 <div class="stepper">
-                  <button class="stepBtn" type="button" data-step="-1" data-target="safetyQty" aria-label="수량 감소">−</button>
+                  <button class="stepBtn" type="button" data-step="-1" data-target="safetyQty">−</button>
                   <input id="safetyQty" class="stepInput" type="number" min="0" step="1" value="0" inputmode="numeric">
-                  <button class="stepBtn" type="button" data-step="1" data-target="safetyQty" aria-label="수량 증가">＋</button>
+                  <button class="stepBtn" type="button" data-step="1" data-target="safetyQty">＋</button>
                 </div>
               </div>
 
               <button class="btn btnPrimary" type="button" id="btnAddSafety">추가</button>
-              <div class="note" id="safetyHint">* 면적(㎡)은 0.1 단위로 올림(예: 1.86 → 1.9) 후 단가표 소비자가격 적용</div>
+              <div class="note" id="safetyPreview"></div>
 
               <div class="list" id="safetyListBox" style="display:none;">
                 <div class="listHead">
@@ -666,7 +471,7 @@
 
         <div class="result">
           <p class="price" id="resultPrice">0원</p>
-          <div class="resultMeta" id="resultNote">개수 입력하면 자동으로 소비자가격(정가)이 계산됩니다.</div>
+          <div class="resultMeta" id="resultNote">입력 기준 소비자가격(정가) 자동견적입니다.</div>
 
           <label>고객에게 보낼 요약(자동 생성)</label>
           <textarea id="summary" readonly></textarea>
@@ -689,9 +494,7 @@
   <div class="modalBack" id="modalBack" aria-hidden="true">
     <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
       <div class="modalTop"><b id="modalTitle">견적요약 자동복사</b></div>
-      <div class="modalBody" id="modalBody">
-        복사 완료! 오픈채팅으로 이동하면 채팅창에 붙여넣기만 하시면 됩니다.
-      </div>
+      <div class="modalBody" id="modalBody">복사 완료! 오픈채팅으로 이동하면 채팅창에 붙여넣기만 하시면 됩니다.</div>
       <div class="modalBtns">
         <button class="btn btnPrimary" id="btnGoKakao">오픈채팅으로 이동</button>
         <button class="btn btnSoft" id="btnCloseModal">닫기</button>
@@ -729,10 +532,6 @@ const CONFIG = {
   },
   MAKE_PRICE: { SM: 100000, L: 140000 },
 
-  // (참고용) 지금 화면은 소비자가격 기준 표기
-  DISCOUNT_RATE: 0.10,
-
-  // ✅ 사진 단가표 "소비자가격" 그대로 (0.4mm / 0.7mm)
   SAFETY_CONSUMER_TABLE: {
     "0.4": {
       "0.3":150000,"0.4":150000,"0.5":150000,"0.6":150000,
@@ -753,7 +552,6 @@ const CONFIG = {
       "2.7":390000,"2.8":400000,"2.9":410000,"3.0":420000
     }
   },
-
   SAFETY_MIN_M2: 0.3,
   SAFETY_MAX_M2: 3.0
 };
@@ -761,7 +559,6 @@ const CONFIG = {
 const $ = (id) => document.getElementById(id);
 const fmt = (n) => (Math.round(n)).toLocaleString("ko-KR") + "원";
 const clampInt = (v) => Math.max(0, Number.isFinite(v) ? Math.floor(v) : 0);
-const clampNum = (v) => Math.max(0, Number.isFinite(v) ? v : 0);
 
 function meshLabel(k){
   return ({
@@ -781,7 +578,10 @@ function entranceSizeLabel(k){
   return (k === "under") ? "1000×2100 이하" : "1000×2100 이상";
 }
 function safetyKindLabel(k){
-  return ({ safe:"안전방충망", fall:"추락방충망" })[k] || k;
+  return (k === "crime") ? "방범안전 방충망" : "추락안전 방충망";
+}
+function safetyGaugeForKind(kind){
+  return (kind === "crime") ? "0.7" : "0.4";
 }
 
 function toast(msg){
@@ -789,28 +589,28 @@ function toast(msg){
   setTimeout(()=>{ $("toast").textContent = ""; }, 2400);
 }
 
-/* ✅ 면적(㎡) 0.1단위 올림 + 최소/최대 처리 */
 function ceilToTenth(area){
   return Math.ceil(area * 10) / 10;
 }
 function safetyRoundedM2FromMM(wMm, hMm){
-  const raw = (wMm * hMm) / 1_000_000; // mm^2 -> m^2
+  const raw = (wMm * hMm) / 1_000_000;
   let rounded = ceilToTenth(raw);
   if(rounded < CONFIG.SAFETY_MIN_M2) rounded = CONFIG.SAFETY_MIN_M2;
-  // 1.799999 같은 부동소수 방지
   rounded = Number(rounded.toFixed(1));
   return { raw, rounded };
 }
 function safetyPriceByGaugeM2(gauge, roundedM2){
   const key = roundedM2.toFixed(1);
   const table = CONFIG.SAFETY_CONSUMER_TABLE[gauge];
-  if(!table) return null;
-  return table[key] ?? null;
+  return table ? (table[key] ?? null) : null;
 }
 
-/* ✅ 안전/추락 항목 리스트 (여러개 추가 가능) */
+/* 안전/추락 누적 리스트 */
 let safetyItems = []; // {id, kind, gauge, w, h, qty, rawM2, roundedM2, unitPrice}
 
+function safetySumTotal(){
+  return safetyItems.reduce((acc, it)=> acc + (it.unitPrice * it.qty), 0);
+}
 function renderSafetyList(){
   const box = $("safetyListBox");
   const list = $("safetyList");
@@ -849,39 +649,45 @@ function renderSafetyList(){
   $("safetySumText").textContent = `합계 ${fmt(sum)}`;
 }
 
-function safetySumTotal(){
-  return safetyItems.reduce((acc, it)=> acc + (it.unitPrice * it.qty), 0);
-}
+function buildSummary(totalConsumer){
+  const meshKey = $("meshType").value;
+  const cntS = clampInt(parseFloat($("cntS").value));
+  const cntM = clampInt(parseFloat($("cntM").value));
+  const cntL = clampInt(parseFloat($("cntL").value));
+  const memo = ($("memo").value || "").trim();
 
-function buildSummary(totalConsumer, memo, meshKey, cntS, cntM, cntL,
-  useEntranceRoll, entranceType, entranceSize, entranceQty, entranceInquiry,
-  useAlMake, alSM, alL,
-  useHighSash2, hsSM, hsL2,
-  discountOn
-){
+  const entranceType = $("entranceType").value;
+  const entranceSize = $("entranceSize").value;
+  const entranceQty = clampInt(parseFloat($("entranceQty").value));
+  const entranceInquiry = (entranceQty > 0 && entranceType === "pj_roll");
+
+  const alSM = clampInt(parseFloat($("alSM").value));
+  const alL  = clampInt(parseFloat($("alL").value));
+  const hsSM = clampInt(parseFloat($("hsSM").value));
+  const hsL2 = clampInt(parseFloat($("hsL2").value));
+  const discountOn = $("discount10").checked;
+
   const lines = [];
   lines.push(`창문형: ${meshLabel(meshKey)}`);
   lines.push(`창 개수: 소 ${cntS} / 중 ${cntM}(높이 1500↓) / 대 ${cntL}(높이 2300↓)`);
 
-  if(useEntranceRoll){
+  if(entranceQty>0){
     lines.push(`현관롤: ${entranceTypeLabel(entranceType)} / ${entranceSizeLabel(entranceSize)} / ${entranceQty}개`);
     if(entranceInquiry) lines.push(`- PJ 롤: 별도 견적 문의`);
   }
 
-  if(useAlMake){
-    lines.push(`알미늄 틀 제작(미세망 포함): 소/중 ${alSM}개(×100,000) / 대 ${alL}개(×140,000)`);
+  if(alSM+alL>0){
+    lines.push(`알미늄 틀 제작: 소/중 ${alSM}개(×100,000) / 대 ${alL}개(×140,000)`);
   }
-  if(useHighSash2){
-    lines.push(`하이샤시 틀 제작(미세망 포함): 소/중 ${hsSM}개(×100,000) / 대 ${hsL2}개(×140,000)`);
+  if(hsSM+hsL2>0){
+    lines.push(`하이샤시 틀 제작: 소/중 ${hsSM}개(×100,000) / 대 ${hsL2}개(×140,000)`);
   }
 
   if(safetyItems.length){
-    lines.push(`안전/추락 방충망:`);
+    lines.push(`방범/추락 안전 방충망:`);
     safetyItems.forEach((it, idx)=>{
       const lineTotal = it.unitPrice * it.qty;
-      lines.push(
-        `- ${idx+1}) ${safetyKindLabel(it.kind)} ${it.gauge}mm / ${it.w}×${it.h}mm / ${it.rawM2.toFixed(2)}㎡→${it.roundedM2.toFixed(1)}㎡ / ${fmt(it.unitPrice)}×${it.qty}=${fmt(lineTotal)}`
-      );
+      lines.push(`- ${idx+1}) ${safetyKindLabel(it.kind)} ${it.gauge}mm / ${it.w}×${it.h}mm / ${it.rawM2.toFixed(2)}㎡→${it.roundedM2.toFixed(1)}㎡ / ${fmt(it.unitPrice)}×${it.qty}=${fmt(lineTotal)}`);
     });
   }
 
@@ -893,89 +699,61 @@ function buildSummary(totalConsumer, memo, meshKey, cntS, cntM, cntL,
 }
 
 function calc(){
-  const discountOn = $("discount10").checked;
-
   const meshKey = $("meshType").value;
   const cntS = clampInt(parseFloat($("cntS").value));
   const cntM = clampInt(parseFloat($("cntM").value));
   const cntL = clampInt(parseFloat($("cntL").value));
-  const memo = ($("memo").value || "").trim();
+  const up = CONFIG.UNIT_PRICE_WINDOW[meshKey] || CONFIG.UNIT_PRICE_WINDOW.micro;
 
   let total = 0;
-
-  const up = CONFIG.UNIT_PRICE_WINDOW[meshKey] || CONFIG.UNIT_PRICE_WINDOW.micro;
   total += up.S * cntS + up.M * cntM + up.L * cntL;
 
-  const useEntranceRoll = $("useEntranceRoll").checked;
+  // 현관롤: qty>0이면 반영
   const entranceType = $("entranceType").value;
   const entranceSize = $("entranceSize").value;
   const entranceQty = clampInt(parseFloat($("entranceQty").value));
-
   let entranceInquiry = false;
-  if(useEntranceRoll){
+  if(entranceQty>0){
     const p = CONFIG.ENTRANCE_ROLL_PRICE[entranceType]?.[entranceSize];
-    if(p == null){
-      entranceInquiry = true;
-    }else{
-      total += p * entranceQty;
-    }
+    if(p == null){ entranceInquiry = true; }
+    else total += p * entranceQty;
   }
 
-  const useAlMake = $("useAlMake").checked;
+  // 알미늄: qty>0이면 반영
   const alSM = clampInt(parseFloat($("alSM").value));
-  const alL = clampInt(parseFloat($("alL").value));
-  if(useAlMake){
-    total += CONFIG.MAKE_PRICE.SM * alSM;
-    total += CONFIG.MAKE_PRICE.L  * alL;
-  }
+  const alL  = clampInt(parseFloat($("alL").value));
+  total += CONFIG.MAKE_PRICE.SM * alSM;
+  total += CONFIG.MAKE_PRICE.L  * alL;
 
-  const useHighSash2 = $("useHighSash2").checked;
+  // 하이샤시: qty>0이면 반영
   const hsSM = clampInt(parseFloat($("hsSM").value));
   const hsL2 = clampInt(parseFloat($("hsL2").value));
-  if(useHighSash2){
-    total += CONFIG.MAKE_PRICE.SM * hsSM;
-    total += CONFIG.MAKE_PRICE.L  * hsL2;
-  }
+  total += CONFIG.MAKE_PRICE.SM * hsSM;
+  total += CONFIG.MAKE_PRICE.L  * hsL2;
 
-  // ✅ 안전/추락 방충망 합산
-  const useSafety = $("useSafety").checked;
-  if(useSafety){
-    total += safetySumTotal();
-  }
+  // 안전/추락 누적 합산
+  total += safetySumTotal();
 
   const any =
     (cntS+cntM+cntL) > 0 ||
-    (useEntranceRoll && entranceQty>0) ||
-    (useAlMake && (alSM+alL)>0) ||
-    (useHighSash2 && (hsSM+hsL2)>0) ||
-    (useSafety && safetyItems.length>0);
+    entranceQty>0 ||
+    (alSM+alL)>0 ||
+    (hsSM+hsL2)>0 ||
+    safetyItems.length>0;
 
   if(!any) total = 0;
 
-  // ✅ 현재 화면은 소비자가격(정가)만 표시
-  const totalConsumer = total;
+  $("resultPrice").textContent = fmt(total);
 
-  $("resultPrice").textContent = fmt(totalConsumer);
-
-  let note = any ? "소비자가격(정가) 기준 자동견적입니다." : "개수 입력하면 자동 계산됩니다.";
-  if(useEntranceRoll && entranceInquiry){
+  let note = any ? "소비자가격(정가) 기준 자동견적입니다." : "입력하면 자동 계산됩니다.";
+  if(entranceInquiry){
     note = "⚠️ PJ 롤 방충망은 자동견적이 아니라 ‘별도 견적 문의’입니다. 오픈채팅으로 문의 주세요.";
-  }
-  if(useSafety && safetyItems.some(it => it.unitPrice == null)){
-    note = "⚠️ 안전/추락 방충망 일부 항목이 단가표 범위를 벗어납니다. 오픈채팅으로 문의 주세요.";
   }
   $("resultNote").textContent = note;
 
-  const summary = buildSummary(
-    totalConsumer, memo, meshKey, cntS, cntM, cntL,
-    useEntranceRoll, entranceType, entranceSize, entranceQty, entranceInquiry,
-    useAlMake, alSM, alL,
-    useHighSash2, hsSM, hsL2,
-    discountOn
-  );
-  $("summary").value = summary;
+  $("summary").value = buildSummary(total);
 
-  return { summary, any };
+  return { summary: $("summary").value, any };
 }
 
 async function copyText(text){
@@ -1013,22 +791,53 @@ function closeModal(){
   $("modalBack").setAttribute("aria-hidden","true");
 }
 
-function wire(){
-  [
-    "discount10",
-    "meshType","cntS","cntM","cntL","memo",
-    "useEntranceRoll","entranceType","entranceSize","entranceQty",
-    "useAlMake","alSM","alL",
-    "useHighSash2","hsSM","hsL2",
-    "useSafety"
-  ].forEach(id => $(id).addEventListener("input", calc));
+function updateSafetyGaugeUI(){
+  const kind = $("safetyKind").value;
+  const g = safetyGaugeForKind(kind); // crime=0.7 / fall=0.4
+  $("safetyGauge").value = `${g}mm`;
+  // 미리보기 갱신
+  safetyPreview();
+}
 
+function safetyPreview(){
+  const kind = $("safetyKind").value;
+  const gauge = safetyGaugeForKind(kind);
+  const w = clampInt(parseFloat($("safetyW").value));
+  const h = clampInt(parseFloat($("safetyH").value));
+  const qty = clampInt(parseFloat($("safetyQty").value));
+
+  if(w<=0 || h<=0 || qty<=0){
+    $("safetyPreview").textContent = "";
+    return;
+  }
+
+  const { raw, rounded } = safetyRoundedM2FromMM(w, h);
+  if(rounded > CONFIG.SAFETY_MAX_M2){
+    $("safetyPreview").textContent = "⚠️ 면적 3.0㎡ 초과 — 오픈채팅 문의";
+    return;
+  }
+
+  const unit = safetyPriceByGaugeM2(gauge, rounded);
+  if(unit == null){
+    $("safetyPreview").textContent = "⚠️ 단가표에서 가격을 찾을 수 없음";
+    return;
+  }
+
+  const lineTotal = unit * qty;
+  $("safetyPreview").textContent =
+    `미리보기: ${safetyKindLabel(kind)} ${gauge}mm / ${w}×${h}mm / ${raw.toFixed(2)}㎡→${rounded.toFixed(1)}㎡ / ${fmt(unit)}×${qty} = ${fmt(lineTotal)}`;
+}
+
+function wire(){
+  // stepper buttons
   document.addEventListener("click", (e)=>{
     const btn = e.target.closest("[data-step][data-target]");
     if(btn){
       const delta = parseInt(btn.getAttribute("data-step"), 10);
       const targetId = btn.getAttribute("data-target");
       applyStep(targetId, delta);
+      if(targetId === "safetyQty") safetyPreview();
+      calc();
       return;
     }
 
@@ -1042,78 +851,64 @@ function wire(){
     }
   });
 
-  ["cntS","cntM","cntL","entranceQty","alSM","alL","hsSM","hsL2","safetyQty","safetyW","safetyH"].forEach(id=>{
-    const el = $(id);
-    if(!el) return;
-    el.addEventListener("change", ()=>{
-      if(id === "safetyW" || id === "safetyH"){
-        el.value = clampInt(parseFloat(el.value));
-      }else{
-        el.value = clampInt(parseFloat(el.value));
+  // inputs => auto calc (모든 섹션 자동합산)
+  [
+    "discount10",
+    "meshType","cntS","cntM","cntL","memo",
+    "entranceType","entranceSize","entranceQty",
+    "alSM","alL",
+    "hsSM","hsL2",
+  ].forEach(id => $(id).addEventListener("input", calc));
+
+  // safety inputs: 미리보기 + (추가는 버튼으로만)
+  ["safetyW","safetyH","safetyQty"].forEach(id=>{
+    $(id).addEventListener("input", ()=>{
+      if(id !== "safetyW" && id !== "safetyH") {
+        // stepper로도 바뀌지만 직접입력도 정리
+        $(id).value = clampInt(parseFloat($(id).value));
       }
-      calc();
+      safetyPreview();
+      calc(); // 미리보기뿐 아니라 총합(리스트 합)도 갱신
     });
   });
 
-  $("useEntranceRoll").addEventListener("input", ()=>{
-    const q = parseInt($("entranceQty").value || "0", 10);
-    if($("useEntranceRoll").checked && q === 0) $("entranceQty").value = 1;
-    calc();
-  });
-
-  $("useSafety").addEventListener("input", ()=>{
-    if($("useSafety").checked){
-      if(clampInt(parseFloat($("safetyQty").value)) === 0) $("safetyQty").value = 1;
-    }
-    calc();
+  $("safetyKind").addEventListener("input", ()=>{
+    updateSafetyGaugeUI();
   });
 
   $("btnAddSafety").addEventListener("click", ()=>{
-    if(!$("useSafety").checked){
-      toast("먼저 ‘안전/추락 방충망’ 체크를 해주세요.");
-      return;
-    }
-
-    const kind = $("safetyKind").value;
-    const gauge = $("safetyGauge").value;
+    const kind = $("safetyKind").value;          // crime/fall
+    const gauge = safetyGaugeForKind(kind);      // crime=0.7, fall=0.4
 
     const w = clampInt(parseFloat($("safetyW").value));
     const h = clampInt(parseFloat($("safetyH").value));
     const qty = clampInt(parseFloat($("safetyQty").value));
 
-    if(w <= 0 || h <= 0){
-      toast("가로/세로(mm)를 입력해주세요.");
-      return;
-    }
-    if(qty <= 0){
-      toast("수량을 1개 이상으로 입력해주세요.");
-      return;
-    }
+    if(w<=0 || h<=0){ toast("가로/세로(mm)를 입력해주세요."); return; }
+    if(qty<=0){ toast("수량을 1개 이상으로 입력해주세요."); return; }
 
     const { raw, rounded } = safetyRoundedM2FromMM(w, h);
+    if(rounded > CONFIG.SAFETY_MAX_M2){ toast("면적이 3.0㎡ 초과입니다. 오픈채팅 문의"); return; }
 
-    if(rounded > CONFIG.SAFETY_MAX_M2){
-      toast("면적이 3.0㎡ 초과입니다. 오픈채팅으로 문의해주세요.");
-      return;
-    }
-
-    const unitPrice = safetyPriceByGaugeM2(gauge, rounded);
-    if(unitPrice == null){
-      toast("단가표에서 가격을 찾을 수 없어요. 오픈채팅으로 문의해주세요.");
-      return;
-    }
+    const unit = safetyPriceByGaugeM2(gauge, rounded);
+    if(unit == null){ toast("단가표에서 가격을 찾을 수 없어요. 오픈채팅 문의"); return; }
 
     safetyItems.push({
       id: String(Date.now()) + "_" + Math.random().toString(16).slice(2),
       kind, gauge, w, h, qty,
-      rawM2: raw,
-      roundedM2: rounded,
-      unitPrice
+      rawM2: raw, roundedM2: rounded,
+      unitPrice: unit
     });
 
     renderSafetyList();
     calc();
     toast("추가 완료");
+
+    // 다음 사이즈 입력 편하게 초기화(원하면 수량 유지해도 됨)
+    $("safetyW").value = 0;
+    $("safetyH").value = 0;
+    // $("safetyQty").value = 1; // 원하면 1로 유지
+    safetyPreview();
   });
 
   $("btnCopy").addEventListener("click", async ()=>{
@@ -1129,26 +924,21 @@ function wire(){
     $("cntS").value = 0; $("cntM").value = 0; $("cntL").value = 0;
     $("memo").value = "";
 
-    $("useEntranceRoll").checked = false;
     $("entranceType").value = "normal";
     $("entranceSize").value = "under";
     $("entranceQty").value = 0;
 
-    $("useAlMake").checked = false;
     $("alSM").value = 0; $("alL").value = 0;
-
-    $("useHighSash2").checked = false;
     $("hsSM").value = 0; $("hsL2").value = 0;
 
-    // safety reset
-    $("useSafety").checked = false;
-    $("safetyKind").value = "safe";
-    $("safetyGauge").value = "0.4";
+    $("safetyKind").value = "crime";
+    updateSafetyGaugeUI();
     $("safetyW").value = 0;
     $("safetyH").value = 0;
     $("safetyQty").value = 0;
     safetyItems = [];
     renderSafetyList();
+    safetyPreview();
 
     calc();
     toast("초기화 완료");
@@ -1166,9 +956,8 @@ function wire(){
 
   $("kakaoConsultBtn").addEventListener("click", async ()=>{
     const { summary, any } = calc();
-
     if(!any){
-      openModal("아직 입력된 항목이 없어요. 아래에서 개수 입력 후 다시 ‘상담받기’를 눌러주세요.");
+      openModal("아직 입력된 항목이 없어요. 아래에서 입력 후 다시 ‘상담받기’를 눌러주세요.");
       $("btnGoKakao").style.display = "none";
       $("quoteSection").scrollIntoView({ behavior:"smooth", block:"start" });
       $("dWindow").open = true;
@@ -1176,7 +965,6 @@ function wire(){
     }
 
     const ok = await copyText(summary);
-
     $("btnGoKakao").style.display = "inline-flex";
     if(ok){
       openModal("복사 완료! 오픈채팅으로 이동하면 채팅창에 ‘붙여넣기’만 하시면 됩니다.");
@@ -1186,14 +974,12 @@ function wire(){
     }
   });
 
-  $("btnGoKakao").addEventListener("click", ()=>{
-    window.open(KAKAO_URL, "_blank", "noopener");
-  });
+  $("btnGoKakao").addEventListener("click", ()=> window.open(KAKAO_URL, "_blank", "noopener"));
   $("btnCloseModal").addEventListener("click", closeModal);
-  $("modalBack").addEventListener("click", (e)=>{
-    if(e.target === $("modalBack")) closeModal();
-  });
+  $("modalBack").addEventListener("click", (e)=>{ if(e.target === $("modalBack")) closeModal(); });
 
+  // init
+  updateSafetyGaugeUI();
   calc();
 }
 wire();
