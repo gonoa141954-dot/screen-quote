@@ -289,6 +289,7 @@
     .modalBtns{display:flex;gap:10px;padding:0 14px 14px;}
     .modalBtns .btn{flex:1}
 
+    /* stepper */
     .stepper{
       display:grid;
       grid-template-columns:48px 1fr 48px;
@@ -319,10 +320,47 @@
       padding:12px 10px;
     }
     input[type=number]::-webkit-outer-spin-button,
-    input[type=number]::-webkit-inner-spin-button{
-      -webkit-appearance:none;margin:0;
-    }
+    input[type=number]::-webkit-inner-spin-button{ -webkit-appearance:none;margin:0; }
     input[type=number]{ -moz-appearance:textfield; }
+
+    /* safety list */
+    .list{
+      border:1px solid var(--line);
+      background:#fff;
+      border-radius:18px;
+      overflow:hidden;
+      box-shadow:var(--shadow2);
+    }
+    .listHead{
+      display:flex;justify-content:space-between;align-items:center;
+      padding:12px 12px;
+      border-bottom:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(15,23,42,.02), rgba(255,255,255,0));
+      gap:10px;
+      font-weight:1000;
+    }
+    .listBody{padding:10px 12px; display:flex; flex-direction:column; gap:8px;}
+    .item{
+      display:flex; gap:10px; align-items:flex-start; justify-content:space-between;
+      border:1px solid rgba(15,23,42,.10);
+      background:rgba(15,23,42,.02);
+      border-radius:16px;
+      padding:10px 10px;
+    }
+    .item .left{min-width:0;}
+    .item b{font-weight:1000}
+    .item .meta{font-size:12px;color:var(--muted);margin-top:4px;line-height:1.35;}
+    .xBtn{
+      border:1px solid rgba(15,23,42,.12);
+      background:#fff;
+      border-radius:14px;
+      padding:8px 10px;
+      font-weight:1000;
+      cursor:pointer;
+      white-space:nowrap;
+    }
+    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+    @media (max-width:520px){ .grid2{grid-template-columns:1fr;} }
   </style>
 </head>
 
@@ -366,8 +404,8 @@
       <div class="featureItem">
         <div class="featureIcon">₩</div>
         <div class="featureText">
-          <b>정확 금액</b>
-          <span>입력 기준으로 딱 계산</span>
+          <b>소비자가격</b>
+          <span>정가 기준으로 계산</span>
         </div>
       </div>
       <div class="featureItem">
@@ -402,7 +440,7 @@
           <input type="checkbox" id="discount10">
           <div>
             <div><b>예약리뷰</b> 또는 <b>영수증리뷰</b> 약속(10% 할인)</div>
-            <div class="note">체크하면 총액에서 자동으로 10% 할인 적용됩니다.</div>
+            <div class="note">체크하면 총액에서 자동으로 10% 할인 적용됩니다. (※ 현재 화면 표시는 소비자가격 기준)</div>
           </div>
         </div>
 
@@ -560,9 +598,75 @@
           </div>
         </details>
 
+        <div style="height:12px"></div>
+
+        <!-- ✅ 안전/추락방충망(단가표: 0.4 / 0.7) -->
+        <details id="dSafety">
+          <summary><span>안전/추락 방충망 (mm 입력)</span><span class="chev">열기/닫기 ▾</span></summary>
+          <div class="detailBody">
+            <div class="row">
+              <div class="chip">
+                <input type="checkbox" id="useSafety">
+                <div>
+                  <b>안전/추락 방충망</b> 견적 추가
+                  <div class="note">0.4/0.7 선택 → 가로/세로(mm) 입력 → “추가” 누르면 바로 합산됩니다.</div>
+                </div>
+              </div>
+
+              <div class="grid2">
+                <div>
+                  <label>종류</label>
+                  <select id="safetyKind">
+                    <option value="safe">안전방충망</option>
+                    <option value="fall">추락방충망</option>
+                  </select>
+                </div>
+                <div>
+                  <label>망 규격</label>
+                  <select id="safetyGauge">
+                    <option value="0.4">0.4mm</option>
+                    <option value="0.7">0.7mm</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="grid2">
+                <div>
+                  <label>가로(mm)</label>
+                  <input id="safetyW" type="number" min="0" step="1" value="0" inputmode="numeric" placeholder="예: 850">
+                </div>
+                <div>
+                  <label>세로(mm)</label>
+                  <input id="safetyH" type="number" min="0" step="1" value="0" inputmode="numeric" placeholder="예: 2050">
+                </div>
+              </div>
+
+              <div>
+                <label>수량</label>
+                <div class="stepper">
+                  <button class="stepBtn" type="button" data-step="-1" data-target="safetyQty" aria-label="수량 감소">−</button>
+                  <input id="safetyQty" class="stepInput" type="number" min="0" step="1" value="0" inputmode="numeric">
+                  <button class="stepBtn" type="button" data-step="1" data-target="safetyQty" aria-label="수량 증가">＋</button>
+                </div>
+              </div>
+
+              <button class="btn btnPrimary" type="button" id="btnAddSafety">추가</button>
+              <div class="note" id="safetyHint">* 면적(㎡)은 0.1 단위로 올림(예: 1.86 → 1.9) 후 단가표 소비자가격 적용</div>
+
+              <div class="list" id="safetyListBox" style="display:none;">
+                <div class="listHead">
+                  <span>추가된 항목</span>
+                  <span class="note" id="safetySumText"></span>
+                </div>
+                <div class="listBody" id="safetyList"></div>
+              </div>
+            </div>
+          </div>
+        </details>
+
         <div class="result">
           <p class="price" id="resultPrice">0원</p>
-          <div class="resultMeta" id="resultNote">개수 입력하면 자동으로 정확 금액이 계산됩니다.</div>
+          <div class="resultMeta" id="resultNote">개수 입력하면 자동으로 소비자가격(정가)이 계산됩니다.</div>
 
           <label>고객에게 보낼 요약(자동 생성)</label>
           <textarea id="summary" readonly></textarea>
@@ -581,11 +685,10 @@
     </div>
   </div>
 
+  <!-- modal -->
   <div class="modalBack" id="modalBack" aria-hidden="true">
     <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-      <div class="modalTop">
-        <b id="modalTitle">견적요약 자동복사</b>
-      </div>
+      <div class="modalTop"><b id="modalTitle">견적요약 자동복사</b></div>
       <div class="modalBody" id="modalBody">
         복사 완료! 오픈채팅으로 이동하면 채팅창에 붙여넣기만 하시면 됩니다.
       </div>
@@ -596,6 +699,7 @@
     </div>
   </div>
 
+  <!-- sticky kakao -->
   <div class="kakaoSticky">
     <button class="kakaoBtn" id="kakaoConsultBtn" type="button">
       <div class="kLeft">
@@ -625,13 +729,39 @@ const CONFIG = {
   },
   MAKE_PRICE: { SM: 100000, L: 140000 },
 
-  /* ✅ 남겨두되, 현재는 소비자가격 표시만 할 거라 적용하지 않음 */
-  DISCOUNT_RATE: 0.10
+  // (참고용) 지금 화면은 소비자가격 기준 표기
+  DISCOUNT_RATE: 0.10,
+
+  // ✅ 사진 단가표 "소비자가격" 그대로 (0.4mm / 0.7mm)
+  SAFETY_CONSUMER_TABLE: {
+    "0.4": {
+      "0.3":150000,"0.4":150000,"0.5":150000,"0.6":150000,
+      "0.7":160000,"0.8":170000,"0.9":180000,"1.0":190000,
+      "1.1":200000,"1.2":210000,"1.3":220000,"1.4":230000,
+      "1.5":240000,"1.6":250000,"1.7":260000,"1.8":270000,
+      "1.9":280000,"2.0":290000,"2.1":300000,"2.2":310000,
+      "2.3":320000,"2.4":330000,"2.5":340000,"2.6":350000,
+      "2.7":360000,"2.8":370000,"2.9":380000,"3.0":390000
+    },
+    "0.7": {
+      "0.3":180000,"0.4":180000,"0.5":180000,"0.6":180000,
+      "0.7":190000,"0.8":200000,"0.9":210000,"1.0":220000,
+      "1.1":230000,"1.2":240000,"1.3":250000,"1.4":260000,
+      "1.5":270000,"1.6":280000,"1.7":290000,"1.8":300000,
+      "1.9":310000,"2.0":320000,"2.1":330000,"2.2":340000,
+      "2.3":350000,"2.4":360000,"2.5":370000,"2.6":380000,
+      "2.7":390000,"2.8":400000,"2.9":410000,"3.0":420000
+    }
+  },
+
+  SAFETY_MIN_M2: 0.3,
+  SAFETY_MAX_M2: 3.0
 };
 
 const $ = (id) => document.getElementById(id);
 const fmt = (n) => (Math.round(n)).toLocaleString("ko-KR") + "원";
 const clampInt = (v) => Math.max(0, Number.isFinite(v) ? Math.floor(v) : 0);
+const clampNum = (v) => Math.max(0, Number.isFinite(v) ? v : 0);
 
 function meshLabel(k){
   return ({
@@ -650,10 +780,77 @@ function entranceTypeLabel(k){
 function entranceSizeLabel(k){
   return (k === "under") ? "1000×2100 이하" : "1000×2100 이상";
 }
+function safetyKindLabel(k){
+  return ({ safe:"안전방충망", fall:"추락방충망" })[k] || k;
+}
 
 function toast(msg){
   $("toast").textContent = msg;
   setTimeout(()=>{ $("toast").textContent = ""; }, 2400);
+}
+
+/* ✅ 면적(㎡) 0.1단위 올림 + 최소/최대 처리 */
+function ceilToTenth(area){
+  return Math.ceil(area * 10) / 10;
+}
+function safetyRoundedM2FromMM(wMm, hMm){
+  const raw = (wMm * hMm) / 1_000_000; // mm^2 -> m^2
+  let rounded = ceilToTenth(raw);
+  if(rounded < CONFIG.SAFETY_MIN_M2) rounded = CONFIG.SAFETY_MIN_M2;
+  // 1.799999 같은 부동소수 방지
+  rounded = Number(rounded.toFixed(1));
+  return { raw, rounded };
+}
+function safetyPriceByGaugeM2(gauge, roundedM2){
+  const key = roundedM2.toFixed(1);
+  const table = CONFIG.SAFETY_CONSUMER_TABLE[gauge];
+  if(!table) return null;
+  return table[key] ?? null;
+}
+
+/* ✅ 안전/추락 항목 리스트 (여러개 추가 가능) */
+let safetyItems = []; // {id, kind, gauge, w, h, qty, rawM2, roundedM2, unitPrice}
+
+function renderSafetyList(){
+  const box = $("safetyListBox");
+  const list = $("safetyList");
+
+  if(safetyItems.length === 0){
+    box.style.display = "none";
+    list.innerHTML = "";
+    $("safetySumText").textContent = "";
+    return;
+  }
+
+  box.style.display = "block";
+  list.innerHTML = "";
+
+  let sum = 0;
+
+  safetyItems.forEach(item=>{
+    const lineTotal = item.unitPrice * item.qty;
+    sum += lineTotal;
+
+    const div = document.createElement("div");
+    div.className = "item";
+    div.innerHTML = `
+      <div class="left">
+        <b>${safetyKindLabel(item.kind)} · ${item.gauge}mm</b>
+        <div class="meta">
+          ${item.w}×${item.h}mm / 면적 ${item.rawM2.toFixed(2)}㎡ → <b>${item.roundedM2.toFixed(1)}㎡</b> 적용<br/>
+          소비자가격: ${fmt(item.unitPrice)} × ${item.qty} = <b>${fmt(lineTotal)}</b>
+        </div>
+      </div>
+      <button class="xBtn" type="button" data-del-safety="${item.id}">삭제</button>
+    `;
+    list.appendChild(div);
+  });
+
+  $("safetySumText").textContent = `합계 ${fmt(sum)}`;
+}
+
+function safetySumTotal(){
+  return safetyItems.reduce((acc, it)=> acc + (it.unitPrice * it.qty), 0);
 }
 
 function buildSummary(totalConsumer, memo, meshKey, cntS, cntM, cntL,
@@ -678,12 +875,18 @@ function buildSummary(totalConsumer, memo, meshKey, cntS, cntM, cntL,
     lines.push(`하이샤시 틀 제작(미세망 포함): 소/중 ${hsSM}개(×100,000) / 대 ${hsL2}개(×140,000)`);
   }
 
-  /* ✅ 소비자가격 기준 표기 */
+  if(safetyItems.length){
+    lines.push(`안전/추락 방충망:`);
+    safetyItems.forEach((it, idx)=>{
+      const lineTotal = it.unitPrice * it.qty;
+      lines.push(
+        `- ${idx+1}) ${safetyKindLabel(it.kind)} ${it.gauge}mm / ${it.w}×${it.h}mm / ${it.rawM2.toFixed(2)}㎡→${it.roundedM2.toFixed(1)}㎡ / ${fmt(it.unitPrice)}×${it.qty}=${fmt(lineTotal)}`
+      );
+    });
+  }
+
   lines.push(`소비자가격(정가) 자동견적: ${fmt(totalConsumer)}`);
-
-  /* ✅ 체크 여부는 참고로만 남김 (가격에는 반영 안 함) */
   lines.push(`예약/영수증리뷰 약속 체크: ${discountOn ? "체크" : "미체크"}`);
-
   lines.push(`메모: ${memo || "없음"}`);
 
   return "자동견적 보고 연락드려요.\n" + lines.join("\n");
@@ -699,6 +902,7 @@ function calc(){
   const memo = ($("memo").value || "").trim();
 
   let total = 0;
+
   const up = CONFIG.UNIT_PRICE_WINDOW[meshKey] || CONFIG.UNIT_PRICE_WINDOW.micro;
   total += up.S * cntS + up.M * cntM + up.L * cntL;
 
@@ -733,15 +937,22 @@ function calc(){
     total += CONFIG.MAKE_PRICE.L  * hsL2;
   }
 
+  // ✅ 안전/추락 방충망 합산
+  const useSafety = $("useSafety").checked;
+  if(useSafety){
+    total += safetySumTotal();
+  }
+
   const any =
     (cntS+cntM+cntL) > 0 ||
     (useEntranceRoll && entranceQty>0) ||
     (useAlMake && (alSM+alL)>0) ||
-    (useHighSash2 && (hsSM+hsL2)>0);
+    (useHighSash2 && (hsSM+hsL2)>0) ||
+    (useSafety && safetyItems.length>0);
 
   if(!any) total = 0;
 
-  /* ✅ 소비자가격(정가)만 표시 */
+  // ✅ 현재 화면은 소비자가격(정가)만 표시
   const totalConsumer = total;
 
   $("resultPrice").textContent = fmt(totalConsumer);
@@ -749,6 +960,9 @@ function calc(){
   let note = any ? "소비자가격(정가) 기준 자동견적입니다." : "개수 입력하면 자동 계산됩니다.";
   if(useEntranceRoll && entranceInquiry){
     note = "⚠️ PJ 롤 방충망은 자동견적이 아니라 ‘별도 견적 문의’입니다. 오픈채팅으로 문의 주세요.";
+  }
+  if(useSafety && safetyItems.some(it => it.unitPrice == null)){
+    note = "⚠️ 안전/추락 방충망 일부 항목이 단가표 범위를 벗어납니다. 오픈채팅으로 문의 주세요.";
   }
   $("resultNote").textContent = note;
 
@@ -783,7 +997,6 @@ async function copyText(text){
 function applyStep(targetId, delta){
   const el = $(targetId);
   if(!el) return;
-
   const cur = clampInt(parseFloat(el.value));
   const next = Math.max(0, cur + delta);
   el.value = next;
@@ -806,23 +1019,101 @@ function wire(){
     "meshType","cntS","cntM","cntL","memo",
     "useEntranceRoll","entranceType","entranceSize","entranceQty",
     "useAlMake","alSM","alL",
-    "useHighSash2","hsSM","hsL2"
+    "useHighSash2","hsSM","hsL2",
+    "useSafety"
   ].forEach(id => $(id).addEventListener("input", calc));
 
   document.addEventListener("click", (e)=>{
     const btn = e.target.closest("[data-step][data-target]");
-    if(!btn) return;
-    const delta = parseInt(btn.getAttribute("data-step"), 10);
-    const targetId = btn.getAttribute("data-target");
-    applyStep(targetId, delta);
+    if(btn){
+      const delta = parseInt(btn.getAttribute("data-step"), 10);
+      const targetId = btn.getAttribute("data-target");
+      applyStep(targetId, delta);
+      return;
+    }
+
+    const del = e.target.closest("[data-del-safety]");
+    if(del){
+      const id = del.getAttribute("data-del-safety");
+      safetyItems = safetyItems.filter(x => x.id !== id);
+      renderSafetyList();
+      calc();
+      return;
+    }
   });
 
-  ["cntS","cntM","cntL","entranceQty","alSM","alL","hsSM","hsL2"].forEach(id=>{
-    $(id).addEventListener("change", ()=>{
-      const v = clampInt(parseFloat($(id).value));
-      $(id).value = v;
+  ["cntS","cntM","cntL","entranceQty","alSM","alL","hsSM","hsL2","safetyQty","safetyW","safetyH"].forEach(id=>{
+    const el = $(id);
+    if(!el) return;
+    el.addEventListener("change", ()=>{
+      if(id === "safetyW" || id === "safetyH"){
+        el.value = clampInt(parseFloat(el.value));
+      }else{
+        el.value = clampInt(parseFloat(el.value));
+      }
       calc();
     });
+  });
+
+  $("useEntranceRoll").addEventListener("input", ()=>{
+    const q = parseInt($("entranceQty").value || "0", 10);
+    if($("useEntranceRoll").checked && q === 0) $("entranceQty").value = 1;
+    calc();
+  });
+
+  $("useSafety").addEventListener("input", ()=>{
+    if($("useSafety").checked){
+      if(clampInt(parseFloat($("safetyQty").value)) === 0) $("safetyQty").value = 1;
+    }
+    calc();
+  });
+
+  $("btnAddSafety").addEventListener("click", ()=>{
+    if(!$("useSafety").checked){
+      toast("먼저 ‘안전/추락 방충망’ 체크를 해주세요.");
+      return;
+    }
+
+    const kind = $("safetyKind").value;
+    const gauge = $("safetyGauge").value;
+
+    const w = clampInt(parseFloat($("safetyW").value));
+    const h = clampInt(parseFloat($("safetyH").value));
+    const qty = clampInt(parseFloat($("safetyQty").value));
+
+    if(w <= 0 || h <= 0){
+      toast("가로/세로(mm)를 입력해주세요.");
+      return;
+    }
+    if(qty <= 0){
+      toast("수량을 1개 이상으로 입력해주세요.");
+      return;
+    }
+
+    const { raw, rounded } = safetyRoundedM2FromMM(w, h);
+
+    if(rounded > CONFIG.SAFETY_MAX_M2){
+      toast("면적이 3.0㎡ 초과입니다. 오픈채팅으로 문의해주세요.");
+      return;
+    }
+
+    const unitPrice = safetyPriceByGaugeM2(gauge, rounded);
+    if(unitPrice == null){
+      toast("단가표에서 가격을 찾을 수 없어요. 오픈채팅으로 문의해주세요.");
+      return;
+    }
+
+    safetyItems.push({
+      id: String(Date.now()) + "_" + Math.random().toString(16).slice(2),
+      kind, gauge, w, h, qty,
+      rawM2: raw,
+      roundedM2: rounded,
+      unitPrice
+    });
+
+    renderSafetyList();
+    calc();
+    toast("추가 완료");
   });
 
   $("btnCopy").addEventListener("click", async ()=>{
@@ -849,6 +1140,16 @@ function wire(){
     $("useHighSash2").checked = false;
     $("hsSM").value = 0; $("hsL2").value = 0;
 
+    // safety reset
+    $("useSafety").checked = false;
+    $("safetyKind").value = "safe";
+    $("safetyGauge").value = "0.4";
+    $("safetyW").value = 0;
+    $("safetyH").value = 0;
+    $("safetyQty").value = 0;
+    safetyItems = [];
+    renderSafetyList();
+
     calc();
     toast("초기화 완료");
   });
@@ -861,12 +1162,6 @@ function wire(){
 
   $("btnHow").addEventListener("click", ()=>{
     $("howSection").scrollIntoView({ behavior:"smooth", block:"start" });
-  });
-
-  $("useEntranceRoll").addEventListener("input", ()=>{
-    const q = parseInt($("entranceQty").value || "0", 10);
-    if($("useEntranceRoll").checked && q === 0) $("entranceQty").value = 1;
-    calc();
   });
 
   $("kakaoConsultBtn").addEventListener("click", async ()=>{
