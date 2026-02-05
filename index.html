@@ -3,300 +3,501 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>방충망 자동견적</title>
+  <title>방충망 자동견적 | 방충망시공소</title>
 
-  <!-- ✅ 카톡 미리보기용(가능한 환경에서만 적용됨) -->
-  <meta property="og:title" content="방충망 자동견적" />
-  <meta property="og:description" content="개수만 입력하면 바로 금액 확인 · 요약 복사 후 카톡 상담" />
-  <!-- 아래 og:image는 실제 웹에 올린 ‘절대주소’로 바꾸면 카톡 썸네일 잘 뜸 -->
-  <!-- <meta property="og:image" content="https://your-domain.com/hero.jpg" /> -->
+  <meta name="description" content="30초 셀프견적 · 요약 자동복사 후 오픈채팅 상담" />
+  <meta property="og:title" content="방충망 자동견적 | 방충망시공소" />
+  <meta property="og:description" content="개수만 입력하면 정확 금액 확인 · 상담받기 누르면 견적요약 자동복사" />
+  <meta property="og:image" content="https://postfiles.pstatic.net/MjAyNjAyMDVfNTAg/MDAxNzcwMjc4MDExODM5.kYFzjJTjj7yo8HCyegcA2PTmVc7QCk36hNwsSoswW9Ug.QWdYq37ZL8noWjggwuiPbXg9A32noMuhUqCEdmGCdq0g.PNG/ChatGPT_Image_2026%EB%85%84_2%EC%9B%94_5%EC%9D%BC_%EC%98%A4%ED%9B%84_04_52_58.png?type=w966" />
 
   <style>
-    :root { --bg:#0f1118; --card:#12141b; --muted:#9aa3b2; --text:#e8ecf3; --line:#232736; --blue:#2b62ff; }
+    :root{
+      --bg:#ffffff;
+      --bg2:#f7f8fb;
+      --card:#ffffff;
+      --line:rgba(15,23,42,.10);
+      --text:#0f172a;
+      --muted:rgba(15,23,42,.65);
+      --muted2:rgba(15,23,42,.45);
+
+      --brand:#2563eb;
+      --brand2:#06b6d4;
+      --good:#16a34a;
+
+      --shadow: 0 18px 45px rgba(15,23,42,.10);
+      --shadow2: 0 10px 28px rgba(15,23,42,.08);
+      --r:22px;
+    }
     *{box-sizing:border-box}
     body{
       margin:0;
       font-family:system-ui,-apple-system,Segoe UI,Roboto,Apple SD Gothic Neo,Noto Sans KR,sans-serif;
-      background:linear-gradient(180deg,#090a0e,var(--bg));
       color:var(--text);
+      background:
+        radial-gradient(900px 500px at 0% 0%, rgba(37,99,235,.10), transparent 60%),
+        radial-gradient(900px 500px at 100% 0%, rgba(6,182,212,.10), transparent 55%),
+        linear-gradient(180deg, var(--bg), var(--bg2));
     }
-    .wrap{max-width:720px;margin:0 auto;padding:14px;}
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:980px;margin:0 auto;padding:18px 16px 140px;}
+    .topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:6px 0 14px;}
+    .brand{display:flex; flex-direction:column; gap:2px;}
+    .brand b{font-size:15px; letter-spacing:-0.2px;}
+    .brand span{font-size:12px; color:var(--muted);}
+    .status{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:10px 12px; border-radius:999px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.70);
+      box-shadow:var(--shadow2);
+      font-size:12px; color:var(--muted);
+      white-space:nowrap;
+    }
+    .dot{width:9px;height:9px;border-radius:999px;background:var(--good);box-shadow:0 0 0 4px rgba(22,163,74,.18);}
 
-    /* ✅ 상단 배너 */
     .hero{
-      position:relative;
-      width:100%;
-      border-radius:18px;
+      border:1px solid var(--line);
+      border-radius:var(--r);
       overflow:hidden;
+      background:rgba(255,255,255,.82);
+      box-shadow:var(--shadow);
+    }
+    .heroGrid{display:grid; grid-template-columns:1fr;}
+    @media (min-width:900px){ .heroGrid{grid-template-columns: 1.15fr .85fr;} }
+    .heroMedia{position:relative;min-height:260px;background:#eef2ff;}
+    .heroMedia img{
+      width:100%; height:100%;
+      object-fit:cover; display:block;
+      filter:saturate(1.05) contrast(1.03);
+    }
+    .heroMedia::after{
+      content:""; position:absolute; inset:0;
+      background:linear-gradient(to top, rgba(255,255,255,.95), rgba(255,255,255,.10) 55%, rgba(255,255,255,0));
+      pointer-events:none;
+    }
+    .heroContent{padding:18px;display:flex;flex-direction:column;gap:12px;}
+    .kicker{
+      display:inline-flex; align-items:center; gap:8px; width:max-content;
+      padding:8px 10px; border-radius:999px;
       border:1px solid var(--line);
-      box-shadow:0 10px 26px rgba(0,0,0,.35);
-      background:#0b0c10;
+      background:rgba(37,99,235,.07);
+      color:rgba(37,99,235,.95);
+      font-weight:1000; font-size:12px;
     }
-    .hero img{
-      width:100%;
-      height:220px;
-      object-fit:cover;
-      display:block;
-      filter:saturate(1.05) contrast(1.02);
+    .title{margin:0;font-size:22px;letter-spacing:-0.6px;line-height:1.15;font-weight:1000;}
+    .sub{margin:0;color:var(--muted);font-size:13px;line-height:1.55;}
+    .heroBtns{display:flex;flex-wrap:wrap;gap:10px;margin-top:2px;}
+    .btn{
+      border:1px solid var(--line);
+      background:#fff; color:var(--text);
+      padding:12px 14px; border-radius:16px;
+      font-weight:1000; font-size:14px;
+      cursor:pointer; min-height:46px;
+      display:inline-flex; align-items:center; justify-content:center;
+      box-shadow: 0 10px 18px rgba(15,23,42,.06);
+      transition:transform .08s ease;
     }
-    .hero .grad{
-      position:absolute; left:0; right:0; bottom:0; height:62%;
-      background:linear-gradient(to top, rgba(0,0,0,.70), rgba(0,0,0,.08));
+    .btnPrimary{
+      border-color:transparent;
+      background:linear-gradient(135deg, var(--brand), var(--brand2));
+      color:white;
+      box-shadow: 0 16px 30px rgba(37,99,235,.18);
     }
-    .hero .txt{
-      position:absolute; left:14px; right:14px; bottom:14px;
-    }
-    .hero h1{margin:0;font-size:20px;font-weight:1000;letter-spacing:-0.2px}
-    .hero p{margin:6px 0 0;color:rgba(232,236,243,.80);font-size:12.5px;line-height:1.35}
+    .btnSoft{background:rgba(15,23,42,.04);}
+    .btn:hover{transform:translateY(-1px)}
+    .btn:active{transform:translateY(0px)}
 
+    .grid3{display:grid; grid-template-columns:1fr; gap:12px; margin-top:14px;}
+    @media (min-width:900px){ .grid3{grid-template-columns:1fr 1fr 1fr;} }
     .card{
-      margin-top:12px;
-      background:rgba(18,20,27,.92);
       border:1px solid var(--line);
-      border-radius:16px;
+      background:rgba(255,255,255,.90);
+      border-radius:var(--r);
       padding:14px;
-      box-shadow:0 8px 22px rgba(0,0,0,.25);
+      box-shadow:var(--shadow2);
     }
-    .chip{
-      display:flex;gap:10px;align-items:center;
+    .card h3{margin:0 0 6px;font-size:14px;font-weight:1000;letter-spacing:-0.2px;}
+    .card p{margin:0;color:var(--muted);font-size:12.7px;line-height:1.55;}
+    .icon{
+      width:36px;height:36px;border-radius:14px;
+      display:grid;place-items:center;
+      background:rgba(37,99,235,.10);
+      border:1px solid rgba(37,99,235,.18);
+      margin-bottom:10px;
+      font-weight:1000;
+      color:rgba(37,99,235,.95);
+    }
+
+    .section{
+      margin-top:14px;
       border:1px solid var(--line);
-      background:#0e1016;
-      border-radius:14px;
-      padding:12px;
+      border-radius:var(--r);
+      background:rgba(255,255,255,.92);
+      box-shadow:var(--shadow);
+      overflow:hidden;
     }
-    .chip input{width:auto}
+    .sectionHead{
+      padding:16px 16px 12px;
+      border-bottom:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(37,99,235,.06), rgba(255,255,255,0));
+    }
+    .sectionHead h2{margin:0;font-size:16px;font-weight:1000;letter-spacing:-0.2px;}
+    .sectionHead .desc{margin:6px 0 0;color:var(--muted);font-size:12.8px;line-height:1.5;}
+    .sectionBody{padding:14px 16px 16px;}
 
-    details{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#0e1016;}
-    summary{list-style:none;cursor:pointer;padding:14px 12px;font-weight:1000;}
-    summary::-webkit-details-marker{display:none;}
-    .detailBody{padding:12px;border-top:1px solid var(--line);background:#0b0c10;}
-    .one{display:grid;grid-template-columns:1fr;gap:10px;}
-
+    .row{display:grid;grid-template-columns:1fr;gap:10px;}
     label{font-size:13px;color:var(--muted);display:block;margin-bottom:6px;}
-    input,select,textarea,button{
+    input,select,textarea{
       width:100%;
-      border-radius:12px;
+      border-radius:16px;
       border:1px solid var(--line);
-      background:#0e1016;
+      background:#fff;
       color:var(--text);
-      padding:12px;
+      padding:12px 12px;
       font-size:14px;
       outline:none;
     }
-    textarea{min-height:150px;resize:vertical;line-height:1.4;}
-    input[type="number"]{padding-right:10px;}
+    input:focus,select:focus,textarea:focus{
+      border-color: rgba(37,99,235,.35);
+      box-shadow: 0 0 0 4px rgba(37,99,235,.12);
+    }
+    textarea{min-height:150px;resize:vertical;line-height:1.5;}
+    .note{font-size:12.5px;color:var(--muted);line-height:1.5;}
 
-    .big{font-size:26px;font-weight:1000;margin:4px 0 2px;}
-    .mid{font-size:13px;color:var(--muted);margin:0 0 10px;line-height:1.45;}
-    .small{font-size:12px;color:var(--muted);line-height:1.45;margin-top:6px;}
-    .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px;}
-    button{cursor:pointer;font-weight:1000;}
-    .primary{background:var(--blue);border-color:var(--blue);}
-    .ghost{background:transparent;}
-    .toast{margin-top:10px;color:var(--muted);font-size:12px;line-height:1.45;}
+    .chip{
+      display:flex; gap:10px; align-items:flex-start;
+      border:1px solid var(--line);
+      background:rgba(15,23,42,.03);
+      border-radius:18px;
+      padding:12px;
+    }
+    .chip input{width:auto;margin-top:2px}
+    .chip b{font-weight:1000}
 
-    /* ✅ 카카오 상담 버튼 */
-    .kakao-cta{
-      display:flex; align-items:center; justify-content:center; gap:10px;
-      margin-top:12px; padding:14px;
-      border-radius:16px;
-      background:#FEE500; color:#191919;
-      border:1px solid rgba(0,0,0,.10);
-      text-decoration:none;
+    details{
+      border:1px solid var(--line);
+      border-radius:18px;
+      overflow:hidden;
+      background:#fff;
+      box-shadow: var(--shadow2);
+    }
+    summary{
+      list-style:none;
+      cursor:pointer;
+      padding:14px 12px;
       font-weight:1000;
-      box-shadow:0 10px 24px rgba(0,0,0,.30);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      background: linear-gradient(180deg, rgba(15,23,42,.02), rgba(255,255,255,0));
     }
-    .kakao-cta:active{ transform:translateY(1px); }
-    .kakao-cta .badge{
-      width:34px;height:34px;border-radius:999px;
+    summary::-webkit-details-marker{display:none;}
+    .chev{color:var(--muted2); font-weight:1000;}
+    .detailBody{padding:12px;border-top:1px solid var(--line);background:#fff;}
+
+    .result{
+      margin-top:14px;
+      border:1px solid var(--line);
+      border-radius:22px;
+      background:linear-gradient(180deg, rgba(37,99,235,.06), rgba(255,255,255,0));
+      box-shadow: var(--shadow);
+      padding:14px;
+    }
+    .price{font-size:28px;font-weight:1000;letter-spacing:-0.6px;margin:0;}
+    .resultMeta{margin:6px 0 10px;color:var(--muted);font-size:12.5px;line-height:1.5;}
+    .btnRow{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px;}
+    .toast{margin-top:8px;color:var(--muted);font-size:12px;min-height:16px;}
+
+    .highlight{border-left:6px solid #FEE500;background:rgba(254,229,0,.22);}
+    .highlightTitle{font-weight:1000;font-size:14px;letter-spacing:-0.2px;}
+
+    /* Sticky Kakao */
+    .kakaoSticky{
+      position:fixed;left:14px;right:14px;bottom:14px;
+      z-index:50;max-width:980px;margin:0 auto;
+    }
+    .kakaoBtn{
+      width:100%;
+      display:flex;align-items:center;justify-content:space-between;gap:12px;
+      padding:12px 14px;border-radius:20px;
+      background:#FEE500;color:#191919;
+      border:1px solid rgba(0,0,0,.10);
+      box-shadow: 0 18px 44px rgba(15,23,42,.18);
+      cursor:pointer;
+    }
+    .kLeft{display:flex;gap:12px;align-items:center;}
+    .kBadge{
+      width:40px;height:40px;border-radius:999px;
       display:grid;place-items:center;
-      background:#191919;color:#FEE500;
-      font-weight:1000;font-size:13px;
-      flex:0 0 auto;
+      background:#191919;color:#FEE500;font-weight:1000;flex:0 0 auto;
     }
-    .kakao-cta .txt{display:flex;flex-direction:column;line-height:1.05;text-align:center;}
-    .kakao-cta .txt small{font-weight:700;font-size:11px;color:rgba(25,25,25,.75);}
+    .kText b{display:block;font-size:14px;font-weight:1000;letter-spacing:-0.2px;}
+    .kText span{display:block;font-size:12px;color:rgba(25,25,25,.70);margin-top:2px;}
+    .kRight{
+      padding:10px 12px;border-radius:14px;
+      background:rgba(25,25,25,.10);
+      border:1px solid rgba(25,25,25,.14);
+      font-weight:1000;font-size:12.5px;white-space:nowrap;
+    }
+
+    /* tiny modal */
+    .modalBack{
+      position:fixed;inset:0;
+      background:rgba(15,23,42,.45);
+      display:none;align-items:center;justify-content:center;
+      padding:18px;
+      z-index:80;
+    }
+    .modal{
+      width:min(520px, 100%);
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:22px;
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .modalTop{
+      padding:14px 14px 10px;
+      border-bottom:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(254,229,0,.22), rgba(255,255,255,0));
+    }
+    .modalTop b{font-weight:1000}
+    .modalBody{padding:12px 14px 14px;color:var(--muted);font-size:13px;line-height:1.55;}
+    .modalBtns{display:flex;gap:10px;padding:0 14px 14px;}
+    .modalBtns .btn{flex:1}
   </style>
 </head>
 
 <body>
   <div class="wrap">
+    <div class="topbar">
+      <div class="brand">
+        <b>방충망시공소</b>
+        <span>셀프견적 · 요약 자동복사 · 오픈채팅 상담</span>
+      </div>
+      <div class="status"><span class="dot"></span> 상담 가능</div>
+    </div>
 
-    <!-- ✅ 상단 사진 배너 (사진 파일명: hero.jpg) -->
     <div class="hero">
-      <img src="https://postfiles.pstatic.net/MjAyNjAyMDVfMjEx/MDAxNzcwMjczMTcxNDQy.caZRWY1bF6FUihVStNgFZJ4qS_dqwHeHXuB-9rphGeIg.Lhu-dSGJ04Ypg1Muixzn8_aqoEznEmrN1S85FgEmiGkg.JPEG/hero.jpg?type=w966" alt="방충망 시공 이미지">
-      <div class="grad"></div>
-      <div class="txt">
-        <h1>방충망 자동견적</h1>
-        <p>개수만 입력하면 바로 금액 확인 · “요약 복사” 후 카톡으로 붙여넣기</p>
+      <div class="heroGrid">
+        <div class="heroMedia">
+          <img src="https://postfiles.pstatic.net/MjAyNjAyMDVfNTAg/MDAxNzcwMjc4MDExODM5.kYFzjJTjj7yo8HCyegcA2PTmVc7QCk36hNwsSoswW9Ug.QWdYq37ZL8noWjggwuiPbXg9A32noMuhUqCEdmGCdq0g.PNG/ChatGPT_Image_2026%EB%85%84_2%EC%9B%94_5%EC%9D%BC_%EC%98%A4%ED%9B%84_04_52_58.png?type=w966" alt="방충망 자동견적 이미지" />
+        </div>
+
+        <div class="heroContent">
+          <div class="kicker">⚡ 30초 셀프견적</div>
+          <h1 class="title">방충망 자동견적</h1>
+          <p class="sub">
+            바쁘실 때는 <b>개수만 입력</b>하고 금액 확인하세요.
+            아래 <b>상담받기</b> 누르면 <b>견적요약이 자동 복사</b>됩니다.
+          </p>
+
+          <div class="heroBtns">
+            <button class="btn btnPrimary" id="btnGoQuote">셀프 견적하기</button>
+            <button class="btn btnSoft" id="btnHow">진행 방식 보기</button>
+          </div>
+
+          <div class="note">
+            ※ 입력 기준 자동견적이며, 현장 상황에 따라 추가 발생 시 안내드립니다.
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- ✅ 입력 -->
-    <div class="card">
-      <div class="chip" style="margin-bottom:12px;">
-        <input type="checkbox" id="discount10">
-        <div>
-          <div><b>예약리뷰</b> 또는 <b>영수증리뷰</b> (10% 할인)</div>
-          <div class="small">체크하면 총액에서 자동으로 10% 할인 적용됩니다.</div>
-        </div>
+    <div class="grid3" id="howSection">
+      <div class="card">
+        <div class="icon">✓</div>
+        <h3>정확 금액</h3>
+        <p>“얼마~얼마”가 아니라 입력 기준으로 딱 떨어지게 계산됩니다.</p>
       </div>
-
-      <details open>
-        <summary>창문형 방충망</summary>
-        <div class="detailBody">
-          <div class="one">
-            <div>
-              <label>방충망 선택</label>
-              <select id="meshType">
-                <option value="micro">미세방충망</option>
-                <option value="hydro_micro">발수코팅 미세방충망</option>
-                <option value="black_stainless_micro">블랙스텐 미세방충망</option>
-              </select>
-            </div>
-
-            <div>
-              <label>소형(개)</label>
-              <input id="cntS" type="number" min="0" step="1" value="0">
-            </div>
-
-            <div>
-              <label>중형(개) <span class="small">· 높이 1500 이하</span></label>
-              <input id="cntM" type="number" min="0" step="1" value="0">
-            </div>
-
-            <div>
-              <label>대형(개) <span class="small">· 높이 2300 이하</span></label>
-              <input id="cntL" type="number" min="0" step="1" value="0">
-            </div>
-
-            <div>
-              <label>메모(선택)</label>
-              <input id="memo" placeholder="예: 저층/아이 있음/초파리 유입 등">
-            </div>
-          </div>
-        </div>
-      </details>
-
-      <div style="height:12px"></div>
-
-      <details>
-        <summary>현관 롤방충망</summary>
-        <div class="detailBody">
-          <div class="one">
-            <div class="chip">
-              <input type="checkbox" id="useEntranceRoll">
-              <span><b>현관 롤방충망</b> 견적 추가</span>
-            </div>
-
-            <div>
-              <label>종류 선택</label>
-              <select id="entranceType">
-                <option value="normal">현관 롤방충망</option>
-                <option value="micro">현관 미세 롤방충망</option>
-                <option value="pj_roll">PJ 롤 방충망 (별도 견적 문의)</option>
-              </select>
-            </div>
-
-            <div>
-              <label>사이즈 선택</label>
-              <select id="entranceSize">
-                <option value="under">1000 × 2100 이하</option>
-                <option value="over">1000 × 2100 이상</option>
-              </select>
-            </div>
-
-            <div>
-              <label>개수</label>
-              <input id="entranceQty" type="number" min="0" step="1" value="0">
-            </div>
-
-            <div class="small">
-              * PJ 롤 선택 시 자동금액은 계산하지 않고 “별도 견적 문의”로 표시됩니다.
-            </div>
-          </div>
-        </div>
-      </details>
-
-      <div style="height:12px"></div>
-
-      <details>
-        <summary>알미늄 틀 제작(미세망 포함)</summary>
-        <div class="detailBody">
-          <div class="one">
-            <div class="chip">
-              <input type="checkbox" id="useAlMake">
-              <span>알미늄 틀 제작 견적 추가</span>
-            </div>
-
-            <div>
-              <label>소/중 (합계 개수) <span class="small">· 1개당 100,000원</span></label>
-              <input id="alSM" type="number" min="0" step="1" value="0">
-            </div>
-
-            <div>
-              <label>대창 (개수) <span class="small">· 1개당 140,000원</span></label>
-              <input id="alL" type="number" min="0" step="1" value="0">
-            </div>
-          </div>
-        </div>
-      </details>
-
-      <div style="height:12px"></div>
-
-      <details>
-        <summary>하이샤시 틀 제작(미세망 포함)</summary>
-        <div class="detailBody">
-          <div class="one">
-            <div class="chip">
-              <input type="checkbox" id="useHighSash2">
-              <span>하이샤시 틀 제작 견적 추가</span>
-            </div>
-
-            <div>
-              <label>소/중 (합계 개수) <span class="small">· 1개당 100,000원</span></label>
-              <input id="hsSM" type="number" min="0" step="1" value="0">
-            </div>
-
-            <div>
-              <label>대창 (개수) <span class="small">· 1개당 140,000원</span></label>
-              <input id="hsL2" type="number" min="0" step="1" value="0">
-            </div>
-          </div>
-        </div>
-      </details>
+      <div class="card">
+        <div class="icon">⏱</div>
+        <h3>자동 복사</h3>
+        <p>상담받기 버튼을 누르면 견적요약이 자동으로 복사됩니다.</p>
+      </div>
+      <div class="card">
+        <div class="icon">📱</div>
+        <h3>모바일 최적</h3>
+        <p>대부분 폰으로 보니까 입력/복사/상담 버튼을 크게 만들었습니다.</p>
+      </div>
     </div>
 
-    <!-- ✅ 결과 -->
-    <div class="card">
-      <div class="big" id="resultPrice">0원</div>
-      <p class="mid" id="resultNote">개수 입력하면 자동으로 정확 금액이 계산됩니다.</p>
-
-      <label>고객에게 보낼 요약(자동 생성)</label>
-      <textarea id="summary" readonly></textarea>
-
-      <div class="btns">
-        <button class="primary" id="btnCopy">요약 복사</button>
-        <button class="ghost" id="btnReset">초기화</button>
+    <div class="section" id="quoteSection">
+      <div class="sectionHead">
+        <h2>셀프 견적</h2>
+        <p class="desc">필요한 항목만 펼쳐서 입력하세요.</p>
       </div>
 
-      <div class="toast" id="toast"></div>
-
-      <a id="kakaoBtn" class="kakao-cta" href="https://open.kakao.com/o/symXVtei" target="_blank" rel="noopener">
-        <div class="badge">톡</div>
-        <div class="txt">
-          카카오톡 오픈채팅으로 상담받기
-          <small>요약 복사 후 붙여넣기</small>
+      <div class="sectionBody">
+        <div class="card highlight" style="margin-bottom:12px;">
+          <div class="highlightTitle">✅ 개수에 따라 할인적용 (오픈카톡)</div>
+          <div class="note" style="margin-top:4px;">예약리뷰/영수증리뷰 체크 시 총액에서 10% 자동 할인됩니다.</div>
         </div>
-      </a>
 
-      <div class="small">
-        위에서 <b>“요약 복사”</b> 누른 다음, 오픈채팅 들어가서 <b>붙여넣기</b> 하면 상담이 가장 빨라요.
+        <div class="chip" style="margin-bottom:12px;">
+          <input type="checkbox" id="discount10">
+          <div>
+            <div><b>예약리뷰</b> 또는 <b>영수증리뷰</b> (10% 할인)</div>
+            <div class="note">체크하면 총액에서 자동으로 10% 할인 적용됩니다.</div>
+          </div>
+        </div>
+
+        <!-- 기본 닫힘 -->
+        <details id="dWindow">
+          <summary><span>창문형 방충망</span><span class="chev">열기/닫기 ▾</span></summary>
+          <div class="detailBody">
+            <div class="row">
+              <div>
+                <label>방충망 선택</label>
+                <select id="meshType">
+                  <option value="micro">미세방충망</option>
+                  <option value="hydro_micro">발수코팅 미세방충망</option>
+                  <option value="black_stainless_micro">블랙스텐 미세방충망</option>
+                </select>
+              </div>
+
+              <div><label>소형(개)</label><input id="cntS" type="number" min="0" step="1" value="0" inputmode="numeric"></div>
+
+              <div>
+                <label>중형(개) <span class="note">· 높이 1500 이하</span></label>
+                <input id="cntM" type="number" min="0" step="1" value="0" inputmode="numeric">
+              </div>
+
+              <div>
+                <label>대형(개) <span class="note">· 높이 2300 이하</span></label>
+                <input id="cntL" type="number" min="0" step="1" value="0" inputmode="numeric">
+              </div>
+
+              <div><label>메모(선택)</label><input id="memo" placeholder="예: 저층/아이 있음/초파리 유입 등"></div>
+            </div>
+          </div>
+        </details>
+
+        <div style="height:12px"></div>
+
+        <details id="dEntrance">
+          <summary><span>현관 롤방충망</span><span class="chev">열기/닫기 ▾</span></summary>
+          <div class="detailBody">
+            <div class="row">
+              <div class="chip">
+                <input type="checkbox" id="useEntranceRoll">
+                <div>
+                  <b>현관 롤방충망</b> 견적 추가
+                  <div class="note">체크 후 종류/사이즈/개수를 선택하세요.</div>
+                </div>
+              </div>
+
+              <div>
+                <label>종류 선택</label>
+                <select id="entranceType">
+                  <option value="normal">현관 롤방충망</option>
+                  <option value="micro">현관 미세 롤방충망</option>
+                  <option value="pj_roll">PJ 롤 방충망 (별도 견적 문의)</option>
+                </select>
+              </div>
+
+              <div>
+                <label>사이즈 선택</label>
+                <select id="entranceSize">
+                  <option value="under">1000 × 2100 이하</option>
+                  <option value="over">1000 × 2100 이상</option>
+                </select>
+              </div>
+
+              <div><label>개수</label><input id="entranceQty" type="number" min="0" step="1" value="0" inputmode="numeric"></div>
+
+              <div class="note">* PJ 롤 선택 시 자동금액은 계산하지 않고 “별도 견적 문의”로 표시됩니다.</div>
+            </div>
+          </div>
+        </details>
+
+        <div style="height:12px"></div>
+
+        <details id="dAl">
+          <summary><span>알미늄 틀 제작(미세망 포함)</span><span class="chev">열기/닫기 ▾</span></summary>
+          <div class="detailBody">
+            <div class="row">
+              <div class="chip">
+                <input type="checkbox" id="useAlMake">
+                <div>알미늄 틀 제작 견적 추가<div class="note">소/중, 대창 개수를 입력하세요.</div></div>
+              </div>
+              <div><label>소/중 (합계 개수) <span class="note">· 1개당 100,000원</span></label><input id="alSM" type="number" min="0" step="1" value="0" inputmode="numeric"></div>
+              <div><label>대창 (개수) <span class="note">· 1개당 140,000원</span></label><input id="alL" type="number" min="0" step="1" value="0" inputmode="numeric"></div>
+            </div>
+          </div>
+        </details>
+
+        <div style="height:12px"></div>
+
+        <details id="dHS">
+          <summary><span>하이샤시 틀 제작(미세망 포함)</span><span class="chev">열기/닫기 ▾</span></summary>
+          <div class="detailBody">
+            <div class="row">
+              <div class="chip">
+                <input type="checkbox" id="useHighSash2">
+                <div>하이샤시 틀 제작 견적 추가<div class="note">소/중, 대창 개수를 입력하세요.</div></div>
+              </div>
+              <div><label>소/중 (합계 개수) <span class="note">· 1개당 100,000원</span></label><input id="hsSM" type="number" min="0" step="1" value="0" inputmode="numeric"></div>
+              <div><label>대창 (개수) <span class="note">· 1개당 140,000원</span></label><input id="hsL2" type="number" min="0" step="1" value="0" inputmode="numeric"></div>
+            </div>
+          </div>
+        </details>
+
+        <div class="result">
+          <p class="price" id="resultPrice">0원</p>
+          <div class="resultMeta" id="resultNote">개수 입력하면 자동으로 정확 금액이 계산됩니다.</div>
+
+          <label>고객에게 보낼 요약(자동 생성)</label>
+          <textarea id="summary" readonly></textarea>
+
+          <div class="btnRow">
+            <button class="btn btnPrimary" id="btnCopy">요약 복사</button>
+            <button class="btn" id="btnReset">초기화</button>
+          </div>
+          <div class="toast" id="toast"></div>
+
+          <div class="note" style="margin-top:8px;">
+            아래 <b>상담받기</b> 버튼을 누르면 <b>요약이 자동 복사</b>되고, 오픈채팅으로 이동합니다.
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
+  <!-- 자동복사 안내 모달 -->
+  <div class="modalBack" id="modalBack" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modalTop">
+        <b id="modalTitle">견적요약 자동복사</b>
+      </div>
+      <div class="modalBody" id="modalBody">
+        복사 완료! 오픈채팅으로 이동하면 채팅창에 붙여넣기만 하시면 됩니다.
+      </div>
+      <div class="modalBtns">
+        <button class="btn btnPrimary" id="btnGoKakao">오픈채팅으로 이동</button>
+        <button class="btn btnSoft" id="btnCloseModal">닫기</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 고정 카카오 버튼 (클릭 시 자동복사 + 이동) -->
+  <div class="kakaoSticky">
+    <button class="kakaoBtn" id="kakaoConsultBtn" type="button">
+      <div class="kLeft">
+        <div class="kBadge">톡</div>
+        <div class="kText">
+          <b>카카오톡 오픈채팅 상담</b>
+          <span>누르면 견적요약 자동복사</span>
+        </div>
+      </div>
+      <div class="kRight">상담받기</div>
+    </button>
+  </div>
+
 <script>
+const KAKAO_URL = "https://open.kakao.com/o/symXVtei";
+
 const CONFIG = {
   UNIT_PRICE_WINDOW: {
     micro:                 { S: 10000, M: 30000, L: 50000 },
@@ -306,7 +507,7 @@ const CONFIG = {
   ENTRANCE_ROLL_PRICE: {
     normal: { under: 150000, over: 170000 },
     micro:  { under: 170000, over: 200000 },
-    pj_roll:{ under: null,   over: null }, // 별도 문의
+    pj_roll:{ under: null,   over: null },
   },
   MAKE_PRICE: { SM: 100000, L: 140000 },
   DISCOUNT_RATE: 0.10
@@ -339,77 +540,7 @@ function toast(msg){
   setTimeout(()=>{ $("toast").textContent = ""; }, 2400);
 }
 
-function calc(){
-  const discountOn = $("discount10").checked;
-
-  // 창문형
-  const meshKey = $("meshType").value;
-  const cntS = clampInt(parseFloat($("cntS").value));
-  const cntM = clampInt(parseFloat($("cntM").value));
-  const cntL = clampInt(parseFloat($("cntL").value));
-  const memo = ($("memo").value || "").trim();
-
-  let total = 0;
-  const up = CONFIG.UNIT_PRICE_WINDOW[meshKey] || CONFIG.UNIT_PRICE_WINDOW.micro;
-  total += up.S * cntS + up.M * cntM + up.L * cntL;
-
-  // 현관롤
-  const useEntranceRoll = $("useEntranceRoll").checked;
-  const entranceType = $("entranceType").value;
-  const entranceSize = $("entranceSize").value;
-  const entranceQty = clampInt(parseFloat($("entranceQty").value));
-
-  let entranceInquiry = false;
-
-  if(useEntranceRoll){
-    const p = CONFIG.ENTRANCE_ROLL_PRICE[entranceType]?.[entranceSize];
-    if(p == null){
-      entranceInquiry = true; // PJ 롤
-    }else{
-      total += p * entranceQty;
-    }
-  }
-
-  // 알미늄 틀 제작
-  const useAlMake = $("useAlMake").checked;
-  const alSM = clampInt(parseFloat($("alSM").value));
-  const alL = clampInt(parseFloat($("alL").value));
-  if(useAlMake){
-    total += CONFIG.MAKE_PRICE.SM * alSM;
-    total += CONFIG.MAKE_PRICE.L  * alL;
-  }
-
-  // 하이샤시 틀 제작
-  const useHighSash2 = $("useHighSash2").checked;
-  const hsSM = clampInt(parseFloat($("hsSM").value));
-  const hsL2 = clampInt(parseFloat($("hsL2").value));
-  if(useHighSash2){
-    total += CONFIG.MAKE_PRICE.SM * hsSM;
-    total += CONFIG.MAKE_PRICE.L  * hsL2;
-  }
-
-  // 할인
-  if(discountOn) total *= (1 - CONFIG.DISCOUNT_RATE);
-
-  // 입력 여부
-  const any =
-    (cntS+cntM+cntL) > 0 ||
-    (useEntranceRoll && entranceQty>0) ||
-    (useAlMake && (alSM+alL)>0) ||
-    (useHighSash2 && (hsSM+hsL2)>0);
-
-  if(!any) total = 0;
-
-  // 표시
-  $("resultPrice").textContent = fmt(total);
-
-  let note = any ? "입력 기준 자동견적(정확 금액)입니다." : "개수 입력하면 자동 계산됩니다.";
-  if(useEntranceRoll && entranceInquiry){
-    note = "⚠️ PJ 롤 방충망은 자동견적이 아니라 ‘별도 견적 문의’입니다. 오픈채팅으로 문의 주세요.";
-  }
-  $("resultNote").textContent = note;
-
-  // 요약
+function buildSummary(total, memo, meshKey, cntS, cntM, cntL, useEntranceRoll, entranceType, entranceSize, entranceQty, entranceInquiry, useAlMake, alSM, alL, useHighSash2, hsSM, hsL2, discountOn){
   const lines = [];
   lines.push(`창문형: ${meshLabel(meshKey)}`);
   lines.push(`창 개수: 소 ${cntS} / 중 ${cntM}(높이 1500↓) / 대 ${cntL}(높이 2300↓)`);
@@ -430,8 +561,109 @@ function calc(){
   lines.push(`자동견적: ${fmt(total)}`);
   lines.push(`메모: ${memo || "없음"}`);
 
-  $("summary").value = "자동견적 보고 연락드려요.\n" + lines.join("\n");
-  return { summary: $("summary").value };
+  return "자동견적 보고 연락드려요.\n" + lines.join("\n");
+}
+
+function calc(){
+  const discountOn = $("discount10").checked;
+
+  const meshKey = $("meshType").value;
+  const cntS = clampInt(parseFloat($("cntS").value));
+  const cntM = clampInt(parseFloat($("cntM").value));
+  const cntL = clampInt(parseFloat($("cntL").value));
+  const memo = ($("memo").value || "").trim();
+
+  let total = 0;
+  const up = CONFIG.UNIT_PRICE_WINDOW[meshKey] || CONFIG.UNIT_PRICE_WINDOW.micro;
+  total += up.S * cntS + up.M * cntM + up.L * cntL;
+
+  const useEntranceRoll = $("useEntranceRoll").checked;
+  const entranceType = $("entranceType").value;
+  const entranceSize = $("entranceSize").value;
+  const entranceQty = clampInt(parseFloat($("entranceQty").value));
+
+  let entranceInquiry = false;
+  if(useEntranceRoll){
+    const p = CONFIG.ENTRANCE_ROLL_PRICE[entranceType]?.[entranceSize];
+    if(p == null){
+      entranceInquiry = true;
+    }else{
+      total += p * entranceQty;
+    }
+  }
+
+  const useAlMake = $("useAlMake").checked;
+  const alSM = clampInt(parseFloat($("alSM").value));
+  const alL = clampInt(parseFloat($("alL").value));
+  if(useAlMake){
+    total += CONFIG.MAKE_PRICE.SM * alSM;
+    total += CONFIG.MAKE_PRICE.L  * alL;
+  }
+
+  const useHighSash2 = $("useHighSash2").checked;
+  const hsSM = clampInt(parseFloat($("hsSM").value));
+  const hsL2 = clampInt(parseFloat($("hsL2").value));
+  if(useHighSash2){
+    total += CONFIG.MAKE_PRICE.SM * hsSM;
+    total += CONFIG.MAKE_PRICE.L  * hsL2;
+  }
+
+  const any =
+    (cntS+cntM+cntL) > 0 ||
+    (useEntranceRoll && entranceQty>0) ||
+    (useAlMake && (alSM+alL)>0) ||
+    (useHighSash2 && (hsSM+hsL2)>0);
+
+  if(!any) total = 0;
+
+  let totalFinal = total;
+  if(discountOn) totalFinal = total * (1 - CONFIG.DISCOUNT_RATE);
+
+  $("resultPrice").textContent = fmt(totalFinal);
+
+  let note = any ? "입력 기준 자동견적(정확 금액)입니다." : "개수 입력하면 자동 계산됩니다.";
+  if(useEntranceRoll && entranceInquiry){
+    note = "⚠️ PJ 롤 방충망은 자동견적이 아니라 ‘별도 견적 문의’입니다. 오픈채팅으로 문의 주세요.";
+  }
+  $("resultNote").textContent = note;
+
+  const summary = buildSummary(
+    totalFinal, memo, meshKey, cntS, cntM, cntL,
+    useEntranceRoll, entranceType, entranceSize, entranceQty, entranceInquiry,
+    useAlMake, alSM, alL,
+    useHighSash2, hsSM, hsL2,
+    discountOn
+  );
+  $("summary").value = summary;
+
+  return { summary, any };
+}
+
+async function copyText(text){
+  try{
+    await navigator.clipboard.writeText(text);
+    return true;
+  }catch(e){
+    // fallback
+    const ta = $("summary");
+    ta.removeAttribute("readonly");
+    ta.value = text;
+    ta.select();
+    ta.setSelectionRange(0, 99999);
+    const ok = document.execCommand("copy");
+    ta.setAttribute("readonly","readonly");
+    return ok;
+  }
+}
+
+function openModal(msg){
+  $("modalBody").textContent = msg;
+  $("modalBack").style.display = "flex";
+  $("modalBack").setAttribute("aria-hidden","false");
+}
+function closeModal(){
+  $("modalBack").style.display = "none";
+  $("modalBack").setAttribute("aria-hidden","true");
 }
 
 function wire(){
@@ -445,23 +677,8 @@ function wire(){
 
   $("btnCopy").addEventListener("click", async ()=>{
     const { summary } = calc();
-    try{
-      await navigator.clipboard.writeText(summary);
-      toast("복사 완료! 오픈채팅에 붙여넣기 하면 끝");
-    }catch(e){
-      $("summary").select();
-      document.execCommand("copy");
-      toast("복사 완료!");
-    }
-  });
-
-  $("kakaoBtn").addEventListener("click", ()=>{
-    const summary = $("summary").value.trim();
-    if(!summary){
-      toast("먼저 입력하고 ‘요약 복사’ 누르면 상담이 더 빨라요!");
-    }else{
-      toast("오픈채팅 열렸어요. 복사한 내용 붙여넣기!");
-    }
+    const ok = await copyText(summary);
+    toast(ok ? "복사 완료! 오픈채팅에 붙여넣기 하면 끝" : "복사 실패(기기 설정) — 요약을 길게 눌러 복사해주세요");
   });
 
   $("btnReset").addEventListener("click", ()=>{
@@ -484,6 +701,55 @@ function wire(){
 
     calc();
     toast("초기화 완료");
+  });
+
+  $("btnGoQuote").addEventListener("click", ()=>{
+    $("dWindow").open = true;
+    $("quoteSection").scrollIntoView({ behavior:"smooth", block:"start" });
+    setTimeout(()=> $("meshType").focus(), 450);
+  });
+
+  $("btnHow").addEventListener("click", ()=>{
+    $("howSection").scrollIntoView({ behavior:"smooth", block:"start" });
+  });
+
+  $("useEntranceRoll").addEventListener("input", ()=>{
+    const q = parseInt($("entranceQty").value || "0", 10);
+    if($("useEntranceRoll").checked && q === 0) $("entranceQty").value = 1;
+    calc();
+  });
+
+  // ✅ 상담받기: 자동복사 → 안내 → 이동
+  $("kakaoConsultBtn").addEventListener("click", async ()=>{
+    const { summary, any } = calc();
+
+    if(!any){
+      // 아무 입력 없으면 친절하게 안내 + 견적쪽으로 이동
+      openModal("아직 입력된 항목이 없어요. 아래에서 개수 입력 후 다시 ‘상담받기’를 눌러주세요.");
+      $("btnGoKakao").style.display = "none";
+      $("quoteSection").scrollIntoView({ behavior:"smooth", block:"start" });
+      $("dWindow").open = true;
+      return;
+    }
+
+    const ok = await copyText(summary);
+
+    $("btnGoKakao").style.display = "inline-flex";
+    if(ok){
+      openModal("복사 완료! 오픈채팅으로 이동하면 채팅창에 ‘붙여넣기’만 하시면 됩니다.");
+      // 복사 성공이면 0.6초 뒤 자동 이동(너무 빨리 튀는 느낌 방지)
+      setTimeout(()=> window.open(KAKAO_URL, "_blank", "noopener"), 650);
+    }else{
+      openModal("복사가 막힌 기기예요. 아래 요약을 길게 눌러 복사한 뒤, 오픈채팅으로 이동해주세요.");
+    }
+  });
+
+  $("btnGoKakao").addEventListener("click", ()=>{
+    window.open(KAKAO_URL, "_blank", "noopener");
+  });
+  $("btnCloseModal").addEventListener("click", closeModal);
+  $("modalBack").addEventListener("click", (e)=>{
+    if(e.target === $("modalBack")) closeModal();
   });
 
   calc();
