@@ -1529,13 +1529,25 @@ wire();
   let currentKey = "micro";
 
   function openBack(){
-    back.style.display = "flex";
-    back.setAttribute("aria-hidden","false");
+  back.style.display = "flex";
+  back.setAttribute("aria-hidden","false");
+
+  // ✅ 모달 열릴 때 뒤로가기 1칸 만들기
+  if(!history.state || !history.state.productModal){
+    history.pushState({ productModal: true }, "");
   }
-  function closeBack(){
-    back.style.display = "none";
-    back.setAttribute("aria-hidden","true");
-    showList();
+}
+
+function closeBack(skipHistory){
+  back.style.display = "none";
+  back.setAttribute("aria-hidden","true");
+  showList();
+
+  // ✅ 닫을 때: 우리가 만든 히스토리면 한칸 되돌리기
+  if(!skipHistory && history.state && history.state.productModal){
+    history.back();
+  }
+}
   }
   function showList(){
     listBox.style.display = "flex";
@@ -1622,9 +1634,15 @@ if(media){
   }
 
   btnOpen.addEventListener("click", openBack);
-  btnClose.addEventListener("click", closeBack);
+  btnClose.addEventListener("click", ()=>closeBack());
   back.addEventListener("click", (e)=>{ if(e.target === back) closeBack(); });
   document.addEventListener("keydown", (e)=>{ if(e.key === "Escape" && back.style.display === "flex") closeBack(); });
+  // ✅ 뒤로가기(안드/아이폰) 눌렀을 때: 모달만 닫고 페이지는 안나가게
+window.addEventListener("popstate", ()=>{
+  if(back.style.display === "flex"){
+    closeBack(true); // true = history.back() 다시 안타게 막음
+  }
+});
 
   listBox.addEventListener("click", (e)=>{
     const item = e.target.closest("[data-prod]");
@@ -1657,6 +1675,7 @@ if(media){
 </script>
 </body>
 </html>
+
 
 
 
