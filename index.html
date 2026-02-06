@@ -503,7 +503,7 @@
               </div>
             </div>
 
-            <div class="pMedia2">
+            <div class="pMedia2" id="pMedia2">
               📌 사진/짧은 GIF는 나중에 여기만 교체하면 됩니다.
             </div>
 
@@ -1404,6 +1404,7 @@ wire();
   const one = $("pOne2");
   const pros = $("pPros");
   const cons = $("pCons");
+  const media = $("pMedia2");
 
   const pickWrap = $("pPick");
   const pickTitle = $("pPickTitle");
@@ -1436,6 +1437,7 @@ wire();
       one: "장마철에 최고 효율/물을 머금지 않아 관리가 편함.",
       pros: ["오염·물때가 덜 달라붙는 편(관리 편함)", "미세망 기능은 그대로", "자가세척이 가능"],
       cons: ["일반 미세망 대비 단가가 올라감", "상황 따라 코팅 유지 관리는 필요", "날카로운 도구나 불에 약함,"],
+      mediaSrc: "./hydro.mp4",
       optionUI: null,
       apply(){
         $("meshType").value = "hydro_micro";
@@ -1551,6 +1553,7 @@ wire();
     pros.innerHTML = "";
     cons.innerHTML = "";
     (p.pros || []).forEach(t=>{
+      
       const li = document.createElement("li");
       li.textContent = t;
       pros.appendChild(li);
@@ -1560,6 +1563,25 @@ wire();
       li.textContent = t;
       cons.appendChild(li);
     });
+    // ✅ media 처리 (발수코팅만 mp4 표시)
+if(media){
+  if(p.mediaSrc){
+    media.innerHTML = `
+      <video
+        src="${p.mediaSrc}"
+        controls
+        playsinline
+        preload="metadata"
+        style="width:100%; border-radius:14px; display:block;"
+      ></video>
+      <div class="note" style="margin-top:8px;">※ 발수코팅 미세방충망.</div>
+    `;
+  }else{
+    media.textContent = "📌 사진/짧은 GIF는 나중에 여기만 교체하면 됩니다.";
+  }
+}
+
+
 
     // 옵션 UI 처리
     seg.innerHTML = "";
@@ -1635,6 +1657,7 @@ wire();
 </script>
 </body>
 </html>
+
 
 
 
