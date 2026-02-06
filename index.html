@@ -535,6 +535,250 @@
       </div>
     </div>
   </div>
+<!-- =======================
+  제품 보기(탭) 섹션 추가
+======================== -->
+<div class="pSection" id="productGuide">
+  <div class="pHead">
+    <h2>제품별 장단점 한 번에 보기</h2>
+    <p class="desc">헷갈릴 때는 아래 탭으로 한 번만 보고, “이걸로 견적하기” 누르면 자동으로 해당 항목이 열립니다.</p>
+  </div>
+
+  <div class="pBody">
+    <div class="pTabbar" role="tablist" aria-label="제품 탭">
+      <button class="pTab isActive" type="button" data-tab="micro">미세방충망</button>
+      <button class="pTab" type="button" data-tab="hydro">발수코팅 미세</button>
+      <button class="pTab" type="button" data-tab="black">블랙스텐 미세</button>
+      <button class="pTab" type="button" data-tab="entrance">현관 롤(일반/미세)</button>
+      <button class="pTab" type="button" data-tab="pj">PJ 롤</button>
+      <button class="pTab" type="button" data-tab="safety">안전방충망(0.7/0.4)</button>
+    </div>
+
+    <!-- 미세 -->
+    <section class="pPanel isActive" data-panel="micro">
+      <div class="pGrid">
+        <div class="pMedia">
+          여기에 사진/짧은 영상 넣기<br><small>(미세망 시공 전/후 or 확대샷)</small>
+        </div>
+        <div class="pCont">
+          <div class="pBadge">창문형</div>
+          <h3 class="pName">미세방충망</h3>
+          <p class="pOne">초파리·날파리 같은 작은 벌레 때문에 “창 열기가 찝찝한 집”이면 체감이 제일 빨라요.</p>
+
+          <div class="pCols">
+            <div class="pCol">
+              <b>장점</b>
+              <ul>
+                <li>작은 벌레 유입 확 줄어듦</li>
+                <li>먼지/꽃가루 부담 감소</li>
+                <li>저층·강가/하천 근처 체감 좋음</li>
+              </ul>
+            </div>
+            <div class="pCol">
+              <b>단점</b>
+              <ul class="mut">
+                <li>통풍이 살짝 덜하게 느껴질 수 있음(환경 영향)</li>
+                <li>모헤어/고무 상태에 따라 보강 필요할 수 있음</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="pActions">
+            <button class="btn btnPrimary" type="button" data-go="window" data-mesh="micro">이걸로 견적하기</button>
+            <button class="btn btnSoft" type="button" data-scroll="quote">견적 입력으로 이동</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 발수 -->
+    <section class="pPanel" data-panel="hydro">
+      <div class="pGrid">
+        <div class="pMedia">
+          여기에 사진/짧은 영상 넣기<br><small>(물방울 튕김 테스트 추천)</small>
+        </div>
+        <div class="pCont">
+          <div class="pBadge">창문형</div>
+          <h3 class="pName">발수코팅 미세방충망</h3>
+          <p class="pOne">비 맞는 창/주방창처럼 오염 신경 쓰이면 “관리 편한 쪽”으로 많이 가요.</p>
+
+          <div class="pCols">
+            <div class="pCol">
+              <b>장점</b>
+              <ul>
+                <li>오염/물때가 덜 달라붙는 편(관리 편함)</li>
+                <li>미세망 기능(작은 벌레/먼지) 그대로</li>
+              </ul>
+            </div>
+            <div class="pCol">
+              <b>단점</b>
+              <ul class="mut">
+                <li>일반 미세보다 단가가 올라감</li>
+                <li>환경 따라 주기적 관리는 필요</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="pActions">
+            <button class="btn btnPrimary" type="button" data-go="window" data-mesh="hydro_micro">이걸로 견적하기</button>
+            <button class="btn btnSoft" type="button" data-scroll="quote">견적 입력으로 이동</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 블랙스텐 -->
+    <section class="pPanel" data-panel="black">
+      <div class="pGrid">
+        <div class="pMedia">
+          여기에 사진/짧은 영상 넣기<br><small>(시야 느낌/고급감 비교샷)</small>
+        </div>
+        <div class="pCont">
+          <div class="pBadge">창문형</div>
+          <h3 class="pName">블랙스텐 미세방충망</h3>
+          <p class="pOne">시야 깔끔 + 내구성까지 챙기고 싶을 때 많이 선택해요.</p>
+
+          <div class="pCols">
+            <div class="pCol">
+              <b>장점</b>
+              <ul>
+                <li>블랙 계열이라 시야가 비교적 깔끔</li>
+                <li>스텐 계열 특성상 내구성 기대치 큼</li>
+                <li>미세망이라 작은 벌레/먼지 부담 감소</li>
+              </ul>
+            </div>
+            <div class="pCol">
+              <b>단점</b>
+              <ul class="mut">
+                <li>일반 미세 대비 비용이 올라갈 수 있음</li>
+                <li>창 구조/프레임 상태 따라 체감 차이 가능</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="pActions">
+            <button class="btn btnPrimary" type="button" data-go="window" data-mesh="black_stainless_micro">이걸로 견적하기</button>
+            <button class="btn btnSoft" type="button" data-scroll="quote">견적 입력으로 이동</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 현관롤 -->
+    <section class="pPanel" data-panel="entrance">
+      <div class="pGrid">
+        <div class="pMedia">
+          여기에 사진/짧은 영상 넣기<br><small>(현관롤 열고닫기 3~6초 영상 추천)</small>
+        </div>
+        <div class="pCont">
+          <div class="pBadge">현관/출입</div>
+          <h3 class="pName">현관 롤방충망 (일반 / 미세)</h3>
+          <p class="pOne">출입 잦은 집은 “편한 게 최고”라 롤로 많이 가요. 작은 벌레 스트레스면 미세롤도 선택.</p>
+
+          <div class="pCols">
+            <div class="pCol">
+              <b>일반 롤</b>
+              <ul>
+                <li>통풍 시원 / 가격 부담↓ / 관리 쉬움</li>
+                <li class="mut">초파리급 환경이면 아쉬울 수 있음</li>
+              </ul>
+            </div>
+            <div class="pCol">
+              <b>미세 롤</b>
+              <ul>
+                <li>작은 벌레 유입 부담 감소</li>
+                <li class="mut">단가↑ / 통풍 체감이 조금 덜할 수 있음</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="pActions">
+            <button class="btn btnPrimary" type="button" data-go="entrance" data-etype="normal">일반롤로 견적</button>
+            <button class="btn btnPrimary" type="button" data-go="entrance" data-etype="micro">미세롤로 견적</button>
+            <button class="btn btnSoft" type="button" data-scroll="quote">견적 입력으로 이동</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PJ롤 -->
+    <section class="pPanel" data-panel="pj">
+      <div class="pGrid">
+        <div class="pMedia">
+          여기에 사진/짧은 영상 넣기<br><small>(PJ창 전경 + 롤 동작)</small>
+        </div>
+        <div class="pCont">
+          <div class="pBadge">PJ창 전용</div>
+          <h3 class="pName">PJ 롤방충망</h3>
+          <p class="pOne">PJ창은 구조상 일반 방충망 설치가 안 돼서, 롤형식으로 제작되는 방식이에요. (별거 없음 ㅋㅋ)</p>
+
+          <div class="pCols">
+            <div class="pCol">
+              <b>핵심</b>
+              <ul>
+                <li>PJ창이면 보통 “PJ롤”로 가야 설치가 가능</li>
+                <li class="mut">현장 조건이 다양해서 현재 자동견적은 비워둔 상태</li>
+              </ul>
+            </div>
+            <div class="pCol">
+              <b>안내</b>
+              <ul class="mut">
+                <li>오픈채팅으로 창 사진/사이즈 주면 바로 안내</li>
+                <li>필요하면 이 탭에서 PJ 항목을 열어두게 안내만</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="pActions">
+            <button class="btn btnPrimary" type="button" data-go="pj">PJ 항목 열기</button>
+            <button class="btn btnSoft" type="button" data-scroll="quote">견적 입력으로 이동</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 안전망 -->
+    <section class="pPanel" data-panel="safety">
+      <div class="pGrid">
+        <div class="pMedia">
+          여기에 사진/짧은 영상 넣기<br><small>(당김 테스트/두께 비교)</small>
+        </div>
+        <div class="pCont">
+          <div class="pBadge">방범/추락</div>
+          <h3 class="pName">안전방충망 (0.7 / 0.4)</h3>
+          <p class="pOne">
+            저층 방범이면 0.7(방범), 3층 이상은 0.4(추락)로 많이 씁니다.
+            0.4도 일반인 힘으로 망 탈거 쉽게 안 되게 시공해요.
+          </p>
+
+          <div class="pCols">
+            <div class="pCol">
+              <b>0.7 (방범)</b>
+              <ul>
+                <li>저층/외부 접근 쉬운 창에 유리</li>
+                <li class="mut">리뷰 10% 할인 제외(너 정책 그대로)</li>
+              </ul>
+            </div>
+            <div class="pCol">
+              <b>0.4 (추락)</b>
+              <ul>
+                <li>3층 이상/범용 사용에 많이 선택</li>
+                <li class="mut">리뷰 10% 할인 제외(너 정책 그대로)</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="pActions">
+            <button class="btn btnPrimary" type="button" data-go="safety" data-skind="crime">0.7(방범) 열고 견적</button>
+            <button class="btn btnPrimary" type="button" data-go="safety" data-skind="fall">0.4(추락) 열고 견적</button>
+            <button class="btn btnSoft" type="button" data-scroll="quote">견적 입력으로 이동</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</div>
 
   <!-- modal -->
   <div class="modalBack" id="modalBack" aria-hidden="true">
@@ -1150,6 +1394,7 @@ wire();
 </script>
 </body>
 </html>
+
 
 
 
