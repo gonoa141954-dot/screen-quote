@@ -230,6 +230,18 @@
 
     /* ===================== 제품 보기(리스트 → 상세 1개) ===================== */
     .pMini{ margin-top:14px; }
+    /* ✅ 제품보기(장단점) 버튼/설명 가운데 정렬 */
+#productGuide{
+  text-align:center;
+}
+#productGuide .note{
+  text-align:center; /* 기존 .note 모바일센터랑 충돌 방지 */
+}
+#productGuide #btnOpenProducts{
+  margin-left:auto;
+  margin-right:auto; /* 버튼 자체도 가운데 */
+}
+
     .pBack{
       position:fixed; inset:0; background:rgba(15,23,42,.45);
       display:none; align-items:flex-end; justify-content:center;
@@ -1623,6 +1635,7 @@ wire();
 </script>
 </body>
 </html>
+
 
 
 
