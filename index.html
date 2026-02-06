@@ -8,7 +8,7 @@
   <meta name="description" content="30초 셀프견적 · 요약 자동복사 후 오픈채팅 상담" />
   <meta property="og:title" content="방충망 자동견적 | 방충망시공소" />
   <meta property="og:description" content="입력만 하면 금액 확인 · 상담받기 누르면 견적요약 자동복사" />
-  <meta property="og:image" content="https://gonoa141954-dot.github.io/screen-quote/hero1.png" />
+  <meta property="og:image" content="https://gonoa141954-dot.github.io/screen-quote/hero.png" />
 
   <style>
     :root{
@@ -130,6 +130,12 @@
     .chip input{width:auto;margin-top:2px}
     .chip b{font-weight:1000}
 
+    /* ✅ 예약/영수증 리뷰 체크박스 강조색 */
+    .chipReview{
+      background: rgba(254,229,0,.18);
+      border: 1px solid rgba(0,0,0,.10);
+    }
+
     details{border:1px solid var(--line);border-radius:18px;overflow:hidden;background:#fff;box-shadow: var(--shadow2);}
     summary{
       list-style:none;cursor:pointer;padding:14px 12px;font-weight:1000;
@@ -203,6 +209,23 @@
     .item b{font-weight:1000}
     .item .meta{font-size:12px;color:var(--muted);margin-top:4px;line-height:1.35;}
     .xBtn{border:1px solid rgba(15,23,42,.12);background:#fff;border-radius:14px;padding:8px 10px;font-weight:1000;cursor:pointer;white-space:nowrap;}
+
+    /* ✅ Hero 모바일 가운데 정렬: 30초/제목/설명/버튼까지 중앙 */
+    @media (max-width: 899px){
+      .heroContent{
+        text-align:center;
+        align-items:center;
+      }
+      .heroBtns{
+        justify-content:center;
+      }
+      .kicker{
+        margin:0 auto;
+      }
+      .note{
+        text-align:center;
+      }
+    }
   </style>
 </head>
 
@@ -244,14 +267,18 @@
 
       <div class="sectionBody">
         <div class="highlight" style="border-radius:18px;padding:12px;margin-bottom:12px;border:1px solid rgba(0,0,0,.06);">
-          <div class="highlightTitle">✅ 개수에 따른 차등 할인율 적용</div>
+          <div class="highlightTitle">✅ 창문형/안전망 4개 이상 5% 추가 할인</div>
           <div class="note" style="margin-top:4px;">
-            4개 이상 4% 할인 / 7개 이상 7% 할인<br/>
-            예약리뷰 할인과 중복 가능 (방범/추락 안전망은 예약리뷰 할인 불가)
+            * <b>창문형 방충망 + 방범/추락 안전망</b> 합산 개수가 4개 이상이면 <b>5% 추가 할인</b> 적용됩니다.<br/>
+            * 예약/영수증(10%) 할인은 <b>안전망 제외</b>로 중복 적용됩니다.
           </div>
         </div>
 
-        <div class="chip" style="margin-bottom:12px;">
+        <div class="note" style="margin:0 0 12px 0;">
+          ✅ <b>현관롤 / PJ롤 / 틀제작</b>은 “개수별 차등 할인(단가 자동 반영)”으로 계산됩니다.
+        </div>
+
+        <div class="chip chipReview" style="margin-bottom:12px;">
           <input type="checkbox" id="discount10">
           <div>
             <div><b>예약리뷰</b> 또는 <b>영수증리뷰</b> 약속(10% 할인)</div>
@@ -307,14 +334,14 @@
 
         <div style="height:12px"></div>
 
-        <!-- ✅ 방범/추락: 창문형 바로 밑으로 이동 -->
+        <!-- ✅ 방범/추락 -->
         <details id="dSafety">
           <summary><span>방범/추락 안전 방충망 (mm 입력)</span><span class="chev">열기/닫기 ▾</span></summary>
           <div class="detailBody">
             <div class="row">
               <div class="note">
                 * 가로/세로(mm)와 수량 입력 후 <b>추가</b>를 눌러주세요.<br/>
-                * 방범/추락 안전망은 <b>예약리뷰/영수증 10% 할인 적용 불가</b> (개수 할인은 적용)
+                * 안전망은 <b>예약/영수증 10% 할인 적용 불가</b> (단, 창문형+안전망 4개 이상이면 5% 추가 할인 적용)
               </div>
 
               <div class="grid2">
@@ -369,7 +396,7 @@
 
         <!-- 현관롤 -->
         <details id="dEntrance">
-          <summary><span>현관 롤방충망</span><span class="chev">열기/닫기 ▾</span></summary>
+          <summary><span>현관 롤방충망 (개수별 차등 할인)</span><span class="chev">열기/닫기 ▾</span></summary>
           <div class="detailBody">
             <div class="row">
               <div>
@@ -377,7 +404,6 @@
                 <select id="entranceType">
                   <option value="normal">현관 롤방충망</option>
                   <option value="micro">현관 미세 롤방충망</option>
-                  <option value="pj_roll">PJ 롤 방충망 (별도 견적 문의)</option>
                 </select>
               </div>
 
@@ -398,8 +424,21 @@
                 </div>
               </div>
 
+              <div class="note">* 개수에 따라 <b>단가가 자동으로 내려갑니다</b>. (5개 이후도 5개 단가로 고정)</div>
               <div class="note">* 각 파이프 작업 필요 시 비용 추가</div>
-              <div class="note">* PJ 롤 선택 시 자동금액은 계산하지 않고 “별도 견적 문의”로 표시됩니다.</div>
+            </div>
+          </div>
+        </details>
+
+        <div style="height:12px"></div>
+
+        <!-- PJ 롤 (분리/비움) -->
+        <details id="dPJ">
+          <summary><span>PJ 롤 방충망 (별도 견적 문의)</span><span class="chev">열기/닫기 ▾</span></summary>
+          <div class="detailBody">
+            <div class="note">
+              * PJ 롤은 현장 조건이 다양해서 자동견적은 잠시 비워두었습니다.<br/>
+              * 오픈채팅으로 문의 주시면 빠르게 안내드릴게요.
             </div>
           </div>
         </details>
@@ -408,11 +447,16 @@
 
         <!-- 알미늄 -->
         <details id="dAl">
-          <summary><span>알미늄 틀 제작(미세망 포함)</span><span class="chev">열기/닫기 ▾</span></summary>
+          <summary><span>알미늄 틀 제작(미세망 포함) (개수별 차등 할인)</span><span class="chev">열기/닫기 ▾</span></summary>
           <div class="detailBody">
             <div class="row">
+              <div class="note">
+                * 소/중: 1개 10만 → 2개(개당 9만) → 3개 이상(개당 8만)<br/>
+                * 대창: 1개 14만 → 2개(12만) → 3개(11만) → 4개 이상(개당 10만)
+              </div>
+
               <div>
-                <label>소/중 (합계 개수) <span class="note">· 높이 1500 이하 · 1개당 100,000원</span></label>
+                <label>소/중 (합계 개수) <span class="note">· 높이 1500 이하</span></label>
                 <div class="stepper">
                   <button class="stepBtn" type="button" data-step="-1" data-target="alSM">−</button>
                   <input id="alSM" class="stepInput" type="number" min="0" step="1" value="0" inputmode="numeric">
@@ -421,7 +465,7 @@
               </div>
 
               <div>
-                <label>대창 (개수) <span class="note">· 높이 2200 이하 · 1개당 140,000원</span></label>
+                <label>대창 (개수) <span class="note">· 높이 2200 이하</span></label>
                 <div class="stepper">
                   <button class="stepBtn" type="button" data-step="-1" data-target="alL">−</button>
                   <input id="alL" class="stepInput" type="number" min="0" step="1" value="0" inputmode="numeric">
@@ -436,11 +480,17 @@
 
         <!-- 하이샤시 -->
         <details id="dHS">
-          <summary><span>하이샤시 틀 제작(미세망 포함)</span><span class="chev">열기/닫기 ▾</span></summary>
+          <summary><span>하이샤시 틀 제작(미세망 포함) (개수별 차등 할인)</span><span class="chev">열기/닫기 ▾</span></summary>
           <div class="detailBody">
             <div class="row">
+              <div class="note">
+                * 알미늄과 동일 가격 적용<br/>
+                * 소/중: 1개 10만 → 2개(개당 9만) → 3개 이상(개당 8만)<br/>
+                * 대창: 1개 14만 → 2개(12만) → 3개(11만) → 4개 이상(개당 10만)
+              </div>
+
               <div>
-                <label>소/중 (합계 개수) <span class="note">· 높이 1500 이하 · 1개당 100,000원</span></label>
+                <label>소/중 (합계 개수) <span class="note">· 높이 1500 이하</span></label>
                 <div class="stepper">
                   <button class="stepBtn" type="button" data-step="-1" data-target="hsSM">−</button>
                   <input id="hsSM" class="stepInput" type="number" min="0" step="1" value="0" inputmode="numeric">
@@ -449,7 +499,7 @@
               </div>
 
               <div>
-                <label>대창 (개수) <span class="note">· 높이 2200 이하 · 1개당 140,000원</span></label>
+                <label>대창 (개수) <span class="note">· 높이 2200 이하</span></label>
                 <div class="stepper">
                   <button class="stepBtn" type="button" data-step="-1" data-target="hsL2">−</button>
                   <input id="hsL2" class="stepInput" type="number" min="0" step="1" value="0" inputmode="numeric">
@@ -516,19 +566,13 @@ const CONFIG = {
     hydro_micro:           { S: 20000, M: 40000, L: 60000 },
     black_stainless_micro: { S: 25000, M: 50000, L: 70000 },
   },
-  ENTRANCE_ROLL_PRICE: {
-    normal: { under: 150000, over: 170000 },
-    micro:  { under: 170000, over: 200000 },
-    pj_roll:{ under: null,   over: null },
-  },
-  MAKE_PRICE: { SM: 100000, L: 140000 },
 
   // 예약/영수증 (10%) - ✅ 방범/추락 안전망 제외
   REVIEW_DISCOUNT_RATE: 0.10,
 
-  // ✅ 개수 할인
-  QTY_DISCOUNT_4_RATE: 0.04,
-  QTY_DISCOUNT_7_RATE: 0.07,
+  // ✅ 창문형 + 안전망 합산 4개 이상이면 5% 추가 할인
+  WINDOW_SAFETY_QTY_DISCOUNT_MIN: 4,
+  WINDOW_SAFETY_QTY_DISCOUNT_RATE: 0.05,
 
   // 안전/추락 소비자가격 표(내부 계산용)
   SAFETY_CONSUMER_TABLE: {
@@ -570,7 +614,6 @@ function entranceTypeLabel(k){
   return ({
     normal: "현관 롤방충망",
     micro: "현관 미세 롤방충망",
-    pj_roll: "PJ 롤 방충망(별도 견적문의)"
   })[k] || k;
 }
 function entranceSizeLabel(k){
@@ -600,6 +643,50 @@ function safetyPriceByGaugeM2(gauge, roundedM2){
   const key = roundedM2.toFixed(1);
   const table = CONFIG.SAFETY_CONSUMER_TABLE[gauge];
   return table ? (table[key] ?? null) : null;
+}
+
+/* ✅ 현관롤: 개수별 단가 */
+function clampQty1to5(q){ return Math.max(1, Math.min(5, q)); }
+
+function entranceUnitPrice(type, size, qty){
+  const q = clampQty1to5(qty);
+
+  // normal
+  if(type === "normal" && size === "under"){
+    const table = [160000,150000,130000,130000,120000];
+    return table[q-1];
+  }
+  if(type === "normal" && size === "over"){
+    const table = [180000,170000,160000,150000,140000];
+    return table[q-1];
+  }
+
+  // micro
+  if(type === "micro" && size === "under"){
+    const table = [180000,170000,160000,150000,140000];
+    return table[q-1];
+  }
+  if(type === "micro" && size === "over"){
+    const table = [200000,190000,180000,170000,160000];
+    return table[q-1];
+  }
+
+  return 0;
+}
+
+/* ✅ 틀제작: 개수별 단가(알미늄/하이샤시 동일) */
+function frameUnitPriceSM(qty){
+  if(qty >= 3) return 80000;
+  if(qty === 2) return 90000;
+  if(qty === 1) return 100000;
+  return 0;
+}
+function frameUnitPriceL(qty){
+  if(qty >= 4) return 100000;
+  if(qty === 3) return 110000;
+  if(qty === 2) return 120000;
+  if(qty === 1) return 140000;
+  return 0;
 }
 
 /* 안전/추락 누적 리스트 */
@@ -649,13 +736,27 @@ function renderSafetyList(){
   $("safetySumText").textContent = `합계 ${fmt(sum)}`;
 }
 
-function getQtyDiscountRate(totalQty){
-  if(totalQty >= 7) return CONFIG.QTY_DISCOUNT_7_RATE;
-  if(totalQty >= 4) return CONFIG.QTY_DISCOUNT_4_RATE;
-  return 0;
-}
+function buildSummary(ctx){
+  const {
+    totalFinal,
+    totalConsumer,
+    reviewDiscountOn,
+    windowSafetyQtyDiscountApplied,
+    windowSafetyQty,
+    windowConsumer,
+    safetyConsumer,
+    entranceConsumer,
+    alConsumer,
+    hsConsumer,
+    eligibleConsumer,
+    windowSafetyQtyDiscountRate,
+    eligibleAfterAllDiscounts,
+    entranceQty,
+    entranceUnit,
+    alSM, alL, hsSM, hsL2,
+    alUnitSM, alUnitL, hsUnitSM, hsUnitL
+  } = ctx;
 
-function buildSummary(totalConsumer, totalFinal, discountOn, qtyDiscountRate, totalQty, eligibleConsumer, safetyConsumer){
   const meshKey = $("meshType").value;
   const cntS = clampInt(parseFloat($("cntS").value));
   const cntM = clampInt(parseFloat($("cntM").value));
@@ -664,13 +765,6 @@ function buildSummary(totalConsumer, totalFinal, discountOn, qtyDiscountRate, to
 
   const entranceType = $("entranceType").value;
   const entranceSize = $("entranceSize").value;
-  const entranceQty = clampInt(parseFloat($("entranceQty").value));
-  const entranceInquiry = (entranceQty > 0 && entranceType === "pj_roll");
-
-  const alSM = clampInt(parseFloat($("alSM").value));
-  const alL  = clampInt(parseFloat($("alL").value));
-  const hsSM = clampInt(parseFloat($("hsSM").value));
-  const hsL2 = clampInt(parseFloat($("hsL2").value));
 
   const lines = [];
   lines.push(`창문형: ${meshLabel(meshKey)}`);
@@ -686,23 +780,30 @@ function buildSummary(totalConsumer, totalFinal, discountOn, qtyDiscountRate, to
 
   if(entranceQty>0){
     lines.push(`현관롤: ${entranceTypeLabel(entranceType)} / ${entranceSizeLabel(entranceSize)} / ${entranceQty}개`);
+    lines.push(`- 단가(자동): ${fmt(entranceUnit)} / 합계: ${fmt(entranceConsumer)}`);
     lines.push(`* 각 파이프 작업 필요 시 비용 추가`);
-    if(entranceInquiry) lines.push(`- PJ 롤: 별도 견적 문의`);
   }
 
   if(alSM+alL>0){
-    lines.push(`알미늄 틀 제작: 소/중 ${alSM}개(1500↓, ×100,000) / 대 ${alL}개(2200↓, ×140,000)`);
-  }
-  if(hsSM+hsL2>0){
-    lines.push(`하이샤시 틀 제작: 소/중 ${hsSM}개(1500↓, ×100,000) / 대 ${hsL2}개(2200↓, ×140,000)`);
+    lines.push(`알미늄 틀 제작:`);
+    if(alSM>0) lines.push(`- 소/중 ${alSM}개 / 단가 ${fmt(alUnitSM)} / 합계 ${fmt(alUnitSM * alSM)}`);
+    if(alL>0)  lines.push(`- 대창 ${alL}개 / 단가 ${fmt(alUnitL)} / 합계 ${fmt(alUnitL * alL)}`);
   }
 
-  const qtyDiscTxt =
-    qtyDiscountRate > 0 ? `${Math.round(qtyDiscountRate*100)}% 적용` : "미적용";
-  lines.push(`총 개수: ${totalQty}개 / 개수 할인: ${qtyDiscTxt}`);
+  if(hsSM+hsL2>0){
+    lines.push(`하이샤시 틀 제작:`);
+    if(hsSM>0) lines.push(`- 소/중 ${hsSM}개 / 단가 ${fmt(hsUnitSM)} / 합계 ${fmt(hsUnitSM * hsSM)}`);
+    if(hsL2>0) lines.push(`- 대창 ${hsL2}개 / 단가 ${fmt(hsUnitL)} / 합계 ${fmt(hsUnitL * hsL2)}`);
+  }
+
+  const qtyDiscTxt = windowSafetyQtyDiscountApplied
+    ? `${Math.round(windowSafetyQtyDiscountRate*100)}% 적용`
+    : "미적용";
+
+  lines.push(`창문형+안전망 합산 개수: ${windowSafetyQty}개 / 4개 이상 5% 추가 할인: ${qtyDiscTxt}`);
   lines.push(`소비자가격(정가): ${fmt(totalConsumer)}`);
-  lines.push(`예약/영수증리뷰 10%: ${discountOn ? "적용(안전망 제외)" : "미적용"}`);
-  if(discountOn){
+  lines.push(`예약/영수증리뷰 10%: ${reviewDiscountOn ? "적용(안전망 제외)" : "미적용"}`);
+  if(reviewDiscountOn){
     lines.push(`- 리뷰할인 적용대상 합계: ${fmt(eligibleConsumer)} (안전망 ${fmt(safetyConsumer)} 제외)`);
   }
   lines.push(`최종 자동견적: ${fmt(totalFinal)}`);
@@ -719,95 +820,102 @@ function calc(){
   const cntM = clampInt(parseFloat($("cntM").value));
   const cntL = clampInt(parseFloat($("cntL").value));
 
-  // 1) 창문형(리뷰할인 대상)
-  let windowTotal = 0;
+  // 1) 창문형(소비자)
   const up = CONFIG.UNIT_PRICE_WINDOW[meshKey] || CONFIG.UNIT_PRICE_WINDOW.micro;
-  windowTotal += up.S * cntS + up.M * cntM + up.L * cntL;
+  const windowConsumer = (up.S * cntS) + (up.M * cntM) + (up.L * cntL);
+  const windowQty = (cntS + cntM + cntL);
 
-  // 2) 현관롤(리뷰할인 대상, PJ는 제외/문의)
+  // 2) 안전망(소비자) - 리뷰 10% 제외
+  const safetyConsumer = safetySumTotal();
+  const safetyQty = safetySumQty();
+
+  // ✅ 창문형 + 안전망 합산 4개 이상이면 5% 추가 할인 (이 두 항목에만)
+  const windowSafetyQty = windowQty + safetyQty;
+  const windowSafetyQtyDiscountApplied = (windowSafetyQty >= CONFIG.WINDOW_SAFETY_QTY_DISCOUNT_MIN);
+  const windowSafetyQtyDiscountRate = windowSafetyQtyDiscountApplied ? CONFIG.WINDOW_SAFETY_QTY_DISCOUNT_RATE : 0;
+
+  const windowAfterQty = windowConsumer * (1 - windowSafetyQtyDiscountRate);
+  const safetyAfterQty = safetyConsumer * (1 - windowSafetyQtyDiscountRate);
+
+  // 3) 현관롤: 개수별 단가
   const entranceType = $("entranceType").value;
   const entranceSize = $("entranceSize").value;
   const entranceQty = clampInt(parseFloat($("entranceQty").value));
-  let entranceTotal = 0;
-  let entranceInquiry = false;
-  if(entranceQty>0){
-    const p = CONFIG.ENTRANCE_ROLL_PRICE[entranceType]?.[entranceSize];
-    if(p == null){
-      entranceInquiry = true;
-    }else{
-      entranceTotal += p * entranceQty;
-    }
+  let entranceConsumer = 0;
+  let entranceUnit = 0;
+  if(entranceQty > 0){
+    entranceUnit = entranceUnitPrice(entranceType, entranceSize, entranceQty);
+    entranceConsumer = entranceUnit * entranceQty;
   }
 
-  // 3) 알미늄(리뷰할인 대상)
+  // 4) 알미늄 틀: 개수별 단가
   const alSM = clampInt(parseFloat($("alSM").value));
-  const alL = clampInt(parseFloat($("alL").value));
-  const alTotal = (CONFIG.MAKE_PRICE.SM * alSM) + (CONFIG.MAKE_PRICE.L * alL);
+  const alL  = clampInt(parseFloat($("alL").value));
+  const alUnitSM = frameUnitPriceSM(alSM);
+  const alUnitL  = frameUnitPriceL(alL);
+  const alConsumer = (alUnitSM * alSM) + (alUnitL * alL);
 
-  // 4) 하이샤시(리뷰할인 대상)
+  // 5) 하이샤시 틀: 개수별 단가
   const hsSM = clampInt(parseFloat($("hsSM").value));
   const hsL2 = clampInt(parseFloat($("hsL2").value));
-  const hsTotal = (CONFIG.MAKE_PRICE.SM * hsSM) + (CONFIG.MAKE_PRICE.L * hsL2);
+  const hsUnitSM = frameUnitPriceSM(hsSM);
+  const hsUnitL  = frameUnitPriceL(hsL2);
+  const hsConsumer = (hsUnitSM * hsSM) + (hsUnitL * hsL2);
 
-  // 5) 안전/추락(✅ 리뷰할인 제외)
-  const safetyTotal = safetySumTotal();
+  // 총 소비자(정가) = 창문형 + 안전 + 현관 + 틀
+  const totalConsumer = windowConsumer + safetyConsumer + entranceConsumer + alConsumer + hsConsumer;
 
-  // 총 개수(✅ 안전망 포함, PJ 롤도 개수에는 포함)
-  const safetyQty = safetySumQty();
-  const totalQty =
-    (cntS + cntM + cntL) +
-    entranceQty +
-    (alSM + alL) +
-    (hsSM + hsL2) +
-    safetyQty;
+  // ✅ 리뷰 10%는 안전망 제외
+  // - 창문형은 "5% 적용된 금액" 기준으로 리뷰 10% 적용
+  // - 현관/틀은 이미 개수별 단가 반영된 금액 기준으로 리뷰 10% 적용
+  const eligibleConsumer = windowAfterQty + entranceConsumer + alConsumer + hsConsumer;
 
+  const eligibleAfterReview = reviewDiscountOn
+    ? (eligibleConsumer * (1 - CONFIG.REVIEW_DISCOUNT_RATE))
+    : eligibleConsumer;
+
+  // 최종 = (리뷰할인 적용 대상) + (안전망(5% 여부만 적용))
   const any =
-    totalQty > 0;
+    (windowQty + safetyQty + entranceQty + alSM + alL + hsSM + hsL2) > 0;
 
-  // 소비자가격(정가)
-  const eligibleConsumer = windowTotal + entranceTotal + alTotal + hsTotal;
-  const totalConsumer = eligibleConsumer + safetyTotal;
+  const totalFinal = any ? (eligibleAfterReview + safetyAfterQty) : 0;
 
-  // ✅ 개수 할인율
-  const qtyDiscountRate = getQtyDiscountRate(totalQty);
-
-  // ✅ 개수 할인 먼저 적용(전체 항목)
-  const eligibleAfterQty = eligibleConsumer * (1 - qtyDiscountRate);
-  const safetyAfterQty   = safetyTotal   * (1 - qtyDiscountRate);
-
-  // ✅ 리뷰 10%는 "안전망 제외"로만 적용
-  const eligibleAfterReview = reviewDiscountOn ? (eligibleAfterQty * (1 - CONFIG.REVIEW_DISCOUNT_RATE)) : eligibleAfterQty;
-
-  let totalFinal = 0;
-  if(any){
-    totalFinal = eligibleAfterReview + safetyAfterQty;
-  }
-
-  $("resultPrice").textContent = fmt(any ? totalFinal : 0);
+  $("resultPrice").textContent = fmt(totalFinal);
 
   let note = any ? "입력 기준 자동견적입니다." : "개수 입력하면 자동 계산됩니다.";
-  if(entranceInquiry){
-    note = "⚠️ PJ 롤 방충망은 자동견적이 아니라 ‘별도 견적 문의’입니다. 오픈채팅으로 문의 주세요.";
-  }else{
-    if(qtyDiscountRate > 0){
-      note = `✅ 개수 할인 ${Math.round(qtyDiscountRate*100)}% 적용된 금액입니다.`;
-      if(reviewDiscountOn) note += " (예약/영수증 10% 중복 적용 / 안전망 제외)";
-    }else if(reviewDiscountOn && any){
-      note = "✅ 예약/영수증리뷰 약속 10% 할인 적용된 금액입니다. (안전망 제외)";
+  if(any){
+    const parts = [];
+    if(windowSafetyQtyDiscountApplied){
+      parts.push(`✅ 창문형+안전망 4개 이상 5% 추가 할인 적용`);
     }
+    if(reviewDiscountOn){
+      parts.push(`✅ 예약/영수증 10% 할인 적용 (안전망 제외)`);
+    }
+    if(parts.length) note = parts.join(" / ");
   }
   $("resultNote").textContent = note;
 
-  $("summary").value = buildSummary(
+  const ctx = {
+    totalFinal,
     totalConsumer,
-    any ? totalFinal : 0,
     reviewDiscountOn,
-    qtyDiscountRate,
-    totalQty,
+    windowSafetyQtyDiscountApplied,
+    windowSafetyQty,
+    windowConsumer,
+    safetyConsumer,
+    entranceConsumer,
+    alConsumer,
+    hsConsumer,
     eligibleConsumer,
-    safetyTotal
-  );
+    windowSafetyQtyDiscountRate,
+    eligibleAfterAllDiscounts: eligibleAfterReview,
+    entranceQty,
+    entranceUnit,
+    alSM, alL, hsSM, hsL2,
+    alUnitSM, alUnitL, hsUnitSM, hsUnitL
+  };
 
+  $("summary").value = buildSummary(ctx);
   return { summary: $("summary").value, any };
 }
 
@@ -1035,4 +1143,3 @@ wire();
 </script>
 </body>
 </html>
-
