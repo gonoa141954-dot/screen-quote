@@ -1528,27 +1528,27 @@ wire();
 
   let currentKey = "micro";
 
-  function openBack(){
-  back.style.display = "flex";
-  back.setAttribute("aria-hidden","false");
+   function openBack(){
+    back.style.display = "flex";
+    back.setAttribute("aria-hidden","false");
 
-  // ✅ 모달 열릴 때 뒤로가기 1칸 만들기
-  if(!history.state || !history.state.productModal){
-    history.pushState({ productModal: true }, "");
+    // ✅ 모달 열릴 때 뒤로가기 1칸 만들기
+    if(!history.state || !history.state.productModal){
+      history.pushState({ productModal: true }, "");
+    }
   }
-}
 
-function closeBack(skipHistory){
-  back.style.display = "none";
-  back.setAttribute("aria-hidden","true");
-  showList();
+  function closeBack(skipHistory){
+    back.style.display = "none";
+    back.setAttribute("aria-hidden","true");
+    showList();
 
-  // ✅ 닫을 때: 우리가 만든 히스토리면 한칸 되돌리기
-  if(!skipHistory && history.state && history.state.productModal){
-    history.back();
+    // ✅ 닫을 때: 우리가 만든 히스토리면 한칸 되돌리기
+    if(!skipHistory && history.state && history.state.productModal){
+      history.back();
+    }
   }
-}
-  }
+
   function showList(){
     listBox.style.display = "flex";
     detailBox.style.display = "none";
@@ -1675,6 +1675,7 @@ window.addEventListener("popstate", ()=>{
 </script>
 </body>
 </html>
+
 
 
 
