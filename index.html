@@ -346,7 +346,22 @@
         </div>
       </div>
     </div>
+<!-- ===== 제품 보기(미니 모달) 추가 ===== -->
+<div class="pMini" id="pMini">
+  <button class="btn btnSoft btnBig" type="button" id="btnOpenProducts">
+    제품 보기 (장단점 간단 정리)
+  </button>
+  <div class="note" style="margin-top:8px;">
+    * 누르면 제품 이름만 뜨고, 하나 선택하면 그 제품만 설명됩니다.
+  </div>
+</div>
 
+<!-- 제품 모달(바텀시트) -->
+<div class="pBack" id="pBack" aria-hidden="true">
+  <div class="pSheet" role="dialog" aria-modal="true" aria-labelledby="pTitle">
+    <div class="pTop">
+      <b id="pTitle">제품 선택</b>
+      <button class="pX" type="button" id="btnCloseProducts">닫기</button>
     <div class="section" id="quoteSection">
       <div class="sectionHead">
         <h2>셀프 견적</h2>
@@ -622,22 +637,7 @@
       </div>
     </div>
   </div>
-<!-- ===== 제품 보기(미니 모달) 추가 ===== -->
-<div class="pMini" id="pMini">
-  <button class="btn btnSoft btnBig" type="button" id="btnOpenProducts">
-    제품 보기 (장단점 간단 정리)
-  </button>
-  <div class="note" style="margin-top:8px;">
-    * 누르면 제품 이름만 뜨고, 하나 선택하면 그 제품만 설명됩니다.
-  </div>
-</div>
 
-<!-- 제품 모달(바텀시트) -->
-<div class="pBack" id="pBack" aria-hidden="true">
-  <div class="pSheet" role="dialog" aria-modal="true" aria-labelledby="pTitle">
-    <div class="pTop">
-      <b id="pTitle">제품 선택</b>
-      <button class="pX" type="button" id="btnCloseProducts">닫기</button>
     </div>
 
     <!-- 1단계: 제품 리스트 -->
@@ -1298,6 +1298,7 @@ wire();
 </script>
 </body>
 </html>
+
 
 
 
