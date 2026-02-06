@@ -865,20 +865,19 @@ function calc(){
   // 총 소비자(정가) = 창문형 + 안전 + 현관 + 틀
   const totalConsumer = windowConsumer + safetyConsumer + entranceConsumer + alConsumer + hsConsumer;
 
-  // ✅ 리뷰 10%는 안전망 제외
-  // - 창문형은 "5% 적용된 금액" 기준으로 리뷰 10% 적용
-  // - 현관/틀은 이미 개수별 단가 반영된 금액 기준으로 리뷰 10% 적용
-  const eligibleConsumer = windowAfterQty + entranceConsumer + alConsumer + hsConsumer;
+  // ✅ 리뷰 10%는 "창문형"만 적용 (안전망/현관롤/틀제작은 제외)
+const windowAfterReview = reviewDiscountOn
+  ? (windowAfterQty * (1 - CONFIG.REVIEW_DISCOUNT_RATE))
+  : windowAfterQty;
 
-  const eligibleAfterReview = reviewDiscountOn
-    ? (eligibleConsumer * (1 - CONFIG.REVIEW_DISCOUNT_RATE))
-    : eligibleConsumer;
+// summary에 넣을 "리뷰할인 적용대상 합계"는 이제 창문형만
+const eligibleConsumer = windowAfterQty;
 
-  // 최종 = (리뷰할인 적용 대상) + (안전망(5% 여부만 적용))
-  const any =
-    (windowQty + safetyQty + entranceQty + alSM + alL + hsSM + hsL2) > 0;
+// 최종 = (창문형(10% 여부)) + (안전망(5% 여부)) + (현관롤(차등단가)) + (틀제작(차등단가))
+const totalFinal = any
+  ? (windowAfterReview + safetyAfterQty + entranceConsumer + alConsumer + hsConsumer)
+  : 0;
 
-  const totalFinal = any ? (eligibleAfterReview + safetyAfterQty) : 0;
 
   $("resultPrice").textContent = fmt(totalFinal);
 
@@ -908,7 +907,7 @@ function calc(){
     hsConsumer,
     eligibleConsumer,
     windowSafetyQtyDiscountRate,
-    eligibleAfterAllDiscounts: eligibleAfterReview,
+    eligibleAfterAllDiscounts: windowAfterReview,
     entranceQty,
     entranceUnit,
     alSM, alL, hsSM, hsL2,
@@ -1143,3 +1142,4 @@ wire();
 </script>
 </body>
 </html>
+
