@@ -837,7 +837,7 @@ function calc(){
   const windowAfterQty = windowConsumer * (1 - windowSafetyQtyDiscountRate);
   const safetyAfterQty = safetyConsumer * (1 - windowSafetyQtyDiscountRate);
 
-  // 3) 현관롤: 개수별 단가
+  // 3) 현관롤: 개수별 단가 (✅ 리뷰 10% 제외)
   const entranceType = $("entranceType").value;
   const entranceSize = $("entranceSize").value;
   const entranceQty = clampInt(parseFloat($("entranceQty").value));
@@ -848,36 +848,35 @@ function calc(){
     entranceConsumer = entranceUnit * entranceQty;
   }
 
-  // 4) 알미늄 틀: 개수별 단가
+  // 4) 알미늄 틀: 개수별 단가 (✅ 리뷰 10% 제외)
   const alSM = clampInt(parseFloat($("alSM").value));
   const alL  = clampInt(parseFloat($("alL").value));
   const alUnitSM = frameUnitPriceSM(alSM);
   const alUnitL  = frameUnitPriceL(alL);
   const alConsumer = (alUnitSM * alSM) + (alUnitL * alL);
 
-  // 5) 하이샤시 틀: 개수별 단가
+  // 5) 하이샤시 틀: 개수별 단가 (✅ 리뷰 10% 제외)
   const hsSM = clampInt(parseFloat($("hsSM").value));
   const hsL2 = clampInt(parseFloat($("hsL2").value));
   const hsUnitSM = frameUnitPriceSM(hsSM);
   const hsUnitL  = frameUnitPriceL(hsL2);
   const hsConsumer = (hsUnitSM * hsSM) + (hsUnitL * hsL2);
 
-  // 총 소비자(정가) = 창문형 + 안전 + 현관 + 틀
+  // 총 소비자가격(정가) = 창문형 + 안전 + 현관 + 틀
   const totalConsumer = windowConsumer + safetyConsumer + entranceConsumer + alConsumer + hsConsumer;
 
-  // ✅ 리뷰 10%는 "창문형"만 적용 (안전망/현관롤/틀제작은 제외)
-const windowAfterReview = reviewDiscountOn
-  ? (windowAfterQty * (1 - CONFIG.REVIEW_DISCOUNT_RATE))
-  : windowAfterQty;
+  // ✅ 리뷰 10%는 "창문형"만 적용 (안전망/현관롤/틀제작 제외)
+  const windowAfterReview = reviewDiscountOn
+    ? (windowAfterQty * (1 - CONFIG.REVIEW_DISCOUNT_RATE))
+    : windowAfterQty;
 
-// summary에 넣을 "리뷰할인 적용대상 합계"는 이제 창문형만
-const eligibleConsumer = windowAfterQty;
+  const any =
+    (windowQty + safetyQty + entranceQty + alSM + alL + hsSM + hsL2) > 0;
 
-// 최종 = (창문형(10% 여부)) + (안전망(5% 여부)) + (현관롤(차등단가)) + (틀제작(차등단가))
-const totalFinal = any
-  ? (windowAfterReview + safetyAfterQty + entranceConsumer + alConsumer + hsConsumer)
-  : 0;
-
+  // 최종 = 창문형(10% 여부) + 안전망(5% 여부) + 현관롤 + 틀제작
+  const totalFinal = any
+    ? (windowAfterReview + safetyAfterQty + entranceConsumer + alConsumer + hsConsumer)
+    : 0;
 
   $("resultPrice").textContent = fmt(totalFinal);
 
@@ -888,11 +887,14 @@ const totalFinal = any
       parts.push(`✅ 창문형+안전망 4개 이상 5% 추가 할인 적용`);
     }
     if(reviewDiscountOn){
-      parts.push(`✅ 예약/영수증 10% 할인 적용 (안전망 제외)`);
+      parts.push(`✅ 예약/영수증 10% 할인 적용 (창문형만)`);
     }
     if(parts.length) note = parts.join(" / ");
   }
   $("resultNote").textContent = note;
+
+  // summary에서 쓰는 값들
+  const eligibleConsumer = windowAfterQty; // ✅ 리뷰할인 적용대상(창문형만)
 
   const ctx = {
     totalFinal,
@@ -907,7 +909,7 @@ const totalFinal = any
     hsConsumer,
     eligibleConsumer,
     windowSafetyQtyDiscountRate,
-    eligibleAfterAllDiscounts: windowAfterReview,
+    eligibleAfterAllDiscounts: windowAfterReview, // ✅ 참고용
     entranceQty,
     entranceUnit,
     alSM, alL, hsSM, hsL2,
@@ -917,6 +919,7 @@ const totalFinal = any
   $("summary").value = buildSummary(ctx);
   return { summary: $("summary").value, any };
 }
+
 
 async function copyText(text){
   try{
@@ -1142,4 +1145,5 @@ wire();
 </script>
 </body>
 </html>
+
 
