@@ -3,8 +3,14 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>청라방충망 견적 | 30초 자동견적 · 방충망시공소</title>
 
+  <!-- ✅ 여기 2개만 지역에 맞게 수정 -->
+  <script>
+    const AREA = "청라";          
+    const AREA_KW = "청라방충망";  
+  </script>
+
+  <title>청라방충망 견적 | 30초 자동견적 · 방충망시공소</title>
   <meta name="description" content="청라방충망 견적 30초 자동견적 · 견적요약 자동복사 후 카톡 상담" />
   <meta property="og:title" content="청라방충망 견적 | 30초 자동견적" />
   <meta property="og:description" content="입력만 하면 금액 확인 · 상담받기 누르면 견적요약 자동복사" />
@@ -14,20 +20,154 @@
   <meta http-equiv="refresh" content="4; url=https://www.mogibye.shop/" />
 
   <style>
-    body{margin:0;font-family:system-ui,-apple-system,"Noto Sans KR",sans-serif;display:grid;place-items:center;min-height:100vh;padding:24px;}
-    .box{max-width:520px;width:100%;border:1px solid #e5e7eb;border-radius:18px;padding:18px;}
-    h1{margin:0 0 8px;font-size:20px}
-    p{margin:0 0 14px;color:#555;line-height:1.5;font-size:14px}
-    a{display:block;text-align:center;padding:12px 14px;border-radius:14px;background:#fee500;color:#111;text-decoration:none;font-weight:800}
-    .small{margin-top:10px;font-size:12px;color:#777;text-align:center}
+    :root{
+      --bg:#0b1220;
+      --card:rgba(255,255,255,.08);
+      --line:rgba(255,255,255,.16);
+      --text:#ffffff;
+      --muted:rgba(255,255,255,.70);
+      --brand:#FEE500;
+      --shadow: 0 20px 60px rgba(0,0,0,.35);
+      --r:22px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; min-height:100vh; display:grid; place-items:center;
+      font-family:system-ui,-apple-system,"Noto Sans KR",sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(900px 500px at 10% 0%, rgba(254,229,0,.15), transparent 60%),
+        radial-gradient(900px 500px at 90% 0%, rgba(99,102,241,.18), transparent 55%),
+        linear-gradient(180deg, #050914, var(--bg));
+      padding:22px;
+    }
+    .wrap{width:min(560px, 100%);}
+    .card{
+      border:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.06));
+      border-radius:var(--r);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+    .top{
+      padding:18px 18px 14px;
+      border-bottom:1px solid rgba(255,255,255,.10);
+      display:flex; gap:12px; align-items:flex-start; justify-content:space-between;
+    }
+    .brand{
+      display:flex; flex-direction:column; gap:4px;
+    }
+    .brand b{font-size:14px; letter-spacing:-.2px; opacity:.95;}
+    .brand span{font-size:12px; color:var(--muted);}
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:9px 10px; border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(255,255,255,.06);
+      font-size:12px; color:var(--muted); white-space:nowrap;
+    }
+    .dot{width:9px;height:9px;border-radius:99px;background:#22c55e;box-shadow:0 0 0 4px rgba(34,197,94,.18);}
+    .body{padding:16px 18px 18px;}
+    h1{
+      margin:0; font-size:22px; letter-spacing:-.6px; line-height:1.2;
+    }
+    .sub{
+      margin:10px 0 14px; color:var(--muted); font-size:13px; line-height:1.55;
+    }
+    .grid{
+      display:grid; gap:10px; grid-template-columns:1fr;
+      margin:12px 0 16px;
+    }
+    .mini{
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.06);
+      border-radius:16px;
+      padding:12px;
+      display:flex; gap:10px; align-items:flex-start;
+    }
+    .ico{
+      width:36px;height:36px;border-radius:14px;display:grid;place-items:center;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(0,0,0,.18);
+      flex:0 0 auto;
+    }
+    .mini b{display:block;font-size:13px}
+    .mini span{display:block;margin-top:4px;font-size:12px;color:var(--muted);line-height:1.45}
+    .btn{
+      width:100%;
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+      padding:14px 14px;
+      border-radius:18px;
+      border:1px solid rgba(0,0,0,.12);
+      background:var(--brand);
+      color:#111;
+      text-decoration:none;
+      font-weight:1000;
+      box-shadow: 0 18px 40px rgba(254,229,0,.18);
+    }
+    .btn small{font-weight:800; opacity:.75}
+    .hint{
+      margin-top:10px; text-align:center; font-size:12px; color:var(--muted);
+    }
   </style>
 </head>
 <body>
-  <div class="box">
-    <h1>청라방충망 견적(자동견적)</h1>
-    <p>30초 셀프견적 후 견적요약 자동복사 → 카톡 상담으로 연결됩니다.</p>
-    <a href="https://www.mogibye.shop/">청라방충망 견적 바로가기</a>
-    <div class="small">잠시 후 자동으로 이동합니다…</div>
+  <div class="wrap">
+    <div class="card">
+      <div class="top">
+        <div class="brand">
+          <b>방충망시공소</b>
+          <span>셀프견적 · 요약 자동복사 · 오픈채팅 상담</span>
+        </div>
+        <div class="pill"><span class="dot"></span> 상담 가능</div>
+      </div>
+
+      <div class="body">
+        <h1 id="t1">청라방충망 견적</h1>
+        <p class="sub" id="t2">
+          입력만 하면 금액 확인됩니다. <b>4초 후 자동견적 페이지로 이동</b>합니다.
+        </p>
+
+        <div class="grid">
+          <div class="mini">
+            <div class="ico">⚡</div>
+            <div>
+              <b>30초 자동견적</b>
+              <span>창문형/현관롤/안전망까지 빠르게 계산</span>
+            </div>
+          </div>
+          <div class="mini">
+            <div class="ico">📋</div>
+            <div>
+              <b>견적요약 자동복사</b>
+              <span>상담 누르면 요약이 자동 복사돼서 편해요</span>
+            </div>
+          </div>
+          <div class="mini">
+            <div class="ico">🛠️</div>
+            <div>
+              <b>현장 기준 안내</b>
+              <span>특이 케이스는 상담에서 바로 조정</span>
+            </div>
+          </div>
+        </div>
+
+        <a class="btn" href="https://www.mogibye.shop/">
+          <span id="btnTxt">청라방충망 자동견적 바로가기</span>
+          <small>이동</small>
+        </a>
+
+        <div class="hint">잠시 후 자동으로 이동합니다…</div>
+      </div>
+    </div>
   </div>
+
+  <script>
+    // ✅ 위에서 AREA/AREA_KW만 바꾸면 자동 반영
+    document.title = `${AREA_KW} 견적 | 30초 자동견적 · 방충망시공소`;
+    document.querySelector('meta[name="description"]').setAttribute("content", `${AREA_KW} 견적 30초 자동견적 · 견적요약 자동복사 후 카톡 상담`);
+    document.getElementById("t1").textContent = `${AREA_KW} 견적`;
+    document.getElementById("btnTxt").textContent = `${AREA_KW} 자동견적 바로가기`;
+  </script>
 </body>
 </html>
