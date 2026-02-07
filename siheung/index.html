@@ -3,30 +3,180 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>시흥방충망 견적 | 30초 자동견적 · 방충망시공소</title>
 
-  <meta name="description" content="시흥방충망 견적 30초 자동견적 · 견적요약 자동복사 후 카톡 상담" />
-  <meta property="og:title" content="시흥방충망 견적 | 30초 자동견적" />
+  <!-- ✅ 여기 2개만 지역에 맞게 수정 -->
+  <script>
+    const AREA = "시흥";           // 예: 청라 / 김포 / 검단 / 시흥 / 논현
+    const AREA_KW = "시흥방충망";  // 예: 청라방충망 / 김포방충망 ...
+  </script>
+
+  <title>청라방충망 견적 | 30초 자동견적 · 방충망시공소</title>
+  <meta name="description" content="청라방충망 견적 30초 자동견적 · 견적요약 자동복사 후 카톡 상담" />
+  <meta property="og:title" content="청라방충망 견적 | 30초 자동견적" />
   <meta property="og:description" content="입력만 하면 금액 확인 · 상담받기 누르면 견적요약 자동복사" />
   <meta property="og:image" content="https://gonoa141954-dot.github.io/screen-quote/hero1.png" />
 
+  <!-- ✅ 4초 뒤 메인으로 이동 -->
   <meta http-equiv="refresh" content="4; url=https://www.mogibye.shop/" />
 
   <style>
-    body{margin:0;font-family:system-ui,-apple-system,"Noto Sans KR",sans-serif;display:grid;place-items:center;min-height:100vh;padding:24px;}
-    .box{max-width:520px;width:100%;border:1px solid #e5e7eb;border-radius:18px;padding:18px;}
-    h1{margin:0 0 8px;font-size:20px}
-    p{margin:0 0 14px;color:#555;line-height:1.5;font-size:14px}
-    a{display:block;text-align:center;padding:12px 14px;border-radius:14px;background:#fee500;color:#111;text-decoration:none;font-weight:800}
-    .small{margin-top:10px;font-size:12px;color:#777;text-align:center}
+    :root{
+      --bg:#ffffff;
+      --bg2:#f7f9ff;
+      --card:rgba(255,255,255,.92);
+      --line:rgba(15,23,42,.10);
+      --text:#0f172a;
+      --muted:rgba(15,23,42,.65);
+      --brand1:#2563eb;
+      --brand2:#06b6d4;
+      --kakao:#FEE500;
+      --shadow: 0 18px 45px rgba(15,23,42,.10);
+      --shadow2: 0 10px 28px rgba(15,23,42,.08);
+      --r:22px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; min-height:100vh; display:grid; place-items:center;
+      font-family:system-ui,-apple-system,"Noto Sans KR",sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(900px 500px at 0% 0%, rgba(37,99,235,.10), transparent 60%),
+        radial-gradient(900px 500px at 100% 0%, rgba(6,182,212,.10), transparent 55%),
+        linear-gradient(180deg, var(--bg), var(--bg2));
+      padding:22px;
+    }
+    .wrap{width:min(560px, 100%);}
+    .card{
+      border:1px solid var(--line);
+      background:var(--card);
+      border-radius:var(--r);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+    .top{
+      padding:16px 16px 12px;
+      border-bottom:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(37,99,235,.06), rgba(255,255,255,0));
+      display:flex; gap:12px; align-items:flex-start; justify-content:space-between;
+    }
+    .brand{display:flex;flex-direction:column;gap:2px;}
+    .brand b{font-size:14px; letter-spacing:-.2px;}
+    .brand span{font-size:12px; color:var(--muted);}
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:9px 10px; border-radius:999px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.70);
+      box-shadow:var(--shadow2);
+      font-size:12px; color:var(--muted); white-space:nowrap;
+    }
+    .dot{width:9px;height:9px;border-radius:99px;background:#16a34a;box-shadow:0 0 0 4px rgba(22,163,74,.18);}
+
+    .body{padding:16px;}
+    h1{margin:0;font-size:22px;letter-spacing:-.6px;line-height:1.2;font-weight:1000;}
+    .sub{margin:10px 0 14px;color:var(--muted);font-size:13px;line-height:1.55;}
+    .grid{display:grid;gap:10px;grid-template-columns:1fr;margin:12px 0 16px;}
+    .mini{
+      border:1px solid var(--line);
+      background:rgba(15,23,42,.03);
+      border-radius:18px;
+      padding:12px;
+      display:flex; gap:10px; align-items:flex-start;
+    }
+    .ico{
+      width:38px;height:38px;border-radius:16px;display:grid;place-items:center;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.75);
+      box-shadow:0 10px 18px rgba(15,23,42,.06);
+      flex:0 0 auto;
+    }
+    .mini b{display:block;font-size:13px;font-weight:1000;}
+    .mini span{display:block;margin-top:4px;font-size:12px;color:var(--muted);line-height:1.45;}
+
+    .btn{
+      width:100%;
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+      padding:14px 14px;
+      border-radius:18px;
+      border:1px solid rgba(0,0,0,.10);
+      background:var(--kakao);
+      color:#111;
+      text-decoration:none;
+      font-weight:1000;
+      box-shadow: 0 18px 40px rgba(254,229,0,.18);
+    }
+    .btn small{font-weight:900; opacity:.75}
+    .hint{margin-top:10px;text-align:center;font-size:12px;color:var(--muted);}
+
+    /* ✅ 작은 보정: 모바일에서 더 예쁘게 */
+    @media (max-width:420px){
+      h1{font-size:20px}
+      .mini{padding:11px}
+      .ico{width:36px;height:36px;border-radius:14px}
+    }
   </style>
 </head>
+
 <body>
-  <div class="box">
-    <h1>시흥방충망 견적(자동견적)</h1>
-    <p>30초 셀프견적 후 견적요약 자동복사 → 카톡 상담으로 연결됩니다.</p>
-    <a href="https://www.mogibye.shop/">시흥방충망 견적 바로가기</a>
-    <div class="small">잠시 후 자동으로 이동합니다…</div>
+  <div class="wrap">
+    <div class="card">
+      <div class="top">
+        <div class="brand">
+          <b>방충망시공소</b>
+          <span>셀프견적 · 요약 자동복사 · 오픈채팅 상담</span>
+        </div>
+        <div class="pill"><span class="dot"></span> 상담 가능</div>
+      </div>
+
+      <div class="body">
+        <h1 id="t1">청라방충망 견적</h1>
+        <p class="sub" id="t2">
+          입력만 하면 금액 확인됩니다. <b>4초 후 자동견적 페이지로 이동</b>합니다.
+        </p>
+
+        <div class="grid">
+          <div class="mini">
+            <div class="ico">⚡</div>
+            <div>
+              <b>30초 자동견적</b>
+              <span>창문형/현관롤/안전망까지 빠르게 계산</span>
+            </div>
+          </div>
+          <div class="mini">
+            <div class="ico">📋</div>
+            <div>
+              <b>견적요약 자동복사</b>
+              <span>상담 누르면 요약이 자동 복사돼서 편해요</span>
+            </div>
+          </div>
+          <div class="mini">
+            <div class="ico">🛠️</div>
+            <div>
+              <b>현장 기준 안내</b>
+              <span>특이 케이스는 상담에서 바로 조정</span>
+            </div>
+          </div>
+        </div>
+
+        <a class="btn" href="https://www.mogibye.shop/">
+          <span id="btnTxt">청라방충망 자동견적 바로가기</span>
+          <small>이동</small>
+        </a>
+
+        <div class="hint">잠시 후 자동으로 이동합니다…</div>
+      </div>
+    </div>
   </div>
+
+  <script>
+    // ✅ 위에서 AREA/AREA_KW만 바꾸면 자동 반영
+    document.title = `${AREA_KW} 견적 | 30초 자동견적 · 방충망시공소`;
+    document.querySelector('meta[name="description"]').setAttribute(
+      "content",
+      `${AREA_KW} 견적 30초 자동견적 · 견적요약 자동복사 후 카톡 상담`
+    );
+    document.getElementById("t1").textContent = `${AREA_KW} 견적`;
+    document.getElementById("btnTxt").textContent = `${AREA_KW} 자동견적 바로가기`;
+  </script>
 </body>
 </html>
