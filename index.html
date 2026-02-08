@@ -466,4 +466,1093 @@
       <div class="sectionHead">
         <h2>셀프 견적</h2>
         <p class="desc">필요한 항목만 펼쳐서 입력하세요.</p>
-      </di
+      </div>
+
+      <div class="sectionBody">
+
+        <!-- (숨김) 기존 변수용 체크박스 - 유지 -->
+        <input type="checkbox" id="discount10" style="display:none">
+
+        <div class="highlight" style="border-radius:18px;padding:12px;margin-bottom:12px;border:1px solid rgba(0,0,0,.06);">
+          <div class="highlightTitle">✅ 자동할인 안내</div>
+          <div class="note" style="margin-top:4px;">
+            ✅ <b>창문형(망교체) 5개 이상</b> → <b>10% 할인</b><br>
+            ✅ <b>안전망 4개 이상</b> → <b>5% 할인</b>
+          </div>
+          <div class="note" style="margin:10px 0 0 0;">
+            ✅ <b>현관롤 / PJ롤 / 틀제작</b>은 “개수별 차등 할인(단가 자동 반영)”으로 계산됩니다.
+          </div>
+        </div>
+
+        <!-- 창문형 -->
+        <details id="dWindow">
+          <summary><span>창문형 방충망</span><span class="chev">열기/닫기 ▾</span></summary>
+          <div class="detailBody">
+            <div class="row">
+              <div>
+                <label>방충망 선택</label>
+                <select id="meshType">
+                  <option value="micro">미세방충망</option>
+                  <option value="hydro_micro">발수코팅 미세방충망</option>
+                  <option value="black_stainless_micro">블랙스텐 미세방충망</option>
+                </select>
+              </div>
+
+              <div>
+                <label>소형(개) <span class="note">· 높이 500 이하</span></label>
+                <div class="stepper">
+                  <button class="stepBtn" type="button" data-step="-1" data-target="cntS">−</button>
+                  <input id="cntS" class="stepInput" type="number" min="0" step="1" value="0" inputmode="numeric">
+                  <button class="stepBtn" type="button" data-step="1" data-target="cntS">＋</button>
+                </div>
+              </div>
+
+              <div>
+                <label>중형(개) <span class="note">· 높이500~1500 이하</span></label>
+                <div class="stepper">
+                  <button class="stepBtn" type="button" data-step="-1" data-target="cntM">−</button>
+                  <input id="cntM" class="stepInput" type="number" min="0" step="1" value="0" inputmode="numeric">
+                  <button class="stepBtn" type="button" data-step="1" data-target="cntM">＋</button>
+                </div>
+              </div>
+
+              <div>
+                <label>대형(개) <span class="note">· 높이1500~2300 이하</span></label>
+                <div class="stepper">
+                  <button class="stepBtn" type="button" data-step="-1" data-target="cntL">−</button>
+                  <input id="cntL" class="stepInput" type="number" min="0" step="1" value="0" inputmode="numeric">
+                  <button class="stepBtn" type="button" data-step="1" data-target="cntL">＋</button>
+                </div>
+              </div>
+
+              <div><label>메모(선택)</label><input id="memo" placeholder="예: 저층/아이 있음/초파리 유입 등"></div>
+            </div>
+          </div>
+        </details>
+
+        <div style="height:12px"></div>
+
+        <!-- 안전 -->
+        <details id="dSafety">
+          <summary><span>방범/추락 안전 방충망<br>(mm 입력)</span><span class="chev">열기/닫기 ▾</span></summary>
+          <div class="detailBody">
+            <div class="row">
+              <div class="note">
+                * 가로/세로(mm)와 수량 입력 후 <b>추가</b>를 눌러주세요.<br/>
+                * 안전망은 <b>리뷰 10% 할인 적용 제외</b> (단, 안전망 4개 이상이면 5% 자동할인 적용)
+              </div>
+
+              <div class="grid2">
+                <div>
+                  <label>종류</label>
+                  <select id="safetyKind">
+                    <option value="crime">방범안전 방충망</option>
+                    <option value="fall">추락안전 방충망</option>
+                  </select>
+                </div>
+                <div>
+                  <label>망 규격(자동)</label>
+                  <input id="safetyGauge" readonly value="0.7mm">
+                </div>
+              </div>
+
+              <div class="grid2">
+                <div>
+                  <label>가로(mm)</label>
+                  <input id="safetyW" type="number" min="0" step="1" value="0" inputmode="numeric" placeholder="예: 850">
+                </div>
+                <div>
+                  <label>세로(mm)</label>
+                  <input id="safetyH" type="number" min="0" step="1" value="0" inputmode="numeric" placeholder="예: 2050">
+                </div>
+              </div>
+
+              <div>
+                <label>수량</label>
+                <div class="stepper">
+                  <button class="stepBtn" type="button" data-step="-1" data-target="safetyQty">−</button>
+                  <input id="safetyQty" class="stepInput" type="number" min="0" step="1" value="0" inputmode="numeric">
+                  <button class="stepBtn" type="button" data-step="1" data-target="safetyQty">＋</button>
+                </div>
+              </div>
+
+              <button class="btn btnPrimary" type="button" id="btnAddSafety">추가</button>
+              <div class="note" id="safetyPreview"></div>
+
+              <div class="list" id="safetyListBox" style="display:none;">
+                <div class="listHead">
+                  <span>추가된 항목</span>
+                  <span class="note" id="safetySumText"></span>
+                </div>
+                <div class="listBody" id="safetyList"></div>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <div style="height:12px"></div>
+
+        <!-- 현관롤 -->
+        <details id="dEntrance">
+          <summary><span>현관 롤방충망<br>(개수별 차등 할인)</span><span class="chev">열기/닫기 ▾</span></summary>
+          <div class="detailBody">
+            <div class="row">
+              <div>
+                <label>종류 선택</label>
+                <select id="entranceType">
+                  <option value="normal">현관 롤방충망</option>
+                  <option value="micro">현관 미세 롤방충망</option>
+                </select>
+              </div>
+
+              <div>
+                <label>사이즈 선택</label>
+                <select id="entranceSize">
+                  <option value="under">1000 × 2100 이하</option>
+                  <option value="over">1000 × 2100 이상</option>
+                </select>
+              </div>
+
+              <div>
+                <label>개수</label>
+                <div class="stepper">
+                  <button class="stepBtn" type="button" data-step="-1" data-target="entranceQty">−</button>
+                  <input id="entranceQty" class="stepInput" type="number" min="0" step="1" value="0" inputmode="numeric">
+                  <button class="stepBtn" type="button" data-step="1" data-target="entranceQty">＋</button>
+                </div>
+              </div>
+
+              <div class="note">* 개수에 따라 <b>단가가 자동으로 내려갑니다</b>. (5개 이후도 5개 단가로 고정)</div>
+              <div class="note">* 각 파이프 작업 필요 시 비용 추가</div>
+            </div>
+          </div>
+        </details>
+
+        <div style="height:12px"></div>
+
+        <!-- PJ -->
+        <details id="dPJ">
+          <summary><span>PJ 롤 방충망 (별도 견적 문의)</span><span class="chev">열기/닫기 ▾</span></summary>
+          <div class="detailBody">
+            <div class="note">
+              * PJ 롤은 현장 조건이 다양해서 자동견적은 비워두었습니다.<br/>
+              * 오픈채팅으로 문의 주시면 빠르게 안내드릴게요.
+            </div>
+          </div>
+        </details>
+
+        <div style="height:12px"></div>
+
+        <!-- 알미늄 -->
+        <details id="dAl">
+          <summary><span>알미늄 틀 제작(미세망 포함)<br>(개수별 차등 할인)</span><span class="chev">열기/닫기 ▾</span></summary>
+          <div class="detailBody">
+            <div class="row">
+              <div class="note">
+                * 소/중: 1개 10만 → 2개(개당 9만) → 3개 이상(개당 8만)<br/>
+                * 대창: 1개 14만 → 2개(12만) → 3개(11만) → 4개 이상(개당 10만)
+              </div>
+
+              <div>
+                <label>소/중 (합계 개수) <span class="note">· 높이 100~1500 이하</span></label>
+                <div class="stepper">
+                  <button class="stepBtn" type="button" data-step="-1" data-target="alSM">−</button>
+                  <input id="alSM" class="stepInput" type="number" min="0" step="1" value="0" inputmode="numeric">
+                  <button class="stepBtn" type="button" data-step="1" data-target="alSM">＋</button>
+                </div>
+              </div>
+
+              <div>
+                <label>대창 (개수) <span class="note">· 높이 1500~2300 이하</span></label>
+                <div class="stepper">
+                  <button class="stepBtn" type="button" data-step="-1" data-target="alL">−</button>
+                  <input id="alL" class="stepInput" type="number" min="0" step="1" value="0" inputmode="numeric">
+                  <button class="stepBtn" type="button" data-step="1" data-target="alL">＋</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <div style="height:12px"></div>
+
+        <!-- 하이샤시 -->
+        <details id="dHS">
+          <summary><span>하이샤시 틀 제작(미세망 포함) (개수별 차등 할인)</span><span class="chev">열기/닫기 ▾</span></summary>
+          <div class="detailBody">
+            <div class="row">
+              <div class="note">
+                * 알미늄과 동일 가격 적용<br/>
+                * 소/중: 1개 10만 → 2개(개당 9만) → 3개 이상(개당 8만)<br/>
+                * 대창: 1개 14만 → 2개(12만) → 3개(11만) → 4개 이상(개당 10만)
+              </div>
+
+              <div>
+                <label>소/중 (합계 개수) <span class="note">· 높이 100~1500 이하</span></label>
+                <div class="stepper">
+                  <button class="stepBtn" type="button" data-step="-1" data-target="hsSM">−</button>
+                  <input id="hsSM" class="stepInput" type="number" min="0" step="1" value="0" inputmode="numeric">
+                  <button class="stepBtn" type="button" data-step="1" data-target="hsSM">＋</button>
+                </div>
+              </div>
+
+              <div>
+                <label>대창 (개수) <span class="note">· 높이 1500~2300 이하</span></label>
+                <div class="stepper">
+                  <button class="stepBtn" type="button" data-step="-1" data-target="hsL2">−</button>
+                  <input id="hsL2" class="stepInput" type="number" min="0" step="1" value="0" inputmode="numeric">
+                  <button class="stepBtn" type="button" data-step="1" data-target="hsL2">＋</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <div class="result">
+          <p class="price" id="resultPrice">0원</p>
+          <div class="resultMeta" id="resultNote">개수 입력하면 자동으로 계산됩니다.</div>
+
+          <label>고객에게 보낼 요약(자동 생성)</label>
+          <textarea id="summary" readonly></textarea>
+
+          <div class="btnRow">
+            <button class="btn btnPrimary" id="btnCopy" type="button">요약 복사</button>
+            <button class="btn" id="btnReset" type="button">초기화</button>
+          </div>
+          <div class="toast" id="toast"></div>
+
+          <div class="note" style="margin-top:8px;">
+            아래 <b>상담받기</b> 버튼을 누르면 <b>요약이 자동 복사</b>되고, 오픈채팅으로 이동합니다.
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- modal -->
+  <div class="modalBack" id="modalBack" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modalTop"><b id="modalTitle">견적요약 자동복사</b></div>
+      <div class="modalBody" id="modalBody">복사 완료! 오픈채팅으로 이동하면 채팅창에 붙여넣기만 하시면 됩니다.</div>
+      <div class="modalBtns">
+        <button class="btn btnPrimary" id="btnGoKakao" type="button">오픈채팅으로 이동</button>
+        <button class="btn btnSoft" id="btnCloseModal" type="button">닫기</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- sticky kakao -->
+  <div class="kakaoSticky">
+    <button class="kakaoBtn" id="kakaoConsultBtn" type="button">
+      <div class="kLeft">
+        <div class="kBadge">톡</div>
+        <div class="kText">
+          <b>카카오톡 오픈채팅 상담</b>
+          <span>누르면 견적요약 자동복사</span>
+        </div>
+      </div>
+      <div class="kRight">상담받기</div>
+    </button>
+  </div>
+
+<script>
+/* ===================== 기본 설정 ===================== */
+const KAKAO_URL = "https://open.kakao.com/o/symXVtei";
+
+const CONFIG = {
+  UNIT_PRICE_WINDOW: {
+    micro:                 { S: 10000, M: 30000, L: 50000 },
+    hydro_micro:           { S: 20000, M: 40000, L: 60000 },
+    black_stainless_micro: { S: 25000, M: 50000, L: 70000 },
+  },
+
+  WINDOW_QTY_DISCOUNT_MIN: 5,
+  WINDOW_QTY_DISCOUNT_RATE: 0.10,
+
+  SAFETY_QTY_DISCOUNT_MIN: 4,
+  SAFETY_QTY_DISCOUNT_RATE: 0.05,
+
+  SAFETY_CONSUMER_TABLE: {
+    "0.4": {
+      "0.3":150000,"0.4":150000,"0.5":150000,"0.6":150000,
+      "0.7":160000,"0.8":170000,"0.9":180000,"1.0":190000,
+      "1.1":200000,"1.2":210000,"1.3":220000,"1.4":230000,
+      "1.5":240000,"1.6":250000,"1.7":260000,"1.8":270000,
+      "1.9":280000,"2.0":290000,"2.1":300000,"2.2":310000,
+      "2.3":320000,"2.4":330000,"2.5":340000,"2.6":350000,
+      "2.7":360000,"2.8":370000,"2.9":380000,"3.0":390000
+    },
+    "0.7": {
+      "0.3":180000,"0.4":180000,"0.5":180000,"0.6":180000,
+      "0.7":190000,"0.8":200000,"0.9":210000,"1.0":220000,
+      "1.1":230000,"1.2":240000,"1.3":250000,"1.4":260000,
+      "1.5":270000,"1.6":280000,"1.7":290000,"1.8":300000,
+      "1.9":310000,"2.0":320000,"2.1":330000,"2.2":340000,
+      "2.3":350000,"2.4":360000,"2.5":370000,"2.6":380000,
+      "2.7":390000,"2.8":400000,"2.9":410000,"3.0":420000
+    }
+  },
+  SAFETY_MIN_M2: 0.3,
+  SAFETY_MAX_M2: 3.0
+};
+
+const $ = (id) => document.getElementById(id);
+const fmt = (n) => (Math.round(n)).toLocaleString("ko-KR") + "원";
+const clampInt = (v) => Math.max(0, Number.isFinite(v) ? Math.floor(v) : 0);
+
+function meshLabel(k){
+  return ({
+    micro: "미세방충망",
+    hydro_micro: "발수코팅 미세방충망",
+    black_stainless_micro: "블랙스텐 미세방충망"
+  })[k] || k;
+}
+function entranceTypeLabel(k){
+  return ({ normal: "현관 롤방충망", micro: "현관 미세 롤방충망" })[k] || k;
+}
+function entranceSizeLabel(k){ return (k === "under") ? "1000×2100 이하" : "1000×2100 이상"; }
+function safetyKindLabel(k){ return (k === "crime") ? "방범안전 방충망" : "추락안전 방충망"; }
+function safetyGaugeForKind(kind){ return (kind === "crime") ? "0.7" : "0.4"; }
+
+function toast(msg){
+  $("toast").textContent = msg;
+  setTimeout(()=>{ $("toast").textContent = ""; }, 2400);
+}
+
+/* ===================== 안전망 계산 ===================== */
+function ceilToTenth(area){ return Math.ceil(area * 10) / 10; }
+function safetyRoundedM2FromMM(wMm, hMm){
+  const raw = (wMm * hMm) / 1_000_000;
+  let rounded = ceilToTenth(raw);
+  if(rounded < CONFIG.SAFETY_MIN_M2) rounded = CONFIG.SAFETY_MIN_M2;
+  rounded = Number(rounded.toFixed(1));
+  return { raw, rounded };
+}
+function safetyPriceByGaugeM2(gauge, roundedM2){
+  const key = roundedM2.toFixed(1);
+  const table = CONFIG.SAFETY_CONSUMER_TABLE[gauge];
+  return table ? (table[key] ?? null) : null;
+}
+
+let safetyItems = []; // {id, kind, gauge, w, h, qty, rawM2, roundedM2, unitPrice}
+
+function safetySumTotal(){ return safetyItems.reduce((acc, it)=> acc + (it.unitPrice * it.qty), 0); }
+function safetySumQty(){ return safetyItems.reduce((acc, it)=> acc + it.qty, 0); }
+
+function renderSafetyList(){
+  const box = $("safetyListBox");
+  const list = $("safetyList");
+
+  if(safetyItems.length === 0){
+    box.style.display = "none";
+    list.innerHTML = "";
+    $("safetySumText").textContent = "";
+    return;
+  }
+
+  box.style.display = "block";
+  list.innerHTML = "";
+
+  let sum = 0;
+
+  safetyItems.forEach(item=>{
+    const lineTotal = item.unitPrice * item.qty;
+    sum += lineTotal;
+
+    const div = document.createElement("div");
+    div.className = "item";
+    div.innerHTML = `
+      <div class="left">
+        <b>${safetyKindLabel(item.kind)} · ${item.gauge}mm</b>
+        <div class="meta">
+          ${item.w}×${item.h}mm / ${item.qty}개<br/>
+          ${fmt(item.unitPrice)} × ${item.qty} = <b>${fmt(lineTotal)}</b>
+        </div>
+      </div>
+      <button class="xBtn" type="button" data-del-safety="${item.id}">삭제</button>
+    `;
+    list.appendChild(div);
+  });
+
+  $("safetySumText").textContent = `합계 ${fmt(sum)}`;
+}
+
+function updateSafetyGaugeUI(){
+  const kind = $("safetyKind").value;
+  const g = safetyGaugeForKind(kind);
+  $("safetyGauge").value = `${g}mm`;
+  safetyPreview();
+}
+
+function safetyPreview(){
+  const kind = $("safetyKind").value;
+  const gauge = safetyGaugeForKind(kind);
+  const w = clampInt(parseFloat($("safetyW").value));
+  const h = clampInt(parseFloat($("safetyH").value));
+  const qty = clampInt(parseFloat($("safetyQty").value));
+
+  if(w<=0 || h<=0 || qty<=0){
+    $("safetyPreview").textContent = "";
+    return;
+  }
+
+  const { rounded } = safetyRoundedM2FromMM(w, h);
+  if(rounded > CONFIG.SAFETY_MAX_M2){
+    $("safetyPreview").textContent = "⚠️ 입력 범위를 초과했습니다 — 오픈채팅 문의";
+    return;
+  }
+
+  const unit = safetyPriceByGaugeM2(gauge, rounded);
+  if(unit == null){
+    $("safetyPreview").textContent = "⚠️ 금액 계산이 어려워요 — 오픈채팅 문의";
+    return;
+  }
+
+  const lineTotal = unit * qty;
+  $("safetyPreview").textContent =
+    `미리보기: ${safetyKindLabel(kind)} ${gauge}mm / ${w}×${h}mm / ${fmt(unit)}×${qty} = ${fmt(lineTotal)}`;
+}
+
+/* ===================== 현관롤 단가 ===================== */
+function clampQty1to5(q){ return Math.max(1, Math.min(5, q)); }
+function entranceUnitPrice(type, size, qty){
+  const q = clampQty1to5(qty);
+
+  if(type === "normal" && size === "under"){
+    const table = [160000,150000,130000,130000,120000];
+    return table[q-1];
+  }
+  if(type === "normal" && size === "over"){
+    const table = [180000,170000,160000,150000,140000];
+    return table[q-1];
+  }
+  if(type === "micro" && size === "under"){
+    const table = [180000,170000,160000,150000,140000];
+    return table[q-1];
+  }
+  if(type === "micro" && size === "over"){
+    const table = [200000,190000,180000,170000,160000];
+    return table[q-1];
+  }
+  return 0;
+}
+
+/* ===================== 틀제작 단가 ===================== */
+function frameUnitPriceSM(qty){
+  if(qty >= 3) return 80000;
+  if(qty === 2) return 90000;
+  if(qty === 1) return 100000;
+  return 0;
+}
+function frameUnitPriceL(qty){
+  if(qty >= 4) return 100000;
+  if(qty === 3) return 110000;
+  if(qty === 2) return 120000;
+  if(qty === 1) return 140000;
+  return 0;
+}
+
+/* ===================== 요약 생성 ===================== */
+function buildSummary(ctx){
+  const {
+    totalFinal,
+
+    windowQty,
+    safetyQty,
+    windowQtyDiscountApplied,
+    safetyQtyDiscountApplied,
+
+    entranceConsumer,
+    alConsumer,
+    hsConsumer,
+
+    entranceQty,
+    entranceUnit,
+
+    alSM, alL, hsSM, hsL2,
+    alUnitSM, alUnitL, hsUnitSM, hsUnitL
+  } = ctx;
+
+  const meshKey = $("meshType").value;
+  const cntS = clampInt(parseFloat($("cntS").value));
+  const cntM = clampInt(parseFloat($("cntM").value));
+  const cntL = clampInt(parseFloat($("cntL").value));
+  const memo = ($("memo").value || "").trim();
+
+  const entranceType = $("entranceType").value;
+  const entranceSize = $("entranceSize").value;
+
+  const lines = [];
+  lines.push(`창문형: ${meshLabel(meshKey)}`);
+  lines.push(`창 개수: 소 ${cntS}(높이 500↓) / 중 ${cntM}(높이 1500↓) / 대 ${cntL}(높이 2300↓)`);
+
+  if(safetyItems.length){
+    lines.push(`방범/추락 안전 방충망 (리뷰 10% 할인 제외):`);
+    safetyItems.forEach((it, idx)=>{
+      const lineTotal = it.unitPrice * it.qty;
+      lines.push(`- ${idx+1}) ${safetyKindLabel(it.kind)} ${it.gauge}mm / ${it.w}×${it.h}mm / ${it.qty}개 / ${fmt(it.unitPrice)}×${it.qty}=${fmt(lineTotal)}`);
+    });
+  }
+
+  if(entranceQty>0){
+    lines.push(`현관롤: ${entranceTypeLabel(entranceType)} / ${entranceSizeLabel(entranceSize)} / ${entranceQty}개`);
+    lines.push(`- 단가(자동): ${fmt(entranceUnit)} / 합계: ${fmt(entranceConsumer)}`);
+    lines.push(`* 각 파이프 작업 필요 시 비용 추가`);
+  }
+
+  if(alSM+alL>0){
+    lines.push(`알미늄 틀 제작:`);
+    if(alSM>0) lines.push(`- 소/중 ${alSM}개 / 단가 ${fmt(alUnitSM)} / 합계 ${fmt(alUnitSM * alSM)}`);
+    if(alL>0)  lines.push(`- 대창 ${alL}개 / 단가 ${fmt(alUnitL)} / 합계 ${fmt(alUnitL * alL)}`);
+  }
+
+  if(hsSM+hsL2>0){
+    lines.push(`하이샤시 틀 제작:`);
+    if(hsSM>0) lines.push(`- 소/중 ${hsSM}개 / 단가 ${fmt(hsUnitSM)} / 합계 ${fmt(hsUnitSM * hsSM)}`);
+    if(hsL2>0) lines.push(`- 대창 ${hsL2}개 / 단가 ${fmt(hsUnitL)} / 합계 ${fmt(hsUnitL * hsL2)}`);
+  }
+
+  lines.push(`창문형(망교체) 개수: ${windowQty}개 / 5개 이상 10% 할인: ${windowQtyDiscountApplied ? "적용" : "미적용"}`);
+  lines.push(`안전망 개수: ${safetyQty}개 / 4개 이상 5% 할인: ${safetyQtyDiscountApplied ? "적용" : "미적용"}`);
+
+  lines.push(`최종 자동견적: ${fmt(totalFinal)}`);
+  lines.push(`메모: ${memo || "없음"}`);
+
+  return "자동견적 보고 연락드려요.\n" + lines.join("\n");
+}
+
+/* ===================== 계산 ===================== */
+function calc(){
+  const meshKey = $("meshType").value;
+  const cntS = clampInt(parseFloat($("cntS").value));
+  const cntM = clampInt(parseFloat($("cntM").value));
+  const cntL = clampInt(parseFloat($("cntL").value));
+
+  // 창문형
+  const up = CONFIG.UNIT_PRICE_WINDOW[meshKey] || CONFIG.UNIT_PRICE_WINDOW.micro;
+  const windowConsumer = (up.S * cntS) + (up.M * cntM) + (up.L * cntL);
+  const windowQty = (cntS + cntM + cntL);
+
+  // 안전망
+  const safetyConsumer = safetySumTotal();
+  const safetyQty = safetySumQty();
+
+  // 현관롤
+  const entranceType = $("entranceType").value;
+  const entranceSize = $("entranceSize").value;
+  const entranceQty = clampInt(parseFloat($("entranceQty").value));
+  let entranceConsumer = 0;
+  let entranceUnit = 0;
+  if(entranceQty > 0){
+    entranceUnit = entranceUnitPrice(entranceType, entranceSize, entranceQty);
+    entranceConsumer = entranceUnit * entranceQty;
+  }
+
+  // 알미늄 틀
+  const alSM = clampInt(parseFloat($("alSM").value));
+  const alL  = clampInt(parseFloat($("alL").value));
+  const alUnitSM = frameUnitPriceSM(alSM);
+  const alUnitL  = frameUnitPriceL(alL);
+  const alConsumer = (alUnitSM * alSM) + (alUnitL * alL);
+
+  // 하이샤시 틀
+  const hsSM = clampInt(parseFloat($("hsSM").value));
+  const hsL2 = clampInt(parseFloat($("hsL2").value));
+  const hsUnitSM = frameUnitPriceSM(hsSM);
+  const hsUnitL  = frameUnitPriceL(hsL2);
+  const hsConsumer = (hsUnitSM * hsSM) + (hsUnitL * hsL2);
+
+  // 할인
+  const windowQtyDiscountApplied = (windowQty >= CONFIG.WINDOW_QTY_DISCOUNT_MIN);
+  const windowAfterDiscount = windowQtyDiscountApplied
+    ? (windowConsumer * (1 - CONFIG.WINDOW_QTY_DISCOUNT_RATE))
+    : windowConsumer;
+
+  const safetyQtyDiscountApplied = (safetyQty >= CONFIG.SAFETY_QTY_DISCOUNT_MIN);
+  const safetyAfterDiscount = safetyQtyDiscountApplied
+    ? (safetyConsumer * (1 - CONFIG.SAFETY_QTY_DISCOUNT_RATE))
+    : safetyConsumer;
+
+  const any = (windowQty + safetyQty + entranceQty + alSM + alL + hsSM + hsL2) > 0;
+
+  const totalFinal = any
+    ? (windowAfterDiscount + safetyAfterDiscount + entranceConsumer + alConsumer + hsConsumer)
+    : 0;
+
+  $("resultPrice").textContent = fmt(totalFinal);
+
+  let note = any ? "입력 기준 자동견적입니다." : "개수 입력하면 자동 계산됩니다.";
+  if(any){
+    const parts = [];
+    if(windowQtyDiscountApplied) parts.push("✅ 창문형 5개 이상 10% 할인 적용");
+    if(safetyQtyDiscountApplied) parts.push("✅ 안전망 4개 이상 5% 할인 적용");
+    if(parts.length) note = parts.join(" / ");
+  }
+  $("resultNote").textContent = note;
+
+  const ctx = {
+    totalFinal,
+    windowQty,
+    safetyQty,
+    windowQtyDiscountApplied,
+    safetyQtyDiscountApplied,
+    entranceConsumer,
+    alConsumer,
+    hsConsumer,
+    entranceQty,
+    entranceUnit,
+    alSM, alL, hsSM, hsL2,
+    alUnitSM, alUnitL, hsUnitSM, hsUnitL
+  };
+
+  $("summary").value = buildSummary(ctx);
+  return { summary: $("summary").value, any };
+}
+
+/* ===================== 복사 ===================== */
+async function copyText(text){
+  try{
+    await navigator.clipboard.writeText(text);
+    return true;
+  }catch(e){
+    const ta = $("summary");
+    ta.removeAttribute("readonly");
+    ta.value = text;
+    ta.select();
+    ta.setSelectionRange(0, 99999);
+    const ok = document.execCommand("copy");
+    ta.setAttribute("readonly","readonly");
+    return ok;
+  }
+}
+
+/* ===================== UI ===================== */
+function applyStep(targetId, delta){
+  const el = $(targetId);
+  if(!el) return;
+  const cur = clampInt(parseFloat(el.value));
+  const next = Math.max(0, cur + delta);
+  el.value = next;
+  el.dispatchEvent(new Event("input", { bubbles:true }));
+}
+
+function openModal(msg){
+  $("modalBody").textContent = msg;
+  $("modalBack").style.display = "flex";
+  $("modalBack").setAttribute("aria-hidden","false");
+}
+function closeModal(){
+  $("modalBack").style.display = "none";
+  $("modalBack").setAttribute("aria-hidden","true");
+}
+
+/* ===================== 바인딩 ===================== */
+function wire(){
+  document.addEventListener("click", (e)=>{
+    const btn = e.target.closest("[data-step][data-target]");
+    if(btn){
+      const delta = parseInt(btn.getAttribute("data-step"), 10);
+      const targetId = btn.getAttribute("data-target");
+      applyStep(targetId, delta);
+      if(targetId === "safetyQty") safetyPreview();
+      calc();
+      return;
+    }
+
+    const del = e.target.closest("[data-del-safety]");
+    if(del){
+      const id = del.getAttribute("data-del-safety");
+      safetyItems = safetyItems.filter(x => x.id !== id);
+      renderSafetyList();
+      calc();
+      return;
+    }
+  });
+
+  [
+    "meshType","cntS","cntM","cntL","memo",
+    "entranceType","entranceSize","entranceQty",
+    "alSM","alL",
+    "hsSM","hsL2"
+  ].forEach(id => {
+    const el = $(id);
+    if(el) el.addEventListener("input", calc);
+  });
+
+  ["safetyW","safetyH","safetyQty"].forEach(id=>{
+    $(id).addEventListener("input", ()=>{
+      if(id === "safetyQty"){
+        $(id).value = clampInt(parseFloat($(id).value));
+      }
+      safetyPreview();
+    });
+  });
+
+  $("safetyKind").addEventListener("input", updateSafetyGaugeUI);
+
+  $("btnAddSafety").addEventListener("click", ()=>{
+    const kind = $("safetyKind").value;
+    const gauge = safetyGaugeForKind(kind);
+    const w = clampInt(parseFloat($("safetyW").value));
+    const h = clampInt(parseFloat($("safetyH").value));
+    const qty = clampInt(parseFloat($("safetyQty").value));
+
+    if(w<=0 || h<=0){ toast("가로/세로(mm)를 입력해주세요."); return; }
+    if(qty<=0){ toast("수량을 1개 이상으로 입력해주세요."); return; }
+
+    const { raw, rounded } = safetyRoundedM2FromMM(w, h);
+    if(rounded > CONFIG.SAFETY_MAX_M2){ toast("입력 범위를 초과했습니다. 오픈채팅 문의"); return; }
+
+    const unit = safetyPriceByGaugeM2(gauge, rounded);
+    if(unit == null){ toast("금액 계산이 어려워요. 오픈채팅 문의"); return; }
+
+    safetyItems.push({
+      id: String(Date.now()) + "_" + Math.random().toString(16).slice(2),
+      kind, gauge, w, h, qty,
+      rawM2: raw, roundedM2: rounded,
+      unitPrice: unit
+    });
+
+    renderSafetyList();
+    calc();
+    toast("추가 완료");
+
+    $("safetyW").value = 0;
+    $("safetyH").value = 0;
+    $("safetyQty").value = 0;
+    safetyPreview();
+  });
+
+  $("btnCopy").addEventListener("click", async ()=>{
+    const { summary } = calc();
+    const ok = await copyText(summary);
+    toast(ok ? "복사 완료! 오픈채팅에 붙여넣기 하면 끝" : "복사 실패 — 요약을 길게 눌러 복사해주세요");
+  });
+
+  $("btnReset").addEventListener("click", ()=>{
+    $("meshType").value = "micro";
+    $("cntS").value = 0; $("cntM").value = 0; $("cntL").value = 0;
+    $("memo").value = "";
+
+    $("safetyKind").value = "crime";
+    updateSafetyGaugeUI();
+    $("safetyW").value = 0;
+    $("safetyH").value = 0;
+    $("safetyQty").value = 0;
+    safetyItems = [];
+    renderSafetyList();
+    safetyPreview();
+
+    $("entranceType").value = "normal";
+    $("entranceSize").value = "under";
+    $("entranceQty").value = 0;
+
+    $("alSM").value = 0; $("alL").value = 0;
+    $("hsSM").value = 0; $("hsL2").value = 0;
+
+    calc();
+    toast("초기화 완료");
+  });
+
+  $("btnGoQuote").addEventListener("click", ()=>{
+    $("dWindow").open = true;
+    $("quoteSection").scrollIntoView({ behavior:"smooth", block:"start" });
+    setTimeout(()=> $("meshType").focus(), 450);
+  });
+
+  $("kakaoConsultBtn").addEventListener("click", async ()=>{
+    const { summary, any } = calc();
+    if(!any){
+      openModal("아직 입력된 항목이 없어요. 아래에서 입력 후 다시 ‘상담받기’를 눌러주세요.");
+      $("btnGoKakao").style.display = "none";
+      $("quoteSection").scrollIntoView({ behavior:"smooth", block:"start" });
+      $("dWindow").open = true;
+      return;
+    }
+
+    const ok = await copyText(summary);
+    $("btnGoKakao").style.display = "inline-flex";
+    if(ok){
+      openModal("복사 완료! 오픈채팅으로 이동하면 채팅창에 ‘붙여넣기’만 하시면 됩니다.");
+      setTimeout(()=> window.open(KAKAO_URL, "_blank", "noopener"), 650);
+    }else{
+      openModal("복사가 막힌 기기예요. 아래 요약을 길게 눌러 복사한 뒤, 오픈채팅으로 이동해주세요.");
+    }
+  });
+
+  $("btnGoKakao").addEventListener("click", ()=> window.open(KAKAO_URL, "_blank", "noopener"));
+  $("btnCloseModal").addEventListener("click", closeModal);
+  $("modalBack").addEventListener("click", (e)=>{ if(e.target === $("modalBack")) closeModal(); });
+
+  updateSafetyGaugeUI();
+  calc();
+}
+wire();
+
+/* ===================== 제품 보기(리스트 → 상세1개) ===================== */
+(function initProductGuide(){
+  const back = $("pBack");
+  const btnOpen = $("btnOpenProducts");
+  const btnClose = $("btnCloseProducts");
+  const listBox = $("pList");
+  const detailBox = $("pDetail");
+
+  const badge = $("pBadge2");
+  const name = $("pName2");
+  const one = $("pOne2");
+  const pros = $("pPros");
+  const cons = $("pCons");
+  const media = $("pMedia2");
+
+  const pickWrap = $("pPick");
+  const pickTitle = $("pPickTitle");
+  const seg = $("pSeg");
+  const pickNote = $("pPickNote");
+
+  const btnBack = $("btnBackToList");
+  const btnApply = $("btnApplyToQuote");
+  const btnGoQuote = $("btnGoQuoteFromProduct");
+
+  if(!back || !btnOpen || !listBox || !detailBox) return;
+
+  const PRODUCT = {
+    micro: {
+      badge: "🪟 창문형",
+      name: "미세방충망",
+      one: "초파리·날파리 같은 작은 벌레 유입이 신경 쓰일 때 무난한 선택이에요.",
+      pros: ["작은 벌레 유입 체감 확실", "먼지·꽃가루 부담이 줄어 창 열기 편함", "저층/강가·해안가 환경에서 체감"],
+      cons: ["환경에 따라 통풍이 살짝 덜하게 느껴질 수 있음", "날카로운 도구/불에 약함"],
+      apply(){
+        $("meshType").value = "micro";
+        $("meshType").dispatchEvent(new Event("input",{bubbles:true}));
+        $("dWindow").open = true;
+      }
+    },
+    hydro_micro: {
+      badge: "💧 창문형",
+      name: "발수코팅 미세방충망",
+      one: "장마철에 관리가 편한 타입(오염/물때 관리).",
+      pros: ["오염·물때가 덜 달라붙는 편", "미세망 기능은 그대로", "관리 편의성↑"],
+      cons: ["일반 미세망 대비 단가 상승", "상황 따라 코팅 유지 관리 필요"],
+      mediaSrc: "./hydro.mp4",
+      apply(){
+        $("meshType").value = "hydro_micro";
+        $("meshType").dispatchEvent(new Event("input",{bubbles:true}));
+        $("dWindow").open = true;
+      }
+    },
+    black_stainless_micro: {
+      badge: "🐾 창문형",
+      name: "블랙스텐 미세방충망",
+      one: "반려동물 가정에서 문의 많은 타입. 시야도 깔끔한 편!",
+      pros: ["난반사 적어 시야 선명", "내구성/탄성 좋음", "선호도 높음"],
+      cons: ["가격대가 높은 편", "메시 촘촘하면 통풍 체감이 줄 수 있음"],
+      apply(){
+        $("meshType").value = "black_stainless_micro";
+        $("meshType").dispatchEvent(new Event("input",{bubbles:true}));
+        $("dWindow").open = true;
+      }
+    },
+    entrance: {
+      badge: "🚪 현관",
+      name: "현관 롤방충망 (일반/미세)",
+      one: "여닫기 편하고, 개수 늘면 단가 자동으로 내려가요.",
+      pros: ["출입 편함(롤 방식)", "개수별 단가 자동 반영", "일반/미세 선택 가능"],
+      cons: ["현관 구조에 따라 작업 난이도 차이", "파이프 작업 필요 시 추가 비용 가능"],
+      optionUI: {
+        title: "종류 선택",
+        note: "선택하면 견적 항목이 자동으로 맞춰집니다.",
+        buttons: [
+          { key:"normal", label:"일반", on(){
+              $("entranceType").value = "normal";
+              $("entranceType").dispatchEvent(new Event("input",{bubbles:true}));
+            }
+          },
+          { key:"micro", label:"미세", on(){
+              $("entranceType").value = "micro";
+              $("entranceType").dispatchEvent(new Event("input",{bubbles:true}));
+            }
+          }
+        ],
+        defaultKey: "normal"
+      },
+      apply(){ $("dEntrance").open = true; }
+    },
+    pj: {
+      badge: "🧩 PJ",
+      name: "PJ 롤방충망",
+      one: "PJ창은 일반 방충망 설치가 어려워 전용 롤로 진행합니다. (별도 문의 권장)",
+      pros: ["PJ창 구조에 맞춰 제작", "일반망 불가한 창 해결", "현장 조건 맞춰 안내"],
+      cons: ["현장 조건 다양 → 별도 견적이 정확", "치수/구조 확인 필요"],
+      apply(){ $("dPJ").open = true; }
+    },
+    safety: {
+      badge: "🛡️ 안전",
+      name: "안전방충망 (0.7 / 0.4)",
+      one: "방범(0.7) / 추락(0.4)로 선택. 안전망은 4개 이상이면 5% 자동할인 적용.",
+      pros: ["저층 방범(0.7) / 3층↑ 범용(0.4)", "아이/반려동물 가정 체감 큼", "물리적 차단력"],
+      cons: ["리뷰 10% 할인 제외", "프레임 맞춤이라 가격대 있음"],
+      optionUI: {
+        title: "종류 선택",
+        note: "선택하면 안전망 섹션이 자동으로 맞춰져요.",
+        buttons: [
+          { key:"crime", label:"방범 0.7", on(){
+              $("safetyKind").value = "crime";
+              $("safetyKind").dispatchEvent(new Event("input",{bubbles:true}));
+            }
+          },
+          { key:"fall", label:"추락 0.4", on(){
+              $("safetyKind").value = "fall";
+              $("safetyKind").dispatchEvent(new Event("input",{bubbles:true}));
+            }
+          }
+        ],
+        defaultKey: "crime"
+      },
+      apply(){ $("dSafety").open = true; }
+    }
+  };
+
+  let currentKey = "micro";
+
+  function openBack(){
+    back.style.display = "flex";
+    back.setAttribute("aria-hidden","false");
+    if(!history.state || !history.state.productModal){
+      history.pushState({ productModal: true }, "");
+    }
+  }
+
+  function closeBack(skipHistory){
+    back.style.display = "none";
+    back.setAttribute("aria-hidden","true");
+    showList();
+    if(!skipHistory && history.state && history.state.productModal){
+      history.back();
+    }
+  }
+
+  function showList(){
+    listBox.style.display = "flex";
+    detailBox.style.display = "none";
+  }
+
+  function showDetail(key){
+    currentKey = key;
+    const p = PRODUCT[key];
+    if(!p) return;
+
+    badge.textContent = p.badge;
+    name.textContent = p.name;
+    one.textContent = p.one;
+
+    pros.innerHTML = "";
+    cons.innerHTML = "";
+
+    (p.pros || []).forEach(t=>{
+      const li = document.createElement("li");
+      li.textContent = t;
+      pros.appendChild(li);
+    });
+    (p.cons || []).forEach(t=>{
+      const li = document.createElement("li");
+      li.textContent = t;
+      cons.appendChild(li);
+    });
+
+    if(media){
+      if(p.mediaSrc){
+        media.innerHTML = `
+          <video
+            src="${p.mediaSrc}"
+            controls
+            playsinline
+            preload="metadata"
+            style="width:100%; border-radius:14px; display:block;"
+          ></video>
+          <div class="note" style="margin-top:8px;">※ 발수코팅 미세방충망.</div>
+        `;
+      }else{
+        media.textContent = "📌 사진/짧은 GIF는 나중에 여기만 교체하면 됩니다.";
+      }
+    }
+
+    seg.innerHTML = "";
+    if(p.optionUI){
+      pickWrap.style.display = "block";
+      pickTitle.textContent = p.optionUI.title || "옵션 선택";
+      pickNote.textContent = p.optionUI.note || "";
+
+      const defKey = p.optionUI.defaultKey;
+      p.optionUI.buttons.forEach(btn=>{
+        const b = document.createElement("button");
+        b.type = "button";
+        b.textContent = btn.label;
+        if(btn.key === defKey) b.classList.add("isOn");
+        b.addEventListener("click", ()=>{
+          [...seg.querySelectorAll("button")].forEach(x=>x.classList.remove("isOn"));
+          b.classList.add("isOn");
+          try{ btn.on(); }catch(e){}
+          calc();
+        });
+        seg.appendChild(b);
+      });
+
+      const def = p.optionUI.buttons.find(x => x.key === defKey);
+      if(def && typeof def.on === "function"){
+        try{ def.on(); }catch(e){}
+      }
+      calc();
+    }else{
+      pickWrap.style.display = "none";
+      pickTitle.textContent = "";
+      pickNote.textContent = "";
+    }
+
+    listBox.style.display = "none";
+    detailBox.style.display = "block";
+  }
+
+  btnOpen.addEventListener("click", openBack);
+  btnClose.addEventListener("click", ()=>closeBack());
+  back.addEventListener("click", (e)=>{ if(e.target === back) closeBack(); });
+  document.addEventListener("keydown", (e)=>{ if(e.key === "Escape" && back.style.display === "flex") closeBack(); });
+
+  window.addEventListener("popstate", ()=>{
+    if(back.style.display === "flex"){
+      closeBack(true);
+    }
+  });
+
+  listBox.addEventListener("click", (e)=>{
+    const item = e.target.closest("[data-prod]");
+    if(!item) return;
+    const key = item.getAttribute("data-prod");
+    showDetail(key);
+  });
+
+  $("btnBackToList").addEventListener("click", showList);
+
+  btnGoQuote.addEventListener("click", ()=>{
+    closeBack();
+    $("quoteSection").scrollIntoView({ behavior:"smooth", block:"start" });
+    setTimeout(()=> $("meshType").focus(), 450);
+  });
+
+  btnApply.addEventListener("click", ()=>{
+    const p = PRODUCT[currentKey];
+    if(p && typeof p.apply === "function"){
+      p.apply();
+      calc();
+    }
+    closeBack();
+    $("quoteSection").scrollIntoView({ behavior:"smooth", block:"start" });
+  });
+
+  showList();
+})();
+</script>
+
+</body>
+</html>
