@@ -1016,26 +1016,27 @@ function renderSafetyList(){
   $("safetySumText").textContent = `합계 ${fmt(sum)}`;
 }
 
-function buildSummary(ctx){
-  const {
-    totalFinal,
-    totalConsumer,
-    reviewDiscountOn,
-    windowSafetyQtyDiscountApplied,
-    windowSafetyQty,
-    windowConsumer,
-    safetyConsumer,
-    entranceConsumer,
-    alConsumer,
-    hsConsumer,
-    eligibleConsumer,
-    windowSafetyQtyDiscountRate,
-    eligibleAfterAllDiscounts,
-    entranceQty,
-    entranceUnit,
-    alSM, alL, hsSM, hsL2,
-    alUnitSM, alUnitL, hsUnitSM, hsUnitL
-  } = ctx;
+const {
+  totalFinal,
+  totalConsumer,
+
+  windowQty,
+  safetyQty,
+  windowQtyDiscountApplied,
+  safetyQtyDiscountApplied,
+
+  windowConsumer,
+  safetyConsumer,
+  entranceConsumer,
+  alConsumer,
+  hsConsumer,
+
+  entranceQty,
+  entranceUnit,
+
+  alSM, alL, hsSM, hsL2,
+  alUnitSM, alUnitL, hsUnitSM, hsUnitL
+} = ctx;
 
   const meshKey = $("meshType").value;
   const cntS = clampInt(parseFloat($("cntS").value));
@@ -1076,16 +1077,11 @@ function buildSummary(ctx){
     if(hsL2>0) lines.push(`- 대창 ${hsL2}개 / 단가 ${fmt(hsUnitL)} / 합계 ${fmt(hsUnitL * hsL2)}`);
   }
 
-  const qtyDiscTxt = windowSafetyQtyDiscountApplied
-    ? `${Math.round(windowSafetyQtyDiscountRate*100)}% 적용`
-    : "미적용";
+ 
+  lines.push(`창문형(망교체) 개수: ${windowQty}개 / 5개 이상 10% 할인: ${windowQtyDiscountApplied ? "적용" : "미적용"}`);
+lines.push(`안전망 개수: ${safetyQty}개 / 4개 이상 5% 할인: ${safetyQtyDiscountApplied ? "적용" : "미적용"}`);
 
-  lines.push(`창문형+안전망 합산 개수: ${windowSafetyQty}개 / 4개 이상 5% 추가 할인: ${qtyDiscTxt}`);
-  lines.push(`소비자가격(정가): ${fmt(totalConsumer)}`);
-  lines.push(`예약/영수증리뷰 10%: ${reviewDiscountOn ? "적용(안전망 제외)" : "미적용"}`);
-  if(reviewDiscountOn){
-    lines.push(`- 리뷰할인 적용대상 합계: ${fmt(eligibleConsumer)} (안전망 ${fmt(safetyConsumer)} 제외)`);
-  }
+ 
   lines.push(`최종 자동견적: ${fmt(totalFinal)}`);
   lines.push(`메모: ${memo || "없음"}`);
 
@@ -1093,7 +1089,7 @@ function buildSummary(ctx){
 }
 
 function calc(){
-  const reviewDiscountOn = false;
+ 
 
   const meshKey = $("meshType").value;
   const cntS = clampInt(parseFloat($("cntS").value));
@@ -1109,13 +1105,14 @@ function calc(){
   const safetyConsumer = safetySumTotal();
   const safetyQty = safetySumQty();
 
-  // ✅ 창문형 + 안전망 합산 4개 이상이면 5% 추가 할인 (이 두 항목에만)
-  const windowSafetyQty = windowQty + safetyQty;
-  const windowSafetyQtyDiscountApplied = (windowSafetyQty >= CONFIG.WINDOW_SAFETY_QTY_DISCOUNT_MIN);
-  const windowSafetyQtyDiscountRate = windowSafetyQtyDiscountApplied ? CONFIG.WINDOW_SAFETY_QTY_DISCOUNT_RATE : 0;
+  // ✅ 창문형(망교체) 5개 이상이면 10% 할인 (창문형만)
+const windowQtyDiscountApplied = (windowQty >= 5);
+const windowAfterDiscount = windowConsumer * (1 - (windowQtyDiscountApplied ? 0.10 : 0));
 
-  const windowAfterQty = windowConsumer * (1 - windowSafetyQtyDiscountRate);
-  const safetyAfterQty = safetyConsumer * (1 - windowSafetyQtyDiscountRate);
+// ✅ 안전망 4개 이상이면 5% 할인 (안전망만)
+const safetyQtyDiscountApplied = (safetyQty >= 4);
+const safetyAfterDiscount = safetyConsumer * (1 - (safetyQtyDiscountApplied ? 0.05 : 0));
+
 
   // 3) 현관롤: 개수별 단가 (✅ 리뷰 10% 제외)
   const entranceType = $("entranceType").value;
@@ -1146,58 +1143,66 @@ function calc(){
   const totalConsumer = windowConsumer + safetyConsumer + entranceConsumer + alConsumer + hsConsumer;
 
   // ✅ 리뷰 10%는 "창문형"만 적용
-  const windowAfterReview = reviewDiscountOn
-    ? (windowAfterQty * (1 - CONFIG.REVIEW_DISCOUNT_RATE))
-    : windowAfterQty;
+ // ✅ 창문형(망교체): 5개 이상 10% (창문형만)
+const windowQtyDiscountApplied = (windowQty >= CONFIG.WINDOW_QTY_DISCOUNT_MIN);
+const windowAfterDiscount = windowQtyDiscountApplied
+  ? (windowConsumer * (1 - CONFIG.WINDOW_QTY_DISCOUNT_RATE))
+  : windowConsumer;
 
-  const any =
-    (windowQty + safetyQty + entranceQty + alSM + alL + hsSM + hsL2) > 0;
+// ✅ 안전망: 4개 이상 5% (안전망만)
+const safetyQtyDiscountApplied = (safetyQty >= CONFIG.SAFETY_QTY_DISCOUNT_MIN);
+const safetyAfterDiscount = safetyQtyDiscountApplied
+  ? (safetyConsumer * (1 - CONFIG.SAFETY_QTY_DISCOUNT_RATE))
+  : safetyConsumer;
 
-  // 최종
-  const totalFinal = any
-    ? (windowAfterReview + safetyAfterQty + entranceConsumer + alConsumer + hsConsumer)
-    : 0;
+const any =
+  (windowQty + safetyQty + entranceQty + alSM + alL + hsSM + hsL2) > 0;
 
-  $("resultPrice").textContent = fmt(totalFinal);
+// 총 소비자가격(정가)
+const totalConsumer =
+  windowConsumer + safetyConsumer + entranceConsumer + alConsumer + hsConsumer;
 
-  let note = any ? "입력 기준 자동견적입니다." : "개수 입력하면 자동 계산됩니다.";
-  if(any){
-    const parts = [];
-    if(windowSafetyQtyDiscountApplied){
-      parts.push(`✅ 창문형+안전망 4개 이상 5% 추가 할인 적용`);
-    }
-    if(reviewDiscountOn){
-      parts.push(`✅ 예약/영수증 10% 할인 적용 (창문형만)`);
-    }
-    if(parts.length) note = parts.join(" / ");
-  }
-  $("resultNote").textContent = note;
+// 최종
+const totalFinal = any
+  ? (windowAfterDiscount + safetyAfterDiscount + entranceConsumer + alConsumer + hsConsumer)
+  : 0;
 
-  const eligibleConsumer = windowAfterQty;
+$("resultPrice").textContent = fmt(totalFinal);
 
-  const ctx = {
-    totalFinal,
-    totalConsumer,
-    reviewDiscountOn,
-    windowSafetyQtyDiscountApplied,
-    windowSafetyQty,
-    windowConsumer,
-    safetyConsumer,
-    entranceConsumer,
-    alConsumer,
-    hsConsumer,
-    eligibleConsumer,
-    windowSafetyQtyDiscountRate,
-    eligibleAfterAllDiscounts: windowAfterReview,
-    entranceQty,
-    entranceUnit,
-    alSM, alL, hsSM, hsL2,
-    alUnitSM, alUnitL, hsUnitSM, hsUnitL
-  };
-
-  $("summary").value = buildSummary(ctx);
-  return { summary: $("summary").value, any };
+let note = any ? "입력 기준 자동견적입니다." : "개수 입력하면 자동 계산됩니다.";
+if(any){
+  const parts = [];
+  if(windowQtyDiscountApplied) parts.push("✅ 창문형 5개 이상 10% 할인 적용");
+  if(safetyQtyDiscountApplied) parts.push("✅ 안전망 4개 이상 5% 할인 적용");
+  if(parts.length) note = parts.join(" / ");
 }
+$("resultNote").textContent = note;
+
+// ✅ 요약(ctx)도 새 기준으로
+const ctx = {
+  totalFinal,
+  totalConsumer,
+
+  windowQty,
+  safetyQty,
+  windowQtyDiscountApplied,
+  safetyQtyDiscountApplied,
+
+  windowConsumer,
+  safetyConsumer,
+  entranceConsumer,
+  alConsumer,
+  hsConsumer,
+
+  entranceQty,
+  entranceUnit,
+  alSM, alL, hsSM, hsL2,
+  alUnitSM, alUnitL, hsUnitSM, hsUnitL
+};
+
+$("summary").value = buildSummary(ctx);
+return { summary: $("summary").value, any };
+
 
 async function copyText(text){
   try{
@@ -1699,6 +1704,7 @@ window.addEventListener("popstate", ()=>{
 </script>
 </body>
 </html>
+
 
 
 
