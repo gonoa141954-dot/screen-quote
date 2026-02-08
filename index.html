@@ -20,6 +20,15 @@
   position: relative;
   background-image: none !important;
 }
+  /* 부모 섹션에서 뿌리는 장식까지 싹 차단 */
+#quoteSection .sectionBody::before,
+#quoteSection .sectionBody::after,
+#quoteSection .section::before,
+#quoteSection .section::after{
+  content: none !important;
+  display: none !important;
+  background: none !important;
+}
 
 .autoGuide::before,
 .autoGuide::after{
@@ -1652,6 +1661,7 @@ wire();
 
 </body>
 </html>
+
 
 
 
