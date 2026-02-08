@@ -451,7 +451,7 @@
           <div class="heroBtns">
             <button class="btn btnPrimary btnBig" id="btnGoQuote">셀프 견적하기</button>
           </div>
-          <div class="note">※ 예약/영수증 체크 시 10% 할인 적용됩니다.</div>
+        
         </div>
       </div>
     </div>
@@ -561,14 +561,7 @@
           (단가 자동 반영)”으로 계산됩니다.
         </div>
 
-        <div class="chip chipReview" style="margin-bottom:12px;">
-          <input type="checkbox" id="discount10">
-          <div>
-            <div><b>예약리뷰</b>or<b>영수증리뷰</b> 약속</div>
-            <div class="note">체크하면 총액에서 자동으로 <b style="color:#e11d48;">10% 할인</b></div>
-          </div>
-        </div>
-
+    
         <!-- 창문형 -->
         <details id="dWindow">
           <summary><span>창문형 방충망</span><span class="chev">열기/닫기 ▾</span></summary>
@@ -1301,7 +1294,10 @@ function wire(){
     "entranceType","entranceSize","entranceQty",
     "alSM","alL",
     "hsSM","hsL2"
-  ].forEach(id => $(id).addEventListener("input", calc));
+  ].forEach(id => {
+  const el = $(id);
+  if(el) el.addEventListener("input", calc);
+});
 
   ["safetyW","safetyH","safetyQty"].forEach(id=>{
     $(id).addEventListener("input", ()=>{
@@ -1699,6 +1695,7 @@ window.addEventListener("popstate", ()=>{
 </script>
 </body>
 </html>
+
 
 
 
