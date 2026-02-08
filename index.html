@@ -1298,16 +1298,17 @@ function wire(){
     }
   });
 
-  [
-    "discount10",
-    "meshType","cntS","cntM","cntL","memo",
-    "entranceType","entranceSize","entranceQty",
-    "alSM","alL",
-    "hsSM","hsL2"
-  ].forEach(id => {
+ [
+  "discount10",
+  "meshType","cntS","cntM","cntL","memo",
+  "entranceType","entranceSize","entranceQty",
+  "alSM","alL",
+  "hsSM","hsL2"
+].forEach(id => {
   const el = $(id);
   if(el) el.addEventListener("input", calc);
 });
+
 
   ["safetyW","safetyH","safetyQty"].forEach(id=>{
     $(id).addEventListener("input", ()=>{
@@ -1705,6 +1706,7 @@ window.addEventListener("popstate", ()=>{
 </script>
 </body>
 </html>
+
 
 
 
