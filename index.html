@@ -470,6 +470,25 @@
     }
     .pActions2{ display:flex; gap:10px; flex-wrap:wrap; margin-top:12px; }
     .pActions2 .btn{ flex:1; min-width:180px; }
+    /* (모바일) 왼쪽에 붙는 세로 장식/가로 장식 완전 제거 */
+@media (max-width: 900px){
+  #quoteSection .section::before,
+  #quoteSection .section::after,
+  #quoteSection .sectionHead::before,
+  #quoteSection .sectionHead::after,
+  #quoteSection .sectionBody::before,
+  #quoteSection .sectionBody::after,
+  #quoteSection details::before,
+  #quoteSection details::after,
+  .autoGuide::before,
+  .autoGuide::after{
+    content: none !important;
+    display: none !important;
+    background: none !important;
+    box-shadow: none !important;
+  }
+}
+
   </style>
 </head>
 
@@ -1692,6 +1711,7 @@ wire();
 
 </body>
 </html>
+
 
 
 
