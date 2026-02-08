@@ -20,23 +20,30 @@
   position: relative;
   background-image: none !important;
 }
-  /* 부모 섹션에서 뿌리는 장식까지 싹 차단 */
+/* 무늬/장식(좌측 곡선 + 얇은 가로선) 싹 차단 */
+#quoteSection::before,
+#quoteSection::after,
+#quoteSection .sectionHead::before,
+#quoteSection .sectionHead::after,
 #quoteSection .sectionBody::before,
 #quoteSection .sectionBody::after,
-#quoteSection .section::before,
-#quoteSection .section::after{
-  content: none !important;
-  display: none !important;
-  background: none !important;
-}
-
 .autoGuide::before,
 .autoGuide::after{
   content: none !important;
   display: none !important;
   background: none !important;
+  background-image: none !important;
   box-shadow: none !important;
 }
+
+/* 혹시 배경이미지로 깔린 케이스까지 */
+#quoteSection,
+#quoteSection .sectionHead,
+#quoteSection .sectionBody,
+.autoGuide{
+  background-image: none !important;
+}
+
  
 
   border:1px solid var(--line);
@@ -1661,6 +1668,7 @@ wire();
 
 </body>
 </html>
+
 
 
 
