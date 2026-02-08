@@ -26,6 +26,20 @@
   <style>
     /* 자동할인 안내(모바일/PC 공통 깔끔 버전) */
 .autoGuide{
+  /* 자동할인 안내 왼쪽 장식(세로 괄호/알약) 제거 */
+.autoGuide{
+  position: relative;
+  background-image: none !important;
+}
+
+.autoGuide::before,
+.autoGuide::after{
+  content: none !important;
+  display: none !important;
+  background: none !important;
+  box-shadow: none !important;
+}
+
   border:1px solid var(--line);
   border-radius:18px;
   padding:12px;
@@ -1648,6 +1662,7 @@ wire();
 
 </body>
 </html>
+
 
 
 
