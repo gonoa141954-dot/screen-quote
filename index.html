@@ -39,6 +39,16 @@
   background: none !important;
   box-shadow: none !important;
 }
+  /* 부모 섹션에서 뿌리는 장식까지 싹 차단 */
+#quoteSection .sectionBody::before,
+#quoteSection .sectionBody::after,
+#quoteSection .section::before,
+#quoteSection .section::after{
+  content: none !important;
+  display: none !important;
+  background: none !important;
+}
+
 
   border:1px solid var(--line);
   border-radius:18px;
@@ -1662,6 +1672,7 @@ wire();
 
 </body>
 </html>
+
 
 
 
