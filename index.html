@@ -11,6 +11,71 @@
   <meta property="og:image" content="https://www.mogibye.shop/hero1.png" />
 
   <style>
+    /* 자동할인 안내(모바일/PC 공통 깔끔 버전) */
+.autoGuide{
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:12px;
+  background:rgba(255,255,255,.92);
+  box-shadow: var(--shadow2);
+}
+.autoGuideHead{
+  display:flex; align-items:center; gap:8px;
+  font-weight:1000;
+  margin-bottom:8px;
+}
+.autoGuideBadge{
+  width:28px;height:28px;border-radius:10px;
+  display:grid;place-items:center;
+  background:rgba(22,163,74,.10);
+  border:1px solid rgba(22,163,74,.22);
+  color:rgba(22,163,74,.95);
+  font-weight:1000;
+}
+
+.autoList{
+  margin:0;
+  padding:0;
+  list-style:none;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+.autoItem{
+  display:flex;
+  align-items:flex-start;
+  gap:10px;
+}
+.autoIcon{
+  width:22px;height:22px;border-radius:8px;
+  display:grid;place-items:center;
+  background:rgba(22,163,74,.10);
+  border:1px solid rgba(22,163,74,.18);
+  color:rgba(22,163,74,.95);
+  font-weight:1000;
+  flex:0 0 auto;
+  margin-top:1px;
+}
+.autoText{
+  font-size:13px;
+  color:var(--muted);
+  line-height:1.45;
+}
+.autoText b{color:var(--text); font-weight:1000;}
+
+.autoDivider{
+  height:1px;
+  background:rgba(15,23,42,.08);
+  margin:8px 0;
+}
+
+/* 모바일에서 더 촘촘하고 깔끔하게 */
+@media (max-width:520px){
+  .autoGuide{ padding:11px; }
+  .autoText{ font-size:12.8px; }
+  .autoList{ gap:7px; }
+}
+
     :root{
       --bg:#ffffff; --bg2:#f7f8fb; --card:#ffffff;
       --line:rgba(15,23,42,.10);
@@ -473,16 +538,30 @@
         <!-- (숨김) 기존 변수용 체크박스 - 유지 -->
         <input type="checkbox" id="discount10" style="display:none">
 
-        <div class="highlight" style="border-radius:18px;padding:12px;margin-bottom:12px;border:1px solid rgba(0,0,0,.06);">
-          <div class="highlightTitle">✅ 자동할인 안내</div>
-          <div class="note" style="margin-top:4px;">
-            ✅ <b>창문형(망교체) 5개 이상</b> → <b>10% 할인</b><br>
-            ✅ <b>안전망 4개 이상</b> → <b>5% 할인</b>
-          </div>
-          <div class="note" style="margin:10px 0 0 0;">
-            ✅ <b>현관롤 / PJ롤 / 틀제작</b>은 “개수별 차등 할인(단가 자동 반영)”으로 계산됩니다.
-          </div>
-        </div>
+        <d<div class="autoGuide" style="margin-bottom:12px;">
+  <div class="autoGuideHead">
+    <span class="autoGuideBadge">%</span>
+    <span>자동할인 안내</span>
+  </div>
+
+  <ul class="autoList">
+    <li class="autoItem">
+      <span class="autoIcon">✓</span>
+      <div class="autoText"><b>창문형(망교체) 5개 이상</b> → <b>10% 할인</b></div>
+    </li>
+
+    <li class="autoItem">
+      <span class="autoIcon">✓</span>
+      <div class="autoText"><b>안전망 4개 이상</b> → <b>5% 할인</b></div>
+    </li>
+
+    <li class="autoItem">
+      <span class="autoIcon">✓</span>
+      <div class="autoText"><b>현관롤 / PJ롤 / 틀제작</b>은 <b>개수별 차등 할인</b>으로 단가가 자동 반영됩니다.</div>
+    </li>
+  </ul>
+</div>
+
 
         <!-- 창문형 -->
         <details id="dWindow">
@@ -1556,3 +1635,4 @@ wire();
 
 </body>
 </html>
+
