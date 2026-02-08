@@ -13,6 +13,30 @@
 
 
   <style>
+    /* 남아있는 왼쪽 세로 괄호(장식) = section/sectionBody 계열 가상요소일 가능성 큼 */
+.section::before,
+.section::after,
+.sectionBody::before,
+.sectionBody::after,
+.sectionHead::before,
+.sectionHead::after,
+.highlight::before,
+.highlight::after{
+  content: none !important;
+  display: none !important;
+  background: none !important;
+  background-image: none !important;
+  box-shadow: none !important;
+}
+
+/* 혹시 background-image로 깔린 장식이면 이것도 같이 */
+.section,
+.sectionHead,
+.sectionBody,
+.highlight{
+  background-image: none !important;
+}
+
     /* 자동할인 안내(모바일/PC 공통 깔끔 버전) */
 .autoGuide{
   /* 자동할인 안내 왼쪽 장식(세로 괄호/알약) 제거 */
@@ -1668,6 +1692,7 @@ wire();
 
 </body>
 </html>
+
 
 
 
