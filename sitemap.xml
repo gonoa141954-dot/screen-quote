@@ -47,6 +47,13 @@
     <loc>https://gonoa141954-dot.github.io/screen-quote/estimate/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
-  </url>
+  </url
+  
+    <url>
+  <loc>https://www.mogibye.shop/ansan/landing.html</loc>
+  <changefreq>weekly</changefreq>
+  <priority>0.9</priority>
+</url>
+
 
 </urlset>
