@@ -12,7 +12,7 @@
   <meta property="og:image" content="https://www.mogibye.shop/hero1.png" />
 
   <style>
-    :root{
+   :root{
       --bg:#ffffff; --bg2:#f7f8fb; --card:#ffffff;
       --line:rgba(15,23,42,.10);
       --text:#0f172a; --muted:rgba(15,23,42,.65); --muted2:rgba(15,23,42,.45);
@@ -159,7 +159,7 @@
       border:1px solid var(--line);
       border-radius:18px;
       padding:12px;
-      background:#fff;               /* ← 반투명X, 글씨 겹침 느낌 제거 */
+      background:#fff;
       box-shadow: var(--shadow2);
       overflow:hidden;
       margin-bottom:12px;
@@ -212,11 +212,15 @@
     .highlightTitle{font-weight:1000;font-size:14px;letter-spacing:-0.2px;}
 
     .kakaoSticky{position:fixed;left:14px;right:14px;bottom:14px;z-index:50;max-width:980px;margin:0 auto;}
+    /* ✅ 버튼을 div로 바꿔도 동일 스타일 먹게 */
     .kakaoBtn{
       width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;
       padding:12px 14px;border-radius:20px;background:#FEE500;color:#191919;
-      border:1px solid rgba(0,0,0,.10);box-shadow: 0 18px 44px rgba(15,23,42,.18);cursor:pointer;
+      border:1px solid rgba(0,0,0,.10);box-shadow: 0 18px 44px rgba(15,23,42,.18);
+      cursor:pointer;
+      user-select:none;
     }
+    .kakaoBtn:active{ transform: translateY(1px); }
     .kLeft{display:flex;gap:12px;align-items:center;}
     .kBadge{
       width:40px;height:40px;border-radius:999px;display:grid;place-items:center;
@@ -447,6 +451,28 @@
     .autoGuide,
     .highlight{
       background-image: none !important;
+    }
+
+    /* ✅ 전화 아이콘(오른쪽) */
+    .kRightWrap{ display:flex; align-items:center; gap:8px; }
+    .callIcon{
+      width:38px; height:38px;
+      border-radius:14px;
+      display:grid; place-items:center;
+      background:rgba(25,25,25,.10);
+      border:1px solid rgba(25,25,25,.14);
+      font-weight:1000;
+      line-height:1;
+      flex:0 0 auto;
+    }
+    .callIcon:hover{ filter:brightness(0.98); }
+    .callIcon:active{ transform:translateY(1px); }
+    .callIcon span{ font-size:16px; }
+
+    /* 접근성: 키보드 포커스 보이게 */
+    .kakaoBtn:focus{
+      outline: none;
+      box-shadow: 0 0 0 4px rgba(0,0,0,.12), 0 18px 44px rgba(15,23,42,.18);
     }
   </style>
 </head>
@@ -855,9 +881,10 @@
     </div>
   </div>
 
-  <!-- sticky kakao -->
+  <!-- ✅ sticky kakao (완벽 수정본: 중복/버튼안에 a 문제 해결) -->
   <div class="kakaoSticky">
-    <button class="kakaoBtn" id="kakaoConsultBtn" type="button">
+    <!-- button -> div 로 변경 (a/tel이 안깨짐 + 클릭 분리 쉬움) -->
+    <div class="kakaoBtn" id="kakaoConsultBtn" role="button" tabindex="0" aria-label="카카오톡 오픈채팅 상담">
       <div class="kLeft">
         <div class="kBadge">톡</div>
         <div class="kText">
@@ -865,8 +892,14 @@
           <span>누르면 견적요약 자동복사</span>
         </div>
       </div>
-      <div class="kRight">상담받기</div>
-    </button>
+
+      <div class="kRightWrap">
+        <div class="kRight">상담받기</div>
+        <a class="callIcon" id="callBtn" href="tel:01049649674" aria-label="전화걸기 (010-4964-9674)">
+          <span>📞</span>
+        </a>
+      </div>
+    </div>
   </div>
 
 <script>
@@ -1370,7 +1403,18 @@ function wire(){
     setTimeout(()=> $("meshType").focus(), 450);
   });
 
-  $("kakaoConsultBtn").addEventListener("click", async ()=>{
+  /* ✅ 전화 아이콘 누를 때는 '카톡 상담' 클릭이 절대 안 타게 */
+  const callBtn = $("callBtn");
+  if(callBtn){
+    const stop = (ev)=>{ ev.stopPropagation(); };
+    callBtn.addEventListener("click", stop);
+    callBtn.addEventListener("touchstart", stop, {passive:true});
+  }
+
+  /* ✅ kakaoConsultBtn: div라서 클릭 + 엔터/스페이스 지원 */
+  const kakaoBtn = $("kakaoConsultBtn");
+
+  async function openKakaoFlow(){
     const { summary, any } = calc();
     if(!any){
       openModal("아직 입력된 항목이 없어요. 아래에서 입력 후 다시 ‘상담받기’를 눌러주세요.");
@@ -1387,6 +1431,14 @@ function wire(){
       setTimeout(()=> window.open(KAKAO_URL, "_blank", "noopener"), 650);
     }else{
       openModal("복사가 막힌 기기예요. 아래 요약을 길게 눌러 복사한 뒤, 오픈채팅으로 이동해주세요.");
+    }
+  }
+
+  kakaoBtn.addEventListener("click", openKakaoFlow);
+  kakaoBtn.addEventListener("keydown", (e)=>{
+    if(e.key === "Enter" || e.key === " "){
+      e.preventDefault();
+      openKakaoFlow();
     }
   });
 
@@ -1665,4 +1717,3 @@ wire();
 
 </body>
 </html>
-
