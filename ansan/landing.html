@@ -16,50 +16,118 @@
   <meta property="og:image" content="https://www.mogibye.shop/ansan/og-ansan.jpg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
+
+  <style>
+    :root{
+      --text:#111;
+      --muted:#667085;
+      --line:rgba(15,23,42,.12);
+      --bg:#fff;
+    }
+    body{
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+      max-width:920px;
+      margin:0 auto;
+      padding:22px;
+      line-height:1.65;
+      color:var(--text);
+      background:var(--bg);
+    }
+    h1{ margin:0 0 10px; }
+    p.lead{ color:var(--muted); margin:0 0 14px; }
+    .card{
+      border:1px solid var(--line);
+      border-radius:14px;
+      padding:16px;
+      margin:16px 0;
+      background:#fff;
+    }
+    .card h2{
+      margin:0 0 8px;
+      font-size:18px;
+    }
+    .sub{
+      margin:0 0 12px;
+      color:var(--muted);
+      font-size:14px;
+    }
+    ul{ margin:0 0 0 18px; }
+    .kw{
+      color:#777;
+      font-size:12px;
+      margin-top:10px;
+    }
+
+    /* CTA (은은하게 깜빡/펄스) */
+    @keyframes ctaPulse{
+      0%   { transform:scale(1); box-shadow:0 0 0 0 rgba(0,0,0,.18); }
+      70%  { transform:scale(1.04); box-shadow:0 0 0 10px rgba(0,0,0,0); }
+      100% { transform:scale(1); box-shadow:0 0 0 0 rgba(0,0,0,0); }
+    }
+    a.cta{
+      display:inline-block;
+      padding:10px 14px;
+      border:1px solid var(--line);
+      border-radius:12px;
+      text-decoration:none;
+      color:#111;
+      background:#fff;
+      font-weight:700;
+      animation:ctaPulse 1.2s ease-out infinite;
+      will-change:transform, box-shadow;
+    }
+    a.cta:focus, a.cta:hover{
+      outline:none;
+      transform:scale(1.03);
+    }
+    @media (prefers-reduced-motion: reduce){
+      a.cta{ animation:none !important; }
+    }
+  </style>
 </head>
 
-<body style="font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;max-width:920px;margin:0 auto;padding:22px;line-height:1.65">
+<body>
 
   <h1>안산방충망 견적 · 교체 · 미세방충망</h1>
-  <p style="color:#667085">
+  <p class="lead">
     안산에서 방충망 교체/수리 문의가 많아서 기준을 정리해뒀어요.
     “안산방충망 견적” 검색하고 오신 분은 아래에서 바로 진행하면 됩니다.
   </p>
 
- <div style="border:1px solid rgba(15,23,42,.12);border-radius:14px;padding:16px;margin:16px 0">
-  <h2 style="margin:0 0 8px;font-size:18px">30초 자동견적</h2>
+  <section class="card" aria-label="30초 자동견적">
+    <h2>30초 자동견적</h2>
+    <p class="sub">창 종류/크기/수량만 입력하면 1차 금액 확인 → 상담 버튼 누르면 견적요약 자동복사</p>
+    <a class="cta" href="https://gonoa141954-dot.github.io/screen-quote/">자동견적 바로가기</a>
+  </section>
 
-  <p style="margin:0 0 12px;color:#667085;font-size:14px">
-    창 종류/크기/수량만 입력하면 1차 금액 확인 → 상담 버튼 누르면 견적요약 자동복사
-  </p>
-
-  <a href="https://gonoa141954-dot.github.io/screen-quote/"
-     style="display:inline-block;padding:10px 14px;border:1px solid rgba(15,23,42,.12);border-radius:12px;text-decoration:none;color:#111;background:#fff;font-weight:600">
-    자동견적 바로가기
-  </a>
-</div>
-
-  <div style="border:1px solid rgba(15,23,42,.12);border-radius:14px;padding:16px;margin:16px 0">
-    <h2 style="margin:0 0 8px;font-size:18px">안산에서 많이 하는 작업</h2>
-    <ul style="margin:0 0 0 18px">
+  <section class="card" aria-label="안산에서 많이 하는 작업">
+    <h2>안산에서 많이 하는 작업</h2>
+    <ul>
       <li><b>미세방충망</b>: 초파리/날파리 같은 미세벌레 유입 감소, 먼지·꽃가루 부담 완화</li>
       <li><b>방충망 교체</b>: 망 늘어짐/찢김/틈 발생 시, 고무·프레임 상태까지 같이 점검</li>
       <li><b>현관 롤방충망</b>: 출입 잦은 집, 아이/반려동물 있는 집 문의 많음</li>
     </ul>
-  </div>
+  </section>
 
-  <div style="border:1px solid rgba(15,23,42,.12);border-radius:14px;padding:16px;margin:16px 0">
-    <h2 style="margin:0 0 8px;font-size:18px">FAQ</h2>
-    <p><b>Q.</b> 안산방충망 가격은 뭐가 제일 영향이 커요?<br>
-      <span style="color:#667085;font-size:14px">A. 창 크기/종류, 망 재질(미세망 등), 프레임 상태, 추가작업 여부가 큽니다.</span>
+  <section class="card" aria-label="FAQ">
+    <h2>FAQ</h2>
+
+    <p><b>Q.</b> 안산방충망 가격은 뭐가 제일 영향이 커요?<br />
+      <span class="sub" style="display:inline-block;margin:6px 0 0">
+        A. 창 크기/종류, 망 재질(미세망 등), 프레임 상태, 추가작업 여부가 큽니다.
+      </span>
     </p>
-    <p><b>Q.</b> 당일 시공도 가능해요?<br>
-      <span style="color:#667085;font-size:14px">A. 일정만 맞으면 가능해요. 사진 1~2장 주시면 더 빠릅니다.</span>
+
+    <p><b>Q.</b> 당일 시공도 가능해요?<br />
+      <span class="sub" style="display:inline-block;margin:6px 0 0">
+        A. 일정만 맞으면 가능해요. 사진 1~2장 주시면 더 빠릅니다.
+      </span>
     </p>
-    <p style="color:#777;font-size:12px;margin-top:10px">
+
+    <p class="kw">
       관련검색: 안산방충망 · 안산 방충망 견적 · 안산 방충망 교체 · 미세방충망 안산 · 현관방충망 안산
     </p>
-  </div>
+  </section>
 
 </body>
 </html>
