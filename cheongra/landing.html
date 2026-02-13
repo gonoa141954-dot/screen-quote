@@ -28,16 +28,13 @@
       --radius: 18px;
     }
 
-    /* ✅ 모바일 가로 삐져나감 방지 "필수 8종 세트" */
+    /* ✅ 모바일 가로 삐져나감 방지 */
     *{ box-sizing:border-box; }
     html, body{ margin:0; padding:0; width:100%; }
     body{ overflow-x:hidden; }
     img, svg, video{ max-width:100%; height:auto; display:block; }
-    a, p, div, li, span, small, h1, h2, h3{
-      overflow-wrap:anywhere;
-      word-break:keep-all;
-    }
-    .wrap *{ min-width:0; } /* flex/grid 안에서 글이 밀리는거 방지 */
+    a, p, div, li, span, small, h1, h2, h3{ overflow-wrap:anywhere; word-break:keep-all; }
+    .wrap *{ min-width:0; }
 
     body{
       font-family: system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans KR",sans-serif;
@@ -156,6 +153,7 @@
       padding: 14px;
       text-align:center;
     }
+
     .btn{
       display:inline-flex;
       align-items:center;
@@ -173,6 +171,46 @@
       transition: transform .08s ease;
     }
     .btn:active{ transform: translateY(1px); }
+
+    /* ✅ 버튼 눈에 띄게: 펄스 + 살짝 흔들림 */
+    .btn.attn{
+      position: relative;
+      animation: btnPulse 1.2s ease-in-out infinite, btnWiggle 3.6s ease-in-out infinite;
+      will-change: transform, box-shadow;
+      box-shadow: 0 0 0 0 rgba(124,58,237,.35);
+    }
+    .btn.attn::after{
+      content:"";
+      position:absolute;
+      inset:-6px;
+      border-radius: 16px;
+      border:1px solid rgba(124,58,237,.35);
+      opacity:0;
+      animation: ring 1.2s ease-out infinite;
+      pointer-events:none;
+    }
+    @keyframes btnPulse{
+      0%   { transform: translateY(0) scale(1); box-shadow: 0 0 0 0 rgba(124,58,237,.35); }
+      60%  { transform: translateY(-1px) scale(1.02); box-shadow: 0 0 0 10px rgba(124,58,237,0); }
+      100% { transform: translateY(0) scale(1); box-shadow: 0 0 0 0 rgba(124,58,237,0); }
+    }
+    @keyframes ring{
+      0%   { opacity:.55; transform: scale(1); }
+      100% { opacity:0; transform: scale(1.08); }
+    }
+    @keyframes btnWiggle{
+      0%, 88%, 100% { transform: translateY(0) scale(1); }
+      90% { transform: translateY(0) scale(1.02) rotate(-1deg); }
+      92% { transform: translateY(0) scale(1.02) rotate(1deg); }
+      94% { transform: translateY(0) scale(1.02) rotate(-.7deg); }
+      96% { transform: translateY(0) scale(1.02) rotate(.7deg); }
+      98% { transform: translateY(0) scale(1.02) rotate(0deg); }
+    }
+    @media (prefers-reduced-motion: reduce){
+      .btn.attn{ animation: none; }
+      .btn.attn::after{ animation: none; }
+    }
+
     .small{
       margin:10px 0 0;
       font-size: 12px;
@@ -239,7 +277,7 @@
     </section>
 
     <section class="cta">
-      <a class="btn" href="https://www.mogibye.shop/" rel="noopener">
+      <a class="btn attn" href="https://www.mogibye.shop/" rel="noopener">
         본페이지로 이동하기 ↗
       </a>
       <p class="small">※ 실제 비용/범위는 창 구성·실측에 따라 달라질 수 있습니다.</p>
