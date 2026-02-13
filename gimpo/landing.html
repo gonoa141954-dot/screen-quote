@@ -78,6 +78,34 @@
       font-size: 15px;
     }
 
+    /* ✅ 모바일 상단(제목/배지) 예쁘게 */
+    @media (max-width: 560px){
+      body{ padding: 18px 14px 90px; } /* 하단 sticky 때문에 아래 여백 */
+      .top{
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        margin-bottom: 10px;
+      }
+      h1{
+        font-size: 22px;
+        line-height: 1.25;
+        letter-spacing: -0.3px;
+      }
+      p.lead{
+        font-size: 14px;
+        margin: 8px 0 12px;
+      }
+      .badge{
+        width: 100%;
+        justify-content: flex-start;
+        padding: 8px 10px;
+        font-size: 12px;
+        white-space: normal;  /* ✅ 한 줄 고정 해제 */
+        line-height: 1.35;
+      }
+    }
+
     /* 히어로 이미지 */
     .heroimg{
       margin: 14px 0 18px;
